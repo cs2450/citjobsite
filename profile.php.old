@@ -1,0 +1,78 @@
+<?php
+include_once('inc/header.php');
+?>
+
+<div class="profilePage">
+	<div class="leftSide">
+		<div class="profileImage"></div>
+		<div class="profileName">Company/Student Name</div>
+		<div class="profileContact">Contact Info</div>
+		<div class="profileAbout">
+			Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+		</div>
+<?php if (!$_SESSION['employer']) { ?>
+		<div class="studentSkills"><div>Skills</div>
+			<div class="skill threeCols">C</div>
+			<div class="skill threeCols">C++</div>
+			<div class="skill threeCols">Java</div>
+			<div class="skill threeCols">Php</div>
+			<div class="skill threeCols">Javascript</div>
+			<div class="skill threeCols">Go</div>
+		</div>
+<?php } ?>
+	</div>
+	<div class="rightSide">Jobs List
+		<div class="job">
+			<div class="jobTitle">Example Job</div>
+			<div class="jobDescription">
+				This is a short fake job.
+			</div>
+		</div>
+		<div class="job">
+			<div class="jobTitle">Job Number Two</div>
+			<div class="jobDescription">
+				This is the next up-and-coming super long fake job.
+			</div>
+		</div>
+		<div class="job">
+			<div class="jobTitle">Example Job</div>
+			<div class="jobDescription">
+				This is a short fake job.
+			</div>
+		</div>
+		<div class="job">
+			<div class="jobTitle">Job Number Two</div>
+			<div class="jobDescription">
+				This is the next up-and-coming super long fake job.
+			</div>
+		</div>
+		<div class="job">
+			<div class="jobTitle">Example Job</div>
+			<div class="jobDescription">
+				This is a short fake job.
+			</div>
+		</div>
+		<div class="job">
+			<div class="jobTitle">Job Number Two</div>
+			<div class="jobDescription">
+				This is the next up-and-coming super long fake job.
+			</div>
+		</div>
+		<div class="job">
+			<div class="jobTitle">Example Job</div>
+			<div class="jobDescription">
+				This is a short fake job.
+			</div>
+		</div>
+		<div class="job">
+			<div class="jobTitle">Job Number Two</div>
+			<div class="jobDescription">
+				This is the next up-and-coming super long fake job.
+			</div>
+		</div>
+	</div>
+</div>
+
+<?php>
+include_once('inc/footer.php');
+?>

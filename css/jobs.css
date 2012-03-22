@@ -1,0 +1,184 @@
+.error {
+	color: #FF0000;
+	font-size: 12px;
+	background-color: #FFEEEE;
+	padding: 5px;
+	border: 1px solid #FF0000;
+	font-weight: bold;
+	display: none;
+	margin: 10px;
+}
+
+A.job,A.job:visited {
+	font-family: Arial, Helvetica,  Verdana, sans-serif;
+	font-weight: bold;
+	text-decoration:none;
+	color:#003366;
+	font-size: 14pt;
+}
+
+A.job:hover {
+	font-family: Arial, Helvetica,  Verdana, sans-serif;
+	text-decoration:none;
+	color:#444444;
+	font-size: 14pt;
+}
+
+A.job2,A.job2:visited {
+	font-family: Arial, Helvetica,  Verdana, sans-serif;
+	font-weight: bold;
+	text-decoration:none;
+	color:#003366;
+	font-size: 12pt;
+}
+
+A.job2:hover {
+	font-family: Arial, Helvetica,  Verdana, sans-serif;
+	text-decoration:none;
+	color:#444444;
+	font-size: 12pt;
+}
+
+.job2 {
+	font-family: Arial, Helvetica,  Verdana, sans-serif;
+	color:#000000;
+	font-weight: bold;
+	font-size: 12pt;
+}
+
+p{text-indent: 40px;}
+
+a.plain,a.plain:hover{
+	font-size: 11pt;
+	color: #000000;
+	text-decoration:underline;
+}
+.text{	font-family: Arial, Helvetica,  Verdana, sans-serif;		
+	font-size: 9pt;
+	color: #000000;
+}
+
+.black{ font-size: 12px;    color: #888888;
+    font-family: Arial, Helvetica, Verdana, sans-serif;
+    text-decoration: none;
+}
+
+.head { font-family: tahoma, arial, sans-serif;
+font-size: 22pt; color: #222222;
+}
+
+#leftbox {
+background-color: #f0f0f0;
+position: fixed;
+border: 1px #ddd solid;
+font-family: tahoma, arial, sans-serif;
+float: left;
+width: auto;
+padding-top: 10px;
+padding-bottom: 10px;
+}
+
+.button {
+font-size: 10pt;
+background-color: #036;
+color: white;
+font-weight: bold;
+border-radius: 5px;
+-moz-border-radius: 5px;
+-webkit-border-radius: 5px;
+padding: 5px;
+border: 1px solid #aaa;
+width: 125px;
+margin: auto;
+text-align: center;
+cursor: pointer;
+}
+
+.button:hover {
+background-color: #a00;
+}
+
+#leftbox #login {
+background: url("images/home.png") 0 0;
+height: 31px;
+width: 31px;
+border: 0;
+cursor: pointer;
+}
+
+#leftbox #login:active {
+background: url("images/home.png") 0 -31px;
+}
+
+#leftbox #register {
+background: url("images/sleep.png") 0 0;
+height: 31px;
+width: 31px;
+border: 0;
+cursor: pointer;
+}
+
+#leftbox #register:active {
+background: url("images/sleep.png") 0 -31px;
+}
+
+#resume_table {
+width: 500px;
+}
+
+#jobs_list {
+	width: 100%;	
+	border: 1px #ddd solid;
+	background: #f0f0f0;
+}
+
+th {
+	text-align: left;
+	background-color: #036;
+	padding: 5px;
+	font-family: tahoma, arial, sans-serif;
+	color: white;
+}
+
+h1 {
+	font-family: tahoma, arial, sans-serif;
+}
+
+.labels {
+text-align: left;
+display: inline-block;
+line-height: 22px;
+}
+
+.labels label {
+display: block;
+margin: 10px 0px;
+}
+
+.inputs {
+text-align: left;
+display: inline-block;
+position: absolute;
+}
+
+.inputs input {
+display: block;
+margin: 10px 10px;
+}
+
+.radios {
+display: inline-block;
+position: relative;
+top: 40px;
+}
+
+.radios input {
+display: block;
+margin-bottom: 20px;
+margin-left: 10px;
+}
+
+#form_container {
+width: 300px;
+margin: 0px 10px;
+}

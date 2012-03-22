@@ -1,0 +1,205 @@
+body {
+	border: 0;
+	margin: 0;
+	padding: 0;
+	font-size: 10pt;
+	font-family: tahoma;
+}
+.regColors {
+	border: 1px solid #ddd;
+	background: #fafafa;
+}
+#citNav {
+	text-align: center;
+	background: url("../images/bannerBack.png") repeat-x;
+}
+#loginBox.sticky-handle.stick,
+#menuBox.sticky-handle.stick {
+	top: 0;
+	z-index: 10000;
+	position: fixed;
+}
+#loginBox {
+	float: left;
+	width: 217px;
+	height: 120px;
+	margin: 0;
+	padding: 5px;
+	border-radius: 0 0 15px 15px;
+	-moz-border-radius: 0 0 15px 15px;
+	-webkit-border-radius: 0 0 15px 15px;
+}
+#loginForm{
+	height: 55px;
+	background: #f0f0f0;
+	padding-top: 5px;
+}
+#loginBox label {
+	letter-spacing: .1em;
+}
+#loginBox input {
+	font-family: tahoma;
+	border: 1px solid #ccc;
+}
+#loginBox input:focus {
+	border: 1px solid #ccddff;
+}
+.formLeft {
+	float: left;
+	width: 70px;
+	margin-left: 2px;
+	text-align: right;
+}
+.formRight {
+	float: left;
+	width: 138px;
+	text-align: left;
+}
+.formItem {
+	height: 19px;
+	padding-top: 5px;
+}
+.formBottom {
+	clear: both;
+	height: 40px;
+	padding-top: 10px;
+	text-align: center;
+}
+.formButton {
+	float: left;
+	text-align: center;
+	padding-top: 5px;
+}
+.formButton button {
+	width: 31px;
+	height: 31px;
+	border: 0;
+	margin: 0;
+	padding: 0;
+	cursor: pointer;
+}
+.buttonText label {
+	cursor: pointer;
+}
+#loginButton { background: url('../images/home-4.png') 0 0; }
+#loginButton:hover { background: url('../images/home-4.png') 0 -31px; }
+#loginButton.active { background: url('../images/home-4.png') -31px 0; }
+#loginButton.active:hover { background: url('../images/home-4.png') -31px -31px; }
+#registerButton { background: url('../images/sleep-4.png') 0 0; }
+#registerButton:hover { background: url('../images/sleep-4.png') 0 -31px; }
+#registerButton.active { background: url('../images/sleep-4.png') -31px 0; }
+#registerButton.active:hover { background: url('../images/sleep-4.png') -31px -31px; }
+#matchesButton { background: url('../images/restart-4.png') 0 0; }
+#matchesButton:hover { background: url('../images/restart-4.png') 0 -31px; }
+#matchesButton.active { background: url('../images/restart-4.png') -31px 0; }
+#matchesButton.active:hover { background: url('../images/restart-4.png') -31px -31px; }
+#logoutButton { background: url('../images/shutdown-4.png') 0 0; }
+#logoutButton:hover { background: url('../images/shutdown-4.png') 0 -31px; }
+#logoutButton.active { background: url('../images/shutdown-4.png') -31px 0; }
+#logoutButton.active:hover { background: url('../images/shutdown-4.png') -31px -31px; }
+.buttonText {
+	float: left;
+	text-align: center;
+}
+.twoCols {
+	width: 50%;
+}
+.threeCols {
+	width: 33.3333%;
+}
+#menuBox {
+	float: left;
+	width: 217px;
+	height: 60px;
+	margin: 0;
+	padding: 5px;
+	border-radius: 0 0 15px 15px;
+	-moz-border-radius: 0 0 15px 15px;
+	-webkit-border-radius: 0 0 15px 15px;
+}
+#mainBody {
+	left: 235px;
+	padding: 5px;
+	position: absolute;
+	font-size: 12pt;
+	min-width: 600px;
+	max-width: 900px;		
+	min-height: 460px;
+}
+.profilePage {
+	width: 100%;
+}
+.profilePage .leftSide {
+	float: left;
+	width: 69%;
+	border-right: 1px solid #ddd;
+}
+.profilePage .rightSide {
+	float: left;
+	width: 29%;
+	padding-left: 1%;
+}
+.profilePage .profileImage {
+	float: left;
+	width: 100px;
+	height: 100px;
+	background: url('../images/empty-100.png');
+}
+.profilePage .profileName {
+	float: left;
+	height: 30px;
+	font-size: 14pt;
+	margin-top: 70px;
+	padding-left: 10px;
+}
+.profilePage .profileContact {
+	clear: both;
+	padding: 10px 0;
+	border-bottom: 1px solid #ddd;
+}
+.profilePage .profileAbout {
+	padding: 10px;
+}
+.profilePage .studentSkills .skill {
+	float: left;
+}
+.job {
+	border: 1px solid #ddd;
+	padding: 3px 0 0 0;
+	overflow: hidden;
+	margin-top: 3px;
+	background-color: #f0f0f0;
+	box-shadow: -3px -3px 20px rgba(0, 0, 0, .25) inset;
+	-moz-box-shadow: -3px -3px 20px rgba(0, 0, 0, .25) inset;
+	-webkit-box-shadow: -3px -3px 20px rgba(0, 0, 0, .25) inset;
+	border-radius: 5px;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+}
+.jobHeader {
+	color: #fff;
+	height: 25px;
+	padding: 5px 0 0 5px;;
+	background: #036;
+}
+.position {
+	float: left;
+}
+.wage {
+	float: right;
+	width: 20%;
+}
+.hours {
+	float: right;
+	width: 20%;
+}
+.jobTitle {
+	padding-left: 10px;
+}
+.jobDescription {
+	padding-left: 2px;
+}
+.profilePage .rightSide .job {
+	height: 40px;
+}
+	
