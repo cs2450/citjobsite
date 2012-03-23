@@ -5,7 +5,6 @@
 		exit();
 	}
 	include_once('inc/header.php');
-	require_once('inc/connect.php');
 ?>
 
 <?php
