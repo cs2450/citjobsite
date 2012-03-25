@@ -39,7 +39,7 @@ else if($user == 'student')
     mysql_query($sql) or die(mysql_error());
     
 	if(validate($email, $pass, $user))
-		header("Location: ../skills.php");
+		header("Location: ../skills.php?student_register=true");
 		exit();
 }
 

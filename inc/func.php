@@ -28,7 +28,7 @@ function validate_data($name,$email,$con_email,$phone,$pass,$con_passwd,$company
 // This function generates the skills checkboxes on skills.php. Whenever a new skill is added to the database, a new checkbox is created in skills.php.
 // Specification covered: 3.1.1 (Divide skills by CIT emphasis)
 
-function query($dept) 
+function query($dept,$current_skills) 
 {
 	// Select the skills from the cs department
 	$sql = 'SELECT skill_id, skill FROM skills WHERE dept="'.$dept.'"';
@@ -36,7 +36,11 @@ function query($dept)
 	while($row = mysql_fetch_assoc($result))
 	{
 		$skill = $row['skill'];
-		echo '<input type="checkbox" name="'.$row['skill_id'].'" /> <label for="'.$skill.'">'.$skill.'</label><br />';
+		$checked = "";
+		if ($current_skills[$row['skill_id']]) {
+			$checked = "checked";
+		}
+		echo '<input type="checkbox" name="'.$row['skill_id'].'" '.$checked.' /> <label for="'.$skill.'">'.$skill.'</label><br />';
 	}
 }
 

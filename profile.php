@@ -25,11 +25,13 @@ if ($_SESSION['user_type'] == 'student'){
 	$name = $_SESSION['name'];
 	$sql = "SELECT description FROM students WHERE email='".$_SESSION['email']."'";
 	$jobs_list = "Jobs List";
+	$desc_header="About me <a href=''>[edit]</a>";
 }
 else if ($_SESSION['user_type'] == 'employer'){
 	$name = $_SESSION['company'];
 	$sql = "SELECT description FROM employers WHERE email='".$_SESSION['email']."'";
 	$jobs_list = "My Posted Jobs List";
+	$desc_header="About me <a href=''>[edit]</a>";
 }
 else { die('invalid user type'); }
 $result=mysql_query($sql) or die("cant fetch description");
@@ -45,6 +47,9 @@ $desc=$desc['description'];
 		</div>
 		<div class="profileContact"><?php echo $_SESSION['email']; ?></div>
 		<div class="profileAbout">
+			<div class="CHANGEMEPLEASE">
+				<?php echo $desc_header; ?>
+			</div>
 			<?php echo $desc; ?> 
 		</div>
 <?php
@@ -73,7 +78,7 @@ $desc=$desc['description'];
 			}
 			$result = mysql_query($sql) or die('cannot fetch skills');
 
-			echo "<div class='studentSkills'><div>Skills</div>\n";
+			echo "<div class='studentSkills'><div>Skills <a href='skills.php'>[edit]</a></div>\n";
 			while($row=mysql_fetch_array($result)) {
 				echo "<div class='skill threeCols'>".$row['skill']."</div>\n";
 			}

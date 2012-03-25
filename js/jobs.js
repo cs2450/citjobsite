@@ -143,12 +143,24 @@ jQuery(document).ready(function($) {
 			return false;
 	
 	});
-	
-	var num_other_fields = 1;
+	var num_other_fields = 0;
+	if($('#other_count').val()){
+		num_other_fields = $('#other_count').val();
+	}
 	
 	// Add other skill fields
 	$('#add').click(function () {
-		$('#other_skills').append('<br /><input type="text" name="other'+ ++num_other_fields + '" />');
+		$('#other_skills').append('<br /><input type="text" id="other'+ ++num_other_fields + '"  name="other'+ num_other_fields + '" /><input type="button" value="Remove" id="skill_remove'+ num_other_fields + '" class="skill_remove" />');
+	});
+	// Remove other skill field
+	$('.skill_remove').live("click", function () {
+		this.previousSibling.previousSibling.id = 'abr';
+		var element = document.getElementById(this.previousSibling.id);
+		element.parentNode.removeChild(element);
+		element = document.getElementById(this.id);
+		element.parentNode.removeChild(element);
+		element = document.getElementById('abr');
+		element.parentNode.removeChild(element);
 	});
 	
 	//////////////////////////////////////////////////////////////////////////////
