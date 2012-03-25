@@ -67,7 +67,7 @@ function validate($user, $pass, $type){
 			  $_SESSION['access_level']=$row['access'];
 			  $_SESSION['Security_Hash'] = $SecurityHash;
 			  $_SESSION['Security_TokenMd5'] = md5($SecurityHash . "This Is not For you to see");
-			  $_SESSION['usertype'] = $type;
+			  $_SESSION['user_type'] = $type;
 			  
 			  return true;
 			 }
@@ -96,7 +96,7 @@ function validate($user, $pass, $type){
 			  $_SESSION['email'] = $row['email'];          
 			  $_SESSION['Security_Hash'] = $SecurityHash;
 			  $_SESSION['Security_TokenMd5'] = md5($SecurityHash . "This Is not For you to see");
-			  $_SESSION['usertype'] = $type;
+			  $_SESSION['user_type'] = $type;
 			  
 			  return true;
 			 }

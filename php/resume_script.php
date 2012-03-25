@@ -3,6 +3,10 @@ include_once("../inc/connect.php");
 session_start();
 $doc_root = "../resumes";
 
+foreach($_POST as $key => $value){
+	echo $key.": ".$value."<br/>";
+}
+
 // If a resume file was uploaded, handle the resume placement and validation
 if(isset($_FILES['resume']))
 {
@@ -61,6 +65,7 @@ if(isset($_FILES['resume']))
 			$sql = "UPDATE students SET resume='$document_name' WHERE studentID='$id'";
 			mysql_query($sql) or die("Cannot query database: " . mysql_error());
 			header("Location:../profile.php?student_register=true");
+			exit();
 		}
 	}
 }
@@ -68,5 +73,7 @@ if(isset($_FILES['resume']))
 // Else handle the resume form information and insert it into the student database.
 else
 {
+	header("Location:../profile.php?student_register=true");
+	exit();
 }
 ?>

@@ -88,7 +88,11 @@ jQuery(document).ready(function($) {
 				$('form[name=register]').before('<span class="error">Please enter your company name.</span>');
 				hasError = true;
 			}
-			
+			else if($('textarea[name=description]').val() == '') {
+				$('form[name=register]').before('<span class="error">Please tell us about your company.</span>');
+				hasError = true;
+			}
+	
 			// return false for an error
              if(hasError == true) {$('.error').fadeIn('slow'); return false;}
 			 
@@ -101,15 +105,21 @@ jQuery(document).ready(function($) {
 	$('#employer_radio').click(function () {
 		$('label[for=company]').remove();
 		$('input[name=company]').next().remove().end().remove();
+		$('label[for=description]').remove();
+		$('textarea[name=description]').next().remove().end().remove();
+		$('div[id=formspacer]').remove();
 		
-		$('<label for="company"><strong>Company Name:</strong></label>').insertAfter('label[for=confirm_password]').hide().fadeIn('slow');
-		$('<input type="text" name="company" style="display:inline; margin-top: 0px;" /><strong>Please fill out</strong>').insertAfter('input[name=confirm_password]').hide().fadeIn('slow');
+		$('<label for="company"><strong>Company Name:</strong></label>\n<label for="description"><strong>Company Description:</strong></label><div id="formspacer" style="height: 40px;"></div>').insertAfter('label[for=confirm_password]').hide().fadeIn('slow');
+		$('<input type="text" name="company" style="display:inline; margin-top: 0px;" /><strong>Please fill out</strong>\n<textarea rows="5" cols="50" name="description" style="display:inline; margin-top: 0px; margin-left: 10px;"></textarea>').insertAfter('input[name=confirm_password]').hide().fadeIn('slow');
 		$('input[name=company]').css('border', '1px solid green');
 	});
 	
 	$('#student_radio').click(function () {
 		$('label[for=company]').remove();
 		$('input[name=company]').next().remove().end().remove();
+		$('label[for=description]').remove();
+		$('textarea[name=description]').next().remove().end().remove();
+		$('div[id=formspacer]').remove();
 	});
 	
 	/////////////////////////////////////////////////////////////////////////////
