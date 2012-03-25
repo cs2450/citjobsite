@@ -25,7 +25,7 @@ if ($_SESSION['user_type'] == 'student'){
 	$name = $_SESSION['name'];
 	$sql = "SELECT description FROM students WHERE email='".$_SESSION['email']."'";
 	$jobs_list = "Jobs List";
-	$desc_header="About me <a href=''>[edit]</a>";
+	$desc_header="About me/Resume <a href='resume.php'>[edit]</a>";
 }
 else if ($_SESSION['user_type'] == 'employer'){
 	$name = $_SESSION['company'];
