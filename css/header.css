@@ -2,8 +2,14 @@ body {
 	border: 0;
 	margin: 0;
 	padding: 0;
-	font-size: 10pt;
-	font-family: tahoma;
+	font-size: 14px;
+	font-style: normal;
+	font-weight: lighter;
+	font-family: Tahoma, Helvetica, Verdana, sans-serif;
+	font-stretch: none;
+	font-variant: normal;
+	font-size-adjust: none;
+	letter-spacing: 0;
 }
 .regColors {
 	border: 1px solid #ddd;
@@ -35,9 +41,10 @@ body {
 	padding-top: 5px;
 }
 #loginBox label {
-	letter-spacing: .1em;
 }
 #loginBox input {
+	width: 135px;
+	margin-bottom: 4px;
 	font-family: tahoma;
 	border: 1px solid #ccc;
 }
@@ -121,7 +128,6 @@ body {
 	left: 235px;
 	padding: 5px;
 	position: absolute;
-	font-size: 12pt;
 	min-width: 600px;
 	max-width: 900px;		
 	min-height: 460px;
@@ -143,6 +149,7 @@ body {
 	float: left;
 	width: 100px;
 	height: 100px;
+	margin-right: 4px;
 	background: url('../images/empty-100.png');
 	border-radius: 5px;
 	-moz-border-radius: 5px;
@@ -171,32 +178,35 @@ body {
 	border: 1px solid #ddd;
 	padding: 4px;
 	overflow: hidden;
-	margin-bottom: 3px;
+	margin-bottom: 5px;
 	background-color: #f0f0f0;
 	box-shadow: -3px -3px 20px rgba(0, 0, 0, 0.25) inset;
 	-moz-box-shadow: -3px -3px 20px rgba(0, 0, 0, 0.25) inset;
 	-webkit-box-shadow: -3px -3px 20px rgba(0, 0, 0, 0.25) inset;
-	border-radius: 5px;
-	-moz-border-radius: 5px;
-	-webkit-border-radius: 5px;
+	border-radius: 7px;
+	-moz-border-radius: 7px;
+	-webkit-border-radius: 7px;
 }
-.job .leftSide {
-	float: left;
-	min-width: 329px;
-	max-width: 629px;
-	border-right: 1px solid #ddd;
+.job .jobInfo {
+	margin: auto;
+	padding: 0;
+	display: block;
 }
 .job .rightSide {
 	float: right;
 	width: 150px;
+	margin-left: 4px;
+	border-left: 1px solid #ddd;
 }
 .jobHeader {
 	color: #fff;
 	height: 25px;
-	padding: 5px 0 0 5px;;
+	padding: 5px 0 0 5px;
 	background: #036;
 }
 .jobTitle {
+	height: 25px;
+	margin-top: -5px;
 	text-align: center;
 }
 .jobTitle a {
@@ -208,7 +218,6 @@ body {
 }
 .jobDescription {
 	height: 60px;
-	padding: 0 2px;
 	overflow: hidden;
 }
 .position {
@@ -220,6 +229,7 @@ body {
 }
 .hours {
 	height: 40px;
+	overflow: hidden;
 	text-align: center;
 }
 .hours > div {
@@ -227,6 +237,7 @@ body {
 }
 .wage {
 	height: 40px;
+	overflow: hidden;
 	text-align: center;
 }
 .wage > div {
@@ -234,6 +245,7 @@ body {
 }
 .date {
 	padding: 3px 0 0 5px;
+	overflow: hidden;
 }
 .profilePage .rightSide .job {
 	height: 40px;
