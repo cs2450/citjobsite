@@ -8,8 +8,10 @@ include_once("inc/header.php");
 include_once("inc/func.php");
 
 // If the session isn't set by logging in or registering, re-route to login.php
-if(!isset($_SESSION['email']))
-	header("Location:prompt_login.php");
+if(!isset($_SESSION['email']) || $_SESSION['user_type'] != 'student') {
+	header("Location:index.php");
+	exit();
+}
 
 // This variable is used to pass on the get variables
 $get = '';
@@ -81,6 +83,8 @@ if ($_SESSION['user_type'] == 'student') {
 				<td id="other_skills">
 					<input type="button" value="Add Another Skill" id="add" />
 						<?php  if (count($other_skills) != 0){
+							// Hidden value is the number of 'other_skills
+							// pulled from db. Value used in jobs.js
 							echo '<input type="hidden" name="other_count" id="other_count" value="'.count($other_skills).'" />';
 							for ($c = 0;$c < count($other_skills);$c++) {
 								echo '<br /><input type="text" id="other'.($c+1).'" name="other'.($c+1).'" value="'.$other_skills[$c].'"><input type="button" value="Remove" id="skill_remove'.($c+1).'" class="skill_remove" />';

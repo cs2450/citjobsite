@@ -5,40 +5,37 @@
 		exit();
 	}
 	include_once('inc/header.php');
+
+	// If students registration or employer registration is complete, let them know their profile is ready for view
+	if($_GET['student_register'] == true || $_GET['employer_register'] == true)
+	{
+		echo '<script type="text/javascript">
+			$(document).ready(function () { 
+				alert("Thank you for registering ' . $_SESSION['name'] . '! You may now view your profile.");
+			})
+			</script>';
+	}
+
+	// Prepare all the differences between the student and employer profile pages here
+	// so I dont have to keep asking "if (user_type==student)" OVER AND OVER AGAIN!! (rawr)
+
+	if ($_SESSION['user_type'] == 'student'){
+		$name = $_SESSION['name'];
+		$jobs_list = "Jobs List";
+		$desc_header="About me/Resume <a href='resume.php'>[edit]</a>";
+		$sql = "SELECT description FROM students WHERE email='".$_SESSION['email']."'";
+	}
+	else if ($_SESSION['user_type'] == 'employer'){
+		$name = $_SESSION['company'];
+		$jobs_list = "My Posted Jobs List";
+		$desc_header="About my company: <a href='edit_company.php'>[edit]</a>";
+		$sql = "SELECT description FROM employers WHERE email='".$_SESSION['email']."'";
+	}
+	else { die('invalid user type'); }
+	$result=mysql_query($sql) or die("cant fetch description");
+	$desc=mysql_fetch_array($result);
+	$desc=$desc['description'];
 ?>
-
-<?php
-// If students registration or employer registration is complete, let them know their profile is ready for view
-if($_GET['student_register'] == true || $_GET['employer_register'] == true)
-{
-	echo '<script type="text/javascript">
-		$(document).ready(function () { 
-			alert("Thank you for registering ' . $_SESSION['name'] . '! You may now view your profile.");
-		})
-		</script>';
-}
-
-// Prepare all the differences between the student and employer profile pages here
-// so I dont have to keep asking "if (user_type==student)" OVER AND OVER AGAIN!! (rawr)
-
-if ($_SESSION['user_type'] == 'student'){
-	$name = $_SESSION['name'];
-	$sql = "SELECT description FROM students WHERE email='".$_SESSION['email']."'";
-	$jobs_list = "Jobs List";
-	$desc_header="About me/Resume <a href='resume.php'>[edit]</a>";
-}
-else if ($_SESSION['user_type'] == 'employer'){
-	$name = $_SESSION['company'];
-	$sql = "SELECT description FROM employers WHERE email='".$_SESSION['email']."'";
-	$jobs_list = "My Posted Jobs List";
-	$desc_header="About me <a href=''>[edit]</a>";
-}
-else { die('invalid user type'); }
-$result=mysql_query($sql) or die("cant fetch description");
-$desc=mysql_fetch_array($result);
-$desc=$desc['description'];
-?>
-
 <div class="profilePage">
 	<div class="leftSide">
 		<div class="profileImage"></div>
@@ -152,21 +149,26 @@ $desc=$desc['description'];
 			</div>
 		</div>
 */
-	if ($_SESSION['user_type']=='student') {
+	if ($_SESSION['user_type']=='employer') {
+		$email = $_SESSION['email'];
+		$sql="SELECT * FROM jobs WHERE contact_email='$email' ORDER BY date DESC LIMIT 10";
+	} else {
 		$sql="SELECT * FROM jobs WHERE status='active' ORDER BY date DESC LIMIT 10";
-		$result = mysql_query($sql) or die(mysql_error());
+	}
 
-		while($row=mysql_fetch_array($result)) {
-			?>
-			<div class="job">
-				<div class="jobTitle">
-					<?php echo '<a href="jobdetail.php?'.$row['id'].'">'.$row['title']; ?></a>
-				</div>
-				<div class="jobDescription">
-					<?php echo $row['job_description']; ?>
-				</div>
+	$result = mysql_query($sql) or die(mysql_error());
+
+	while($row=mysql_fetch_array($result)) {
+		?>
+		<div class="job">
+			<div class="jobTitle">
+				<?php echo '<a href="jobdetail.php?'.$row['id'].'">'.$row['title']; ?></a>
 			</div>
-<?php } } ?>
+			<div class="jobDescription">
+				<?php echo $row['job_description']; ?>
+			</div>
+		</div>
+<?php } ?>
 
 	</div>
 </div>

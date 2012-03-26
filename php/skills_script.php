@@ -3,6 +3,12 @@ include_once("../inc/connect.php");
 
 session_start();
 
+// This script is for student skills only
+if (!(isset($_SESSION['email']) || $_SESSION['user_type'] != 'student') {
+	header("Location:../index.php");
+	exit();
+}
+
 $student_id = $_SESSION['student_id'];
 
 // Get the number of skills in the database

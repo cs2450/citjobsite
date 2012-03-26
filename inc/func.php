@@ -28,7 +28,12 @@ function validate_data($name,$email,$con_email,$phone,$pass,$con_passwd,$company
 // This function generates the skills checkboxes on skills.php. Whenever a new skill is added to the database, a new checkbox is created in skills.php.
 // Specification covered: 3.1.1 (Divide skills by CIT emphasis)
 
-function query($dept,$current_skills) 
+// current_skills is an array filled by querying for selected skills
+// filled using looped: $current_skills[$row['skill_id']] = true;
+// from post_job.php it is filled using:
+// $current_skills[$row['skill_id']] = $row['match_priority'];
+// Keep in mind that match_priority includes 0's
+function query($dept,$current_skills,$form_type='student') 
 {
 	// Select the skills from the cs department
 	$sql = 'SELECT skill_id, skill FROM skills WHERE dept="'.$dept.'"';
@@ -37,10 +42,24 @@ function query($dept,$current_skills)
 	{
 		$skill = $row['skill'];
 		$checked = "";
-		if ($current_skills[$row['skill_id']]) {
+		if (isset($current_skills[$row['skill_id']])) {
 			$checked = "checked";
 		}
-		echo '<input type="checkbox" name="'.$row['skill_id'].'" '.$checked.' /> <label for="'.$skill.'">'.$skill.'</label><br />';
+		if ($form_type == 'job') {
+			// Matching selector
+			$op1='';
+			$op2='';
+			if ($current_skills[$row['skill_id']] == 1)
+				$op1 = 'Selected';
+			else if ($current_skills[$row['skill_id']] == 2)
+				$op2 = 'Selected';
+			echo "<select name='match_".$row['skill_id']."'>\n<option value='0'>None</optoin>\n<option value='1' $op1>Required</option>\n<option value='2' $op2>Matched</option>";
+			// Skill checkbox
+			echo '<input type="checkbox" name="'.$row['skill_id'].'" '.$checked.' /> <label for="'.$skill.'">'.$skill.'</label><br />';
+		}
+		else {
+			echo '<input type="checkbox" name="'.$row['skill_id'].'" '.$checked.' /> <label for="'.$skill.'">'.$skill.'</label><br />';
+		}
 	}
 }
 
