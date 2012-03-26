@@ -52,22 +52,34 @@
 	}
 ?>
 <p>* required information</p>
-<form method="post" action="php/post_job_script.php?<?php echo $_SERVER['QUERY_STRING']; ?>">
-	<label for="title">*Title/Position</label>
-	<input type="text" size="50" name="title" value="<?php echo $title; ?>"/>
-	<label for="wage">Wage:</label>
-	<input type="text" name="wage" value="<?php echo $wage; ?>"/>
-	<label for="hours">Hours:</label>
-	<select name="hours">
-		<option value="">-Select-</option>
-		<option value="Full Time" <?php echo $full; ?>>Full Time</option>
-		<option value="Part Time" <?php echo $part; ?>>Part Time</option>
-		<option value="Full/Part" <?php echo $both; ?>>Full/Part</option>
-		<option value="Negotiable" <?php echo $nego; ?>>Negotiable</option>
-		<option value="Temporary" <?php echo $temp; ?>>Temporary</option>
-		<option value="Internship" <?php echo $intern; ?>>Internship</option>
-	</select>
-	<label for="job_description">*Job Description</label>
+<form id="jobEditForm" method="post" action="php/post_job_script.php?<?php echo $_SERVER['QUERY_STRING']; ?>">
+	<table align=center>
+		<tr><td class="rightJust"><label for="title">*Title/Position:</label></td>
+			<td class="leftJust" colspan=2>
+				<input type="text" size="50" name="title" value="<?php
+					echo $title; ?>"/>
+			</td></tr>
+		<tr><td class="rightJust"><label for="wage">Wage:</label></td>
+			<td class="leftJust"><input type="text" name="wage" value="<?php
+				echo $wage; ?>"/></td>
+			<td><label for="hours">Hours:</label>
+				<select name="hours">
+					<option value="">-Select-</option>
+					<option value="Full Time" <?php echo $full;?>>Full Time</option>
+					<option value="Part Time" <?php echo $part;?>>Part Time</option>
+					<option value="Full/Part" <?php echo $both;?>>Full/Part</option>
+					<option value="Negotiable"<?php echo$nego;?>>Negotiable</option>
+					<option value="Temporary" <?php echo $temp;?>>Temporary</option>
+					<option value="Internship"<?php echo$intern;?>>Internship</option>
+				</select>
+			</td>
+		</tr>
+	</table>
+	<div class="row">
+	</div>
+	<div class="row">
+		<label for="job_description">*Job Description</label>
+	</div>
 	<textarea rows="10" cols="50" name="job_description"> <?php echo $desc; ?></textarea>
 	<!-- Skills stuff -->
 	<br/>

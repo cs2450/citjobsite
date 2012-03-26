@@ -36,9 +36,12 @@ body {
 	-webkit-border-radius: 0 0 15px 15px;
 }
 #loginForm{
-	height: 55px;
+	height: 56px;
 	background: #f0f0f0;
-	padding-top: 5px;
+	padding-top: 2px;
+	border-radius: 0 0 10px 10px;
+	-moz-border-radius: 0 0 10px 10px;
+	-webkit-border-radius: 0 0 10px 10px;
 }
 #loginBox label {
 }
@@ -88,10 +91,14 @@ body {
 .buttonText label {
 	cursor: pointer;
 }
-#loginButton { background: url('../images/home-4.png') 0 0; }
-#loginButton:hover { background: url('../images/home-4.png') 0 -31px; }
-#loginButton.active { background: url('../images/home-4.png') -31px 0; }
-#loginButton.active:hover { background: url('../images/home-4.png') -31px -31px; }
+#loginButton,
+#homeButton { background: url('../images/home-4.png') 0 0; }
+#loginButton:hover,
+#homeButton:hover { background: url('../images/home-4.png') 0 -31px; }
+#loginButton.active,
+#homeButton.active { background: url('../images/home-4.png') -31px 0; }
+#loginButton.active:hover,
+#homeButton.active:hover { background: url('../images/home-4.png') -31px -31px; }
 #registerButton { background: url('../images/sleep-4.png') 0 0; }
 #registerButton:hover { background: url('../images/sleep-4.png') 0 -31px; }
 #registerButton.active { background: url('../images/sleep-4.png') -31px 0; }
@@ -130,7 +137,6 @@ body {
 	position: absolute;
 	min-width: 600px;
 	max-width: 900px;		
-	min-height: 460px;
 }
 .profilePage {
 	width: 100%;
@@ -219,6 +225,7 @@ body {
 .jobDescription {
 	height: 60px;
 	overflow: hidden;
+	text-overflow: ellipsis;
 }
 .position {
 }
@@ -249,4 +256,31 @@ body {
 }
 .profilePage .rightSide .job {
 	height: 40px;
+}
+#jobEditForm {
+	text-align: center;
+}
+#jobEditForm .leftJust {
+	text-align: left;
+}
+#jobEditForm .rightJust {
+	text-align: right;
+}
+#jobEditForm .row .leftSide {
+	float: left;
+}
+#jobEditForm .row .leftSide label {
+	display: block;
+	padding: 5px 0 2px 0;
+	text-align: right;
+}
+#jobEditForm .row .rightSide {
+	float: left;
+}
+#jobEditForm .row .rightSide label {
+	float: left;
+}
+#jobEditForm .row .rightSide input {
+	display: block;
+	text-align: left;
 }

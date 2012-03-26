@@ -3,12 +3,11 @@
 // Satisfies specification 2.4 -mw 2/29/12
 //
 
-function validate_data($name,$email,$con_email,$phone,$pass,$con_passwd,$company){
+function validate_data($name,$email,$con_email,$phone,$pass,$con_passwd){
   $regexp="/^[a-z0-9]+([_\\.-][a-z0-9]+)*@([a-z0-9]+([\.-][a-z0-9]+)*)+\\.[a-z]{2,}$/i";
   $error='';
 
-  if($company == "" or $name=="" or $phone=="" or $email=="" or 
-     $pass=="" or $con_passwd=="") {
+  if($name=="" or $phone=="" or $email=="" or $pass=="" or $con_passwd=="") {
     $error="* Please fill out all fields";
   }
   else if ( !preg_match($regexp, $email) ) {
