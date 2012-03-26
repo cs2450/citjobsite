@@ -30,16 +30,17 @@ require_once('inc/connect.php');
 		<div id="menuBox" class="regColors sticky-handle">
 			<form id="loginForm" class="regColors" method="post" action="php/login_script.php">
 				<div class="formButton threeCols">
-					<button type="submit" name="home" value="home" id="homeButton"></button>
+					<button type="submit" name="home" value="home" id="homeButton"
+<?php if ($_GET[page]=='home') echo ' class="active"' ?>></button>
 				</div>
 				<div class="formButton threeCols">
-					<button type="submit" name="<?php echo $match_button; ?>" value="<?php echo $match_button; ?>" id="matchesButton"></button>
+					<button type="submit" name="<?php echo $match_button; ?>" value="<?php echo $match_button; ?>" id="matchesButton" <?php if ($_GET[page]==$match_button) echo ' class="active"' ?>></button>
 				</div>
 				<div class="formButton threeCols">
-					<button type="submit" name="logout" value="logout" id="logoutButton"></button>
+					<button type="submit" name="logout" value="logout" id="logoutButton"<?php if ($_GET[page]=='logout') echo 'class="active"' ?>></button>
 				</div>
 				<div class="buttonText threeCols">
-					<label for="loginButton">Home</label>
+					<label for="homeButton">Home</label>
 				</div>
 				<div class="buttonText threeCols">
 					<label for="matchesButton"><?php echo $match_button; ?></label>

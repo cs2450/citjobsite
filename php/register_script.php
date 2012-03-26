@@ -4,7 +4,7 @@ include_once("../inc/func.php");
 
 session_start();
 
-$error = validate_data($_POST['name'], $_POST['register_email'], $_POST['confirm_email'], $_POST['phone'], $_POST['register_password'], $_POST['confirm_password'], $_POST['company']);
+$error = validate_data($_POST['name'], $_POST['register_email'], $_POST['confirm_email'], $_POST['phone'], $_POST['register_password'], $_POST['confirm_password']);
 
 if($error != '');
 	header("Location:../register.php?error=".$error);
@@ -26,7 +26,7 @@ if($user == 'employer')
     mysql_query($sql) or die(mysql_error());
     
 	if(validate($email, $pass, $user)){
-		header("Location:../profile.php?employer_register=true");
+		header("Location:../profile.php?page=home&employer_register=true");
 		exit();
 	}
 }
@@ -39,7 +39,7 @@ else if($user == 'student')
     mysql_query($sql) or die(mysql_error());
     
 	if(validate($email, $pass, $user))
-		header("Location: ../skills.php?student_register=true");
+		header("Location: ../skills.php?page=home&student_register=true");
 		exit();
 }
 

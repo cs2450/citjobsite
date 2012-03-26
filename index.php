@@ -25,20 +25,20 @@ while($row=mysql_fetch_array($result)) {
 		// This div encompasses one entire job ?>
 		<div class="job">
 			<div class="profileImage"></div>
-			<div class="leftSide">
-				<div class="jobTitle"><?php
-					echo "<a href='jobdetail.php?$row[id]'>$row[title]</a>"; ?>
-				</div>
-				<div class="jobDescription"><?php
-					echo $row['job_description'] ?>
-				</div>
-				<div class='company'><?php echo $row[company]; ?></div>
-			</div>
 			<div class="rightSide">
 				<div class='hours'><div>Hours</div><?php echo $row[hours]; ?></div>
 				<div class='wage'><div>Wage</div><?php echo $row[wage]; ?></div>
 				<div class="date">Expires: &nbsp;<?php
 					echo date(" m/d/y",strtotime($row['date'])); ?>
+				</div>
+			</div>
+			<div class="jobInfo">
+				<div class='company'><?php echo $row[company]; ?></div>
+				<div class="jobTitle"><?php
+					echo "<a href='jobdetail.php?$row[id]'>$row[title]</a>"; ?>
+				</div>
+				<div class="jobDescription"><?php
+					echo $row['job_description'] ?>
 				</div>
 			</div>
 		</div>

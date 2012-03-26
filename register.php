@@ -2,12 +2,10 @@
 include_once("inc/header.php");
 ?>
 	<p class="head">Register for the CIT Jobs Board</p>
-	<p class="text"><strong>*All fields required</strong></p>
+	<p class="text"><strong>*All fields required </strong>
+		<?php if(isset($_GET['error'])) echo $_GET['error']; ?>
+	</p>
 <div id="form_container" class="text">
-	<?php
-		if(isset($_GET['error']))
-			echo '<span class="error">'.$_GET['msg'].'</span>';
-	?>
 	<form method="post" name="register" action="php/register_script.php">
 		<div class="labels">
 			<label for="name">Name:</label>
