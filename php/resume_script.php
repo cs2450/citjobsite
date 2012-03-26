@@ -54,13 +54,14 @@ if(isset($_FILES['resume']))
 					$delete_file = @unlink($row['resume']);
 			}
 		}
-
+		echo $file['tmp_name'];
 		// Move temporary file to resumes 
 		if(move_uploaded_file($file['tmp_name'], "$doc_root/$document_name"))
 		{
 			$sql = "UPDATE students SET resume='$document_name' WHERE studentID='$id'";
 			mysql_query($sql) or die("Cannot query database: " . mysql_error());
-			header("Location:../profile.php?student_register=true");
+			header("Location:../resume.php?student_register=true");
+			exit();
 		}
 	}
 }
@@ -68,5 +69,25 @@ if(isset($_FILES['resume']))
 // Else handle the resume form information and insert it into the student database.
 else
 {
+	// An unchecked 'notification' checkbox doesn't seem to show up in post
+	// So to allow for toggling it we always set to false then true if needed
+	$sql = "UPDATE students SET notification=0 WHERE email='".$_SESSION['email']."'";
+	mysql_query($sql) or die(mysql_error());
+	
+	// Dump all inputs to db
+	foreach ($_POST as $key => $value) {
+		echo $key.": ".$value."<br/>";
+		$sql = "UPDATE students SET $key='$value' WHERE email='".$_SESSION['email']."'";
+		if ($key == 'notification' && $value="on")
+			$sql = "UPDATE students SET $key=1 WHERE email='".$_SESSION['email']."'";
+			
+		mysql_query($sql) or die(mysql_error());
+	}
+	if ($_GET['student_register'])
+		header("Location:../profile.php?student_register=true");
+	else
+		header("Location:../profile.php");
+
+	exit();
 }
 ?>

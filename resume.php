@@ -6,10 +6,21 @@ include_once("inc/header.php");
 session_start();
 
 // If the session isn't set by logging in or registering, re-route to login.php
-/*
-if(!isset($_SESSION['email']))
+if(!isset($_SESSION['email'])) {
 	header("Location:prompt_login.php");
-*/
+	exit();
+}
+
+// Grab the student's resume, if any, so we can display a link to it
+// Also grab from the db so we can autofill any inputs
+$resume_link = "No resume uploaded";
+$email = $_SESSION['email'];
+$sql = "SELECT *  FROM students WHERE email='$email'";
+$result = mysql_query($sql);
+$info = mysql_fetch_array($result);
+$resume = $info['resume'];
+if ( !($resume == "NULL" || $resume == '') )
+	$resume_link = "<a href='$resume'>Current resume</a>";
 
 if(isset($_GET['error'])) 
 	{
@@ -45,10 +56,13 @@ if(isset($_GET['error']))
 <form method="post" name="upload" action="php/resume_script.php" enctype="multipart/form-data">
 <table id="resume_table" class="text">
 	<tr>
-		<td>Now, take some time to upload a resume or fill out your resume information in the fields below.</td>
+		<td>Now, take some time to upload a resume and fill out some basic information in the fields below. While nothing on this page is required, more information can improve your chances for employment. Or <a href="profile.php">continue to profile</a></td>
 	</tr>
 	<tr>
 		<td><p><b>Upload your resume: (.pdf only)</b></p></td>
+	</tr>
+	<tr>
+		<td><?php echo $resume_link; ?></td>
 	</tr>
 	<tr>
 		<td><br /><input type="file" name="resume" /></td>
@@ -58,11 +72,10 @@ if(isset($_GET['error']))
 	</tr>
 </table>
 </form>
-
 <form method="post" action="php/resume_script.php">
 <table class="text">
 	<tr>
-		<td><br /><p><b>OR fill out your resume information below:</b></p></td>
+		<td><br /><p><b>Fill out your information below:</b></p></td>
 	</tr>
 	<tr>
 		<td><hr /></td>
@@ -71,13 +84,13 @@ if(isset($_GET['error']))
 		<td>Brief description of yourself:</td>
 	</tr>
 	<tr>
-		<td><textarea rows="5" cols="50" name="description"></textarea></td>
+		<td><textarea rows="5" cols="50" name="description" ><?php echo $info['description']; ?></textarea></td>
 	</tr>
 	<tr>
 		<td><br />Brief list of employable qualities:</td>
 	</tr>
 	<tr>
-		<td><textarea rows="10" cols="50" name="qualities"></textarea></td>
+		<td><textarea rows="10" cols="50" name="qualities"><?php echo $info['qualities']; ?></textarea></td>
 	</tr>
 	<tr>
 		<td><br />Employment history:</td>
@@ -89,13 +102,13 @@ if(isset($_GET['error']))
 		<td>
 		<br />
 		<div id="contact_info">
-			<label for="phone">Contact Phone Number: </label><input type="text" name="phone" maxlength="10" size="10"/> (10 digits)<br />
-			<label for="contact_email">Contact Email: </label><input type="text" name="contact_email" size="40" value="<?php echo $_SESSION['email']; ?>" />
+			<label for="phone">Contact Phone Number: </label><input type="text" name="phone" maxlength="10" size="10" value="<?php echo $info['contact_phone']; ?>"/> (10 digits)<br />
+			<label for="contact_email">Contact Email: </label><input type="text" name="contact_email" size="40" value="<?php echo $info['contact_email']; ?>" />
 		</div>
 		</td>
 	</tr>
 	<tr>
-		<td><br />Receive new job notifications via email? <input type="checkbox" name="notifications" /></td>	
+		<td><br />Receive new job notifications via email? <input type="checkbox" name="notification" <?php if($info['notification']){ echo "checked"; } ?>/></td>	
 	</tr>
 	<tr>
 		<td><br /><button class="button" id="resume_submit">Submit Resume</button></td>

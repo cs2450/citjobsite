@@ -4,7 +4,6 @@
 	session_start();
 	require_once("../inc/connect.php");
 	include_once("../inc/func.php");
-
 	if ($_POST['register']) {
 		header("Location:../register.php");
 		exit();
@@ -14,8 +13,12 @@
 		header("Location:../index.php");
 		exit();
 	}
-	else if ($_POST['matches']){
-		//do something
+	else if ($_POST['Matches']){
+		header("Location:../matches.php");
+		exit();
+	}
+	else if ($_POST['Post_Job']){
+		header("Location:../post_job.php?create_job=true");
 		exit();
 	}
 	else if ($_POST['home']){

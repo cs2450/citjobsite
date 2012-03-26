@@ -20,14 +20,20 @@ require_once('inc/connect.php');
 	<body>
 		<div id="citNav"><img src="images/bannerMain.png"></img></div>
 		<div id="sticky-anchor"></div>
-<?php	if ($_SESSION['email']) { ?>
+<?php	if ($_SESSION['email']) { 
+	// The matches button changes to 'Post Job' if we are an employer
+	if ($_SESSION['user_type'] == 'student')
+		$match_button = "Matches";
+	else
+		$match_button = "Post Job";
+	?>
 		<div id="menuBox" class="regColors sticky-handle">
 			<form id="loginForm" class="regColors" method="post" action="php/login_script.php">
 				<div class="formButton threeCols">
 					<button type="submit" name="home" value="home" id="homeButton"></button>
 				</div>
 				<div class="formButton threeCols">
-					<button type="submit" name="matches" value="matches" id="matchesButton"></button>
+					<button type="submit" name="<?php echo $match_button; ?>" value="<?php echo $match_button; ?>" id="matchesButton"></button>
 				</div>
 				<div class="formButton threeCols">
 					<button type="submit" name="logout" value="logout" id="logoutButton"></button>
@@ -36,7 +42,7 @@ require_once('inc/connect.php');
 					<label for="loginButton">Home</label>
 				</div>
 				<div class="buttonText threeCols">
-					<label for="matchesButton">Matches</label>
+					<label for="matchesButton"><?php echo $match_button; ?></label>
 				</div>
 				<div class="buttonText threeCols">
 					<label for="logoutButton">Log-Out</label>

@@ -28,7 +28,12 @@ function validate_data($name,$email,$con_email,$phone,$pass,$con_passwd,$company
 // This function generates the skills checkboxes on skills.php. Whenever a new skill is added to the database, a new checkbox is created in skills.php.
 // Specification covered: 3.1.1 (Divide skills by CIT emphasis)
 
-function query($dept) 
+// current_skills is an array filled by querying for selected skills
+// filled using looped: $current_skills[$row['skill_id']] = true;
+// from post_job.php it is filled using:
+// $current_skills[$row['skill_id']] = $row['match_priority'];
+// Keep in mind that match_priority includes 0's
+function query($dept,$current_skills,$form_type='student') 
 {
 	// Select the skills from the cs department
 	$sql = 'SELECT skill_id, skill FROM skills WHERE dept="'.$dept.'"';
@@ -36,7 +41,25 @@ function query($dept)
 	while($row = mysql_fetch_assoc($result))
 	{
 		$skill = $row['skill'];
-		echo '<input type="checkbox" name="'.$row['skill_id'].'" /> <label for="'.$skill.'">'.$skill.'</label><br />';
+		$checked = "";
+		if (isset($current_skills[$row['skill_id']])) {
+			$checked = "checked";
+		}
+		if ($form_type == 'job') {
+			// Matching selector
+			$op1='';
+			$op2='';
+			if ($current_skills[$row['skill_id']] == 1)
+				$op1 = 'Selected';
+			else if ($current_skills[$row['skill_id']] == 2)
+				$op2 = 'Selected';
+			echo "<select name='match_".$row['skill_id']."'>\n<option value='0'>None</optoin>\n<option value='1' $op1>Required</option>\n<option value='2' $op2>Matched</option>";
+			// Skill checkbox
+			echo '<input type="checkbox" name="'.$row['skill_id'].'" '.$checked.' /> <label for="'.$skill.'">'.$skill.'</label><br />';
+		}
+		else {
+			echo '<input type="checkbox" name="'.$row['skill_id'].'" '.$checked.' /> <label for="'.$skill.'">'.$skill.'</label><br />';
+		}
 	}
 }
 
@@ -67,7 +90,7 @@ function validate($user, $pass, $type){
 			  $_SESSION['access_level']=$row['access'];
 			  $_SESSION['Security_Hash'] = $SecurityHash;
 			  $_SESSION['Security_TokenMd5'] = md5($SecurityHash . "This Is not For you to see");
-			  $_SESSION['usertype'] = $type;
+			  $_SESSION['user_type'] = $type;
 			  
 			  return true;
 			 }
@@ -96,7 +119,7 @@ function validate($user, $pass, $type){
 			  $_SESSION['email'] = $row['email'];          
 			  $_SESSION['Security_Hash'] = $SecurityHash;
 			  $_SESSION['Security_TokenMd5'] = md5($SecurityHash . "This Is not For you to see");
-			  $_SESSION['usertype'] = $type;
+			  $_SESSION['user_type'] = $type;
 			  
 			  return true;
 			 }

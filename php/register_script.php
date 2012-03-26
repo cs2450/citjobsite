@@ -17,15 +17,18 @@ $email = mysql_real_escape_string($_POST['register_email']);
 $phone = mysql_real_escape_string($_POST['phone']);
 $pass = mysql_real_escape_string($_POST['register_password']);
 $company = isset($_POST['company']) ? mysql_real_escape_string($_POST['company']) : NULL;
+$description = isset($_POST['description']) ? mysql_real_escape_string($_POST['description']) : NULL;
 
 if($user == 'employer')
 {
-	$sql = "INSERT INTO employers (email, password, name, company, phone, access) VALUES('$email', '$pass', '$name', '$company', '$phone', '1');";
+	$sql = "INSERT INTO employers (email, password, name, company, description, phone, access) VALUES('$email', '$pass', '$name', '$company', '$description', '$phone', '1');";
 	
     mysql_query($sql) or die(mysql_error());
     
-	if(validate($email, $pass, $user))
-		echo 'hi';
+	if(validate($email, $pass, $user)){
+		header("Location:../profile.php?employer_register=true");
+		exit();
+	}
 }
 
 // if the user_type is a student
@@ -36,7 +39,8 @@ else if($user == 'student')
     mysql_query($sql) or die(mysql_error());
     
 	if(validate($email, $pass, $user))
-		header("Location: ../skills.php");
+		header("Location: ../skills.php?student_register=true");
+		exit();
 }
 
 else
