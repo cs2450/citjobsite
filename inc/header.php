@@ -31,13 +31,13 @@ require_once('inc/connect.php');
 			<form id="loginForm" class="regColors" method="post" action="php/login_script.php">
 				<div class="formButton threeCols">
 					<button type="submit" name="home" value="home" id="homeButton"
-<?php if ($_GET[page]=='home') echo ' class="active"' ?>></button>
+<?php if (isset($_GET['page']) && $_GET['page']=='home') echo ' class="active"' ?>></button>
 				</div>
 				<div class="formButton threeCols">
-					<button type="submit" name="<?php echo $match_button; ?>" value="<?php echo $match_button; ?>" id="matchesButton" <?php if ($_GET[page]==$match_button) echo ' class="active"' ?>></button>
+					<button type="submit" name="<?php echo $match_button; ?>" value="<?php echo $match_button; ?>" id="matchesButton" <?php if (isset($_GET['page']) && $_GET['page']==$match_button) echo ' class="active"' ?>></button>
 				</div>
 				<div class="formButton threeCols">
-					<button type="submit" name="logout" value="logout" id="logoutButton"<?php if ($_GET[page]=='logout') echo 'class="active"' ?>></button>
+					<button type="submit" name="logout" value="logout" id="logoutButton"<?php if (isset($_GET['page']) && $_GET['page']=='logout') echo 'class="active"' ?>></button>
 				</div>
 				<div class="buttonText threeCols">
 					<label for="homeButton">Home</label>
