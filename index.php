@@ -23,7 +23,7 @@ while($row=mysql_fetch_array($result)) {
 	}
 	else {
 		// This div encompasses one entire job ?>
-		<a class="job" href="jobdetail.php?<?php cho $row['id']; ?>">
+		<a class="job" href="jobdetail.php?<?php echo $row['id']; ?>">
 			<div class="profileImage"></div>
 			<div class="rightSide">
 				<div class='hours'><div>Hours</div><?php echo $row[hours]; ?></div>

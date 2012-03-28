@@ -1,7 +1,6 @@
 <?php
 include_once("../inc/connect.php");
 session_start();
-$doc_root = "../resumes";
 
 // If a resume file was uploaded, handle the resume placement and validation
 if(isset($_FILES['resume']))
@@ -39,7 +38,7 @@ if(isset($_FILES['resume']))
 	// Else, upload the file
 	else
 	{
-		$document_name = $_SESSION['email'] ."_". Date("Y-m-d g:i:s") . $ext;
+		$document_name = $_SESSION['email'] ."_". Date("Y-m-d_g:i:s") . $ext;
 		$id = $_SESSION['student_id'];
 		
 		// Check the students database to see if there is already a resume. If there is, go to the directory and delete the previous resume to make room for the new one
@@ -54,9 +53,9 @@ if(isset($_FILES['resume']))
 					$delete_file = @unlink($row['resume']);
 			}
 		}
-		echo $file['tmp_name'];
+
 		// Move temporary file to resumes 
-		if(move_uploaded_file($file['tmp_name'], "$doc_root/$document_name"))
+		if(move_uploaded_file($file['tmp_name'], "../resumes/$document_name"))
 		{
 			$sql = "UPDATE students SET resume='$document_name' WHERE studentID='$id'";
 			mysql_query($sql) or die("Cannot query database: " . mysql_error());

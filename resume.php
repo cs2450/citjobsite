@@ -2,8 +2,6 @@
 include_once("inc/connect.php");
 include_once("inc/header.php");
 
-// check the session variables to see what forms to display
-
 // If the session isn't set by logging in or registering, re-route to login.php
 /*
 if(!isset($_SESSION['email'])) {
