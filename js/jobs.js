@@ -125,7 +125,7 @@ jQuery(document).ready(function($) {
 	/////////////////////////////////////////////////////////////////////////////
 	//	SKILLS.PHP HANDLERS FOR COLLAPSIBLE MENUS AND ADDING NEW SKILL FIELDS  //
 	/////////////////////////////////////////////////////////////////////////////
-	$('.sub').hide();
+	/*$('.sub').hide();
 	
 	// Expand skills sections when they are clicked on
 	$('.sections').click(function () {
@@ -142,7 +142,7 @@ jQuery(document).ready(function($) {
 		else
 			return false;
 	
-	});
+	});*/
 	var num_other_fields = 0;
 	if($('#other_count').val()){
 		num_other_fields = $('#other_count').val();

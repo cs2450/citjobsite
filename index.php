@@ -23,7 +23,7 @@ while($row=mysql_fetch_array($result)) {
 	}
 	else {
 		// This div encompasses one entire job ?>
-		<div class="job">
+		<a class="job" href="jobdetail.php?<?php cho $row['id']; ?>">
 			<div class="profileImage"></div>
 			<div class="rightSide">
 				<div class='hours'><div>Hours</div><?php echo $row[hours]; ?></div>
@@ -33,15 +33,13 @@ while($row=mysql_fetch_array($result)) {
 				</div>
 			</div>
 			<div class="jobInfo">
-				<div class='company'><?php echo $row[company]; ?></div>
-				<div class="jobTitle"><?php
-					echo "<a href='jobdetail.php?$row[id]'>$row[title]</a>"; ?>
-				</div>
+				<div class='company'><?php echo $row['company']; ?></div>
+				<div class="jobTitle"><?php echo $row['title']; ?></div>
 				<div class="jobDescription"><?php
 					echo $row['job_description'] ?>
 				</div>
 			</div>
-		</div>
+		</a>
 <?php	}
 	}
 echo "</div>";

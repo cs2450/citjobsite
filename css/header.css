@@ -183,6 +183,7 @@ body {
 	height: 101px;
 	border: 1px solid #ddd;
 	padding: 4px;
+	display: block;
 	overflow: hidden;
 	margin-bottom: 5px;
 	background-color: #f0f0f0;
@@ -192,6 +193,9 @@ body {
 	border-radius: 7px;
 	-moz-border-radius: 7px;
 	-webkit-border-radius: 7px;
+}
+.job:hover {
+	background-color: #e0e0e0;
 }
 .job .jobInfo {
 	margin: auto;
@@ -254,8 +258,25 @@ body {
 	padding: 3px 0 0 5px;
 	overflow: hidden;
 }
-.profilePage .rightSide .job {
+.profilePage .rightSide > div:first-child {
+	margin-bottom: 3px;
+	text-align: center;
+}
+.profilePage .rightSide a.job {
 	height: 40px;
+	margin: auto;
+	display: block;
+	font-size: 14px;
+}
+.profilePage .rightSide .job .jobTitle {
+	color: #036;
+	height: 15px;
+	padding-top: 5px;
+}
+.profilePage .rightSide .job .jobDescription {
+	color: #000;
+	height: 17px;
+	margin-top: 5px;
 }
 #jobEditForm {
 	text-align: center;
@@ -282,5 +303,20 @@ body {
 }
 #jobEditForm .row .rightSide input {
 	display: block;
+	text-align: left;
+}
+.floatLeft {
+	float: left;
+}
+.floatRight {
+	float: right;
+}
+.jobSkills {
+	padding-top: 10px;
+}
+.jobSkills h4 {
+	font-size: 14px;
+}
+.sub {
 	text-align: left;
 }

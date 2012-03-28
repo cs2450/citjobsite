@@ -27,7 +27,7 @@
 	}
 	else if ($_SESSION['user_type'] == 'employer'){
 		$name = $_SESSION['company'];
-		$jobs_list = "My Posted Jobs List";
+		$jobs_list = "My Posted Jobs";
 		$desc_header="About my company: <a href='edit_company.php'>[edit]</a>";
 		$sql = "SELECT description FROM employers WHERE email='".$_SESSION['email']."'";
 	}
@@ -96,56 +96,13 @@
 
 	</div>
 	<div class="rightSide"><!-- title in next command -->
-<?php echo $jobs_list;
+<?php echo "<div class='centerJustify'>$jobs_list</div>";
 /*
 		// Sample output from the below PHP loop
-
 		<div class="job">
 			<div class="jobTitle">Example Job</div>
 			<div class="jobDescription">
 				This is a short fake job.
-			</div>
-		</div>
-		<div class="job">
-			<div class="jobTitle">Job Number Two</div>
-			<div class="jobDescription">
-				This is the next up-and-coming super long fake job.
-			</div>
-		</div>
-		<div class="job">
-			<div class="jobTitle">Example Job</div>
-			<div class="jobDescription">
-				This is a short fake job.
-			</div>
-		</div>
-		<div class="job">
-			<div class="jobTitle">Job Number Two</div>
-			<div class="jobDescription">
-				This is the next up-and-coming super long fake job.
-			</div>
-		</div>
-		<div class="job">
-			<div class="jobTitle">Example Job</div>
-			<div class="jobDescription">
-				This is a short fake job.
-			</div>
-		</div>
-		<div class="job">
-			<div class="jobTitle">Job Number Two</div>
-			<div class="jobDescription">
-				This is the next up-and-coming super long fake job.
-			</div>
-		</div>
-		<div class="job">
-			<div class="jobTitle">Example Job</div>
-			<div class="jobDescription">
-				This is a short fake job.
-			</div>
-		</div>
-		<div class="job">
-			<div class="jobTitle">Job Number Two</div>
-			<div class="jobDescription">
-				This is the next up-and-coming super long fake job.
 			</div>
 		</div>
 */
@@ -160,19 +117,12 @@
 
 	while($row=mysql_fetch_array($result)) {
 		?>
-		<div class="job">
-			<div class="jobTitle">
-				<?php echo '<a href="jobdetail.php?'.$row['id'].'">'.$row['title']; ?></a>
-			</div>
-			<div class="jobDescription">
-				<?php echo $row['job_description']; ?>
-			</div>
-		</div>
+		<a class="job" href="jobdetail.php?<?php echo $row['id']?>">
+			<div class="jobTitle"><?php echo $row['title']; ?></div>
+			<div class="jobDescription"><?php echo $row['job_description']; ?></div>
+		</a>
 <?php } ?>
-
 	</div>
 </div>
 
-<?php>
-include_once('inc/footer.php');
-?>
+<?php include_once('inc/footer.php'); ?>

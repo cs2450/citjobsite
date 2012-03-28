@@ -14,24 +14,21 @@
 		exit();
 	}
 	else if ($_POST['Matches']){
-		header("Location:../matches.php");
+		header("Location:../matches.php>page=Matches");
 		exit();
 	}
 	else if ($_POST['Post_Job']){
-		header("Location:../post_job.php?create_job=true");
+		header("Location:../post_job.php?page=Post%20Job&create_job=true");
 		exit();
 	}
 	else if ($_POST['home']){
-		header("Location:../profile.php");
+		header("Location:../profile.php?page=home");
 		exit();
 	}
 	else if ($_POST['login']){
-		if (validate($_POST['email'],$_POST['password'],'employer')) {
-			header("Location:../profile.php");
-			exit();
-		}
-		else if (validate($_POST['email'],$_POST['password'],'student')) {
-			header("Location:../profile.php");
+		if (validate($_POST['email'],$_POST['password'],'employer') || 
+			validate($_POST['email'],$_POST['password'],'student')) {
+			header("Location:../profile.php?page=home");
 			exit();
 		}
 		else {

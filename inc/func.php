@@ -52,7 +52,7 @@ function query($dept,$current_skills,$form_type='student')
 				$op1 = 'Selected';
 			else if ($current_skills[$row['skill_id']] == 2)
 				$op2 = 'Selected';
-			echo "<select name='match_".$row['skill_id']."'>\n<option value='0'>None</optoin>\n<option value='1' $op1>Required</option>\n<option value='2' $op2>Matched</option>";
+			echo "<select name='match_".$row['skill_id']."'>\n<option value='0'>None</optoin>\n<option value='1' $op1>Required</option>\n<option value='2' $op2>Desirable</option>";
 			// Skill checkbox
 			echo '<input type="checkbox" name="'.$row['skill_id'].'" '.$checked.' /> <label for="'.$skill.'">'.$skill.'</label><br />';
 		}
