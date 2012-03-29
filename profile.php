@@ -41,7 +41,7 @@
 	else if ($_SESSION['user_type'] == 'employer'){
 		$email = &$_SESSION['email'];
 		$name = $_SESSION['company'];
-		$jobs_list = "My Posted Jobs <a href='post_job.php?create_job=true'>[post]</a>";
+		$jobs_list = "My Posted Jobs <a href='post_job.php?action=create'>[post]</a>";
 		$desc_header="About my company: <a href='edit_company.php'>[edit]</a>";
 		$sql = "SELECT description FROM employers WHERE email='$email'";
 		$result=mysql_query($sql) or die("cant fetch description");
