@@ -18,7 +18,7 @@
 		exit();
 	}
 	else if ($_POST['Post_Job']){
-		header("Location:../post_job.php?page=Post%20Job&create_job=true");
+		header("Location:../post_job.php?page=Post%20Job&action=create");
 		exit();
 	}
 	else if ($_POST['home']){

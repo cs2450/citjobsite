@@ -8,15 +8,17 @@ if ( !(isset($_SESSION['email'])) || $_SESSION['user_type'] != 'employer') {
 	header("Location:../index.php");
 	exit();
 }
+$action = $_GET['action'];
 // GOING TO FIX THIS LATER SO IT DOESNT USE GET (not sure what I was thinking)
 // Also make sure theres no funny business, allow only what we want in GET
-if ( !( isset($_GET['edit']) || isset($_GET['create_job']) ) ) {
+if ($action != 'create' && $action != 'edit' && $action != 'renew' && $action != 'deleted' && $action != 'filled')  {
 	header("Location:../index.php");
 	exit();
 }
-// Finally, make sure a job with id $_GET['edit'] actually exists and we own it
-if (isset($_GET['edit'])){
-	$job_id = $_GET['edit'];
+
+// If we are changing a job, make sure it actually exists and we own it
+if ($action != 'create') {
+	$job_id = $_GET['id'];
 	$email = $_SESSION['email'];
 	$sql = "SELECT id FROM jobs WHERE id='$job_id' AND contact_email='$email'";
 	$result = mysql_query($sql);
@@ -24,20 +26,31 @@ if (isset($_GET['edit'])){
 		header("Location:../index.php");
 		exit();
 	}
+	// Renewing a job is simple. We handle it here
+	if ($action == 'renew') {
+		$expires = date('Y-m-d', strtotime('+1 month'));
+		$sql = "UPDATE jobs SET expire_date='$expires' WHERE id='$job_id'";
+		mysql_query($sql) or die(mysql_error());
+		header("Location:../jobdetail.php?$job_id");
+		exit();
+	}
+	// So is deleting. We don't actually delete it though.
+	else if ($action == 'filled' || $action == 'deleted') {
+		$rm = &$_GET['action'];
+		$sql = "UPDATE jobs SET status='$rm' WHERE id='$job_id'";
+		mysql_query($sql) or die(mysql_error());
+		header("Location:../jobdetail.php?$job_id");
+		exit();
+	}
 }
 
-
-foreach ($_POST as $key => $value) {
-	echo $key.": ".$value."<br/>";
-}
-
-// Take care of the job information first so we can ignore it in the loop.
+// Take care of the job information first so we can ignore it in the skills loop.
 $title = mysql_real_escape_string($_POST['title']);
 $wage = mysql_real_escape_string($_POST['wage']);
 $desc = str_replace("\n","<br>",$_POST['job_description']);
 $desc = mysql_real_escape_string($desc);
 $date = date('Y-m-d H:i:s');
-$expires = date('Y-m-d', strtotime('+6 month'));
+$expires = date('Y-m-d', strtotime($_POST['lifetime']));
 $email = $_SESSION['email'];
 $company = $_SESSION['company'];
 $name = $_SESSION['name'];
@@ -45,23 +58,18 @@ $hours = $_POST['hours'];
 $phone = $_SESSION['phone'];
 
 // Check if we are creating or updating
-if ($_GET['create_job']) {
+if ($action == 'create') {
 	$sql = "INSERT INTO jobs (date,company,contact,job_description,title,wage,hours,expire_date,contact_email,phone,status) VALUES('$date', '$company', '$name', '$desc', '$title', '$wage', '$hours', '$expires', '$email', '$phone', 'active')";
 	mysql_query($sql) or die(mysql_error());
 	$job_id = mysql_insert_id();
 }
-else {
-	$job_id = $_GET['edit'];
-	$sql= "UPDATE jobs SET date='$date', title='$title', wage='$wage', hours='$hours', job_description='$desc' WHERE id='$job_id' AND contact_email='$email'";
+// Updating
+else if ($action == 'edit') {
+	$sql= "UPDATE jobs SET title='$title', wage='$wage', hours='$hours', job_description='$desc', expire_date='$expires' WHERE id='$job_id' AND contact_email='$email'";
 	mysql_query($sql) or die(mysql_error());
 }
 
-
-// Get the number of skills in the database
-$sql = "SELECT skill_id FROM skills";
-$result = mysql_query($sql) or die("Cannot query database: " . mysql_error());
-
-$number_of_skills = mysql_num_rows($result);
+// Now we process the skills
 
 // grab our current skills (if any) to avoid duplicate db entries
 if ($_SESSION['user_type'] == 'employer') {
@@ -108,10 +116,5 @@ foreach($_POST as $key => $value)
 		$match = 0;
 	}
 }
-if ($_GET['create_job']) {
-	header('Location:../jobdetail.php?create_job=true');
-}
-else {
-	header("Location:../jobdetail.php");
-}
+header("Location:../jobdetail.php?$job_id");
 ?>

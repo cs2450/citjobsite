@@ -7,10 +7,14 @@
 	include_once("inc/connect.php");
 	include_once("inc/header.php");
 	include_once("inc/func.php");
-	
+	$action = &$_GET['action'];
+
+	// $submit_button is what goes in the submit button waaaay down at the bottom
+	$submit_button = "Submit Job";
 	// Set up our variables so we can auto fill if editing a job
-	if (isset($_GET['edit'])) {
-		$job_id = &$_GET['edit'];
+	if ($action == 'edit') {
+		$submit_button = "Edit job";
+		$job_id = &$_GET['id'];
 		$email = &$_SESSION['email'];
 		$sql = "SELECT * FROM jobs WHERE id='$job_id' AND contact_email='$email'";
 		$result = mysql_query($sql) or die(mysql_error());
@@ -81,6 +85,13 @@
 		<label for="job_description">*Job Description</label>
 	</div>
 	<textarea rows="10" cols="50" name="job_description"> <?php echo $desc; ?></textarea>
+	<br/>
+	<label for="lifetime">Expires in:</label>
+	<select name="lifetime">
+		<option value="+6 month">6 Months</option>
+		<option value="+3 month">3 Months</option>
+		<option value="+1 month">1 Month</option>
+	</select>
 	<!-- Skills stuff -->
 	<div class="jobSkills">
 		<label for="skills_matching"><h4>Skills Matching (optional)</h4></label>
@@ -137,7 +148,7 @@
 				</td>
 			</tr>
 			<tr>
-				<td colspan="2"><br /><button class="button" onclick="document.student_skills.submit()">Submit Job</button></td>
+				<td colspan="2"><br /><button class="button" onclick="document.student_skills.submit()"><?php echo $submit_button; ?></button></td>
 			</tr>
 		</table>
 	</div>

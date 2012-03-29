@@ -28,7 +28,7 @@ while($row=mysql_fetch_array($result)) {
 			<div class="rightSide">
 				<div class='hours'><div>Hours</div><?php echo $row[hours]; ?></div>
 				<div class='wage'><div>Wage</div><?php echo $row[wage]; ?></div>
-				<div class="date">Expires: &nbsp;<?php
+				<div class="date">Posted: <?php
 					echo date(" m/d/y",strtotime($row['date'])); ?>
 				</div>
 			</div>

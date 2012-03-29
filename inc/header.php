@@ -5,7 +5,7 @@ session_start();
 //require_once('../includes/functions.php');
 //myheader('CIT Jobs');
 
-require_once('inc/connect.php');
+require_once('connect.php');
 ?>
 <html>
 	<head>
