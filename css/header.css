@@ -320,3 +320,22 @@ body {
 .sub {
 	text-align: left;
 }
+#form_container {
+	text-align: center;
+}
+#form_container table {
+	width: 400px;
+}
+#form_container .labels {
+	width: 200px;
+	text-align: right;
+}
+#form_container .inputs {
+	width: 300px;
+	text-align: left;
+}
+#form_container .radios {
+	top: 23px;
+}
+#form_container #register_button {
+}

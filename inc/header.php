@@ -9,6 +9,7 @@ require_once('connect.php');
 ?>
 <html>
 	<head>
+		<link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/2.9.0/build/reset-fonts-grids/reset-fonts-grids.css" />
 		<link rel="stylesheet" type="text/css" href="./css/header.css" />
         <link rel="stylesheet" type="text/css" href="./css/jobs.css" />
 		<link rel="icon" href="http://cit.dixie.edu/favicon.png"/>
