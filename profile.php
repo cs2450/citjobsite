@@ -31,7 +31,7 @@
 	else if ($_SESSION['user_type'] == 'student'){
 		$email = &$_SESSION['email'];
 		$name = $_SESSION['name'];
-		$jobs_list = "Jobs List";
+		$jobs_list = "Matched Jobs";
 		$desc_header="About me/Resume <a href='resume.php'>[edit]</a>";
 		$sql = "SELECT description FROM students WHERE email='$email'";
 		$result=mysql_query($sql) or die("cant fetch description");
@@ -41,7 +41,7 @@
 	else if ($_SESSION['user_type'] == 'employer'){
 		$email = &$_SESSION['email'];
 		$name = $_SESSION['company'];
-		$jobs_list = "My Posted Jobs <a href='post_job.php?action=create'>[post]</a>";
+		$jobs_list = "My Posted Jobs <a href='post_job.php?action=create'>[post job]</a>";
 		$desc_header="About my company: <a href='edit_company.php'>[edit]</a>";
 		$sql = "SELECT description FROM employers WHERE email='$email'";
 		$result=mysql_query($sql) or die("cant fetch description");
@@ -109,7 +109,7 @@
 
 	</div>
 	<div class="rightSide"><!-- title in next command -->
-<?php echo "<div class='centerJustify'>$jobs_list</div>";
+<?php echo "<div class='top centerJustify'>$jobs_list</div>";
 /*
 		// Sample output from the below PHP loop
 		<div class="job">

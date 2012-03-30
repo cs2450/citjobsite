@@ -23,11 +23,13 @@ while($row=mysql_fetch_array($result)) {
 	}
 	else {
 		// This div encompasses one entire job ?>
-		<a class="job" href="jobdetail.php?<?php echo $row['id']; ?>">
+		<a class="partial job" href="jobdetail.php?<?php echo $row['id']; ?>">
 			<div class="profileImage"></div>
 			<div class="rightSide">
-				<div class='hours'><div>Hours</div><?php echo $row[hours]; ?></div>
-				<div class='wage'><div>Wage</div><?php echo $row[wage]; ?></div>
+				<div class='hours'><div class="bold">Hours</div><?php
+					echo $row[hours]; ?></div>
+				<div class='wage'><div class="bold">Wage</div><?php
+					echo $row[wage]; ?></div>
 				<div class="date">Posted: <?php
 					echo date(" m/d/y",strtotime($row['date'])); ?>
 				</div>

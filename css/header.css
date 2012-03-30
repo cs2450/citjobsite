@@ -64,6 +64,7 @@ body {
 	float: left;
 	width: 138px;
 	text-align: left;
+	padding-top: 3px;
 }
 .formItem {
 	height: 19px;
@@ -95,20 +96,25 @@ body {
 #homeButton { background: url('../images/home-4.png') 0 0; }
 #loginButton:hover,
 #homeButton:hover { background: url('../images/home-4.png') 0 -31px; }
+#loginButton:active,
 #loginButton.active,
+#homeButton:active,
 #homeButton.active { background: url('../images/home-4.png') -31px 0; }
 #loginButton.active:hover,
 #homeButton.active:hover { background: url('../images/home-4.png') -31px -31px; }
 #registerButton { background: url('../images/sleep-4.png') 0 0; }
 #registerButton:hover { background: url('../images/sleep-4.png') 0 -31px; }
+#registerButton:active,
 #registerButton.active { background: url('../images/sleep-4.png') -31px 0; }
 #registerButton.active:hover { background: url('../images/sleep-4.png') -31px -31px; }
 #matchesButton { background: url('../images/restart-4.png') 0 0; }
 #matchesButton:hover { background: url('../images/restart-4.png') 0 -31px; }
+#matchesButton:active,
 #matchesButton.active { background: url('../images/restart-4.png') -31px 0; }
 #matchesButton.active:hover { background: url('../images/restart-4.png') -31px -31px; }
 #logoutButton { background: url('../images/shutdown-4.png') 0 0; }
 #logoutButton:hover { background: url('../images/shutdown-4.png') 0 -31px; }
+#logoutButton:active,
 #logoutButton.active { background: url('../images/shutdown-4.png') -31px 0; }
 #logoutButton.active:hover { background: url('../images/shutdown-4.png') -31px -31px; }
 .buttonText {
@@ -149,7 +155,29 @@ body {
 .profilePage .rightSide {
 	float: left;
 	width: 29%;
+	border: 0;
 	padding-left: 1%;
+}
+.profilePage .rightSide > div:first-child {
+	text-align: center;
+	margin-bottom: 3px;
+}
+.profilePage .rightSide a.job {
+	height: 40px;
+	margin: 2px auto;
+	display: block;
+	font-size: 14px;
+}
+.profilePage .rightSide .job .jobTitle {
+	height: 15px;
+	overflow: hidden;
+	padding-top: 5px;
+}
+.profilePage .rightSide .job .jobDescription {
+	color: #000;
+	height: 17px;
+	overflow: hidden;
+	margin-top: 5px;
 }
 .profileImage {
 	float: left;
@@ -179,13 +207,24 @@ body {
 .profilePage .studentSkills .skill {
 	float: left;
 }
+.rightSide .top {
+	padding: 5px 0 3px 0;
+	background: #ccf;
+	font-weight: bold;
+}
+.rightSide .top a {
+	float: right;
+	font-weight: normal;
+}
 .job {
+	color: #000;
 	height: 101px;
 	border: 1px solid #ddd;
 	padding: 4px;
 	display: block;
 	overflow: hidden;
 	margin-bottom: 5px;
+	text-decoration: none;
 	background-color: #f0f0f0;
 	box-shadow: -3px -3px 20px rgba(0, 0, 0, 0.25) inset;
 	-moz-box-shadow: -3px -3px 20px rgba(0, 0, 0, 0.25) inset;
@@ -197,16 +236,20 @@ body {
 .job:hover {
 	background-color: #e0e0e0;
 }
-.job .jobInfo {
+.jobInfo {
 	margin: auto;
 	padding: 0;
 	display: block;
 }
-.job .rightSide {
+.rightSide {
 	float: right;
 	width: 150px;
 	margin-left: 4px;
 	border-left: 1px solid #ddd;
+}
+.full.rightSide {
+	width: 25%;
+	padding: 20px 0;
 }
 .jobHeader {
 	color: #fff;
@@ -215,68 +258,76 @@ body {
 	background: #036;
 }
 .jobTitle {
+	color: #036;
 	height: 25px;
+	font-size: 16px;
+	font-weight: bold;
 	margin-top: -5px;
 	text-align: center;
 }
-.jobTitle a {
+.full .jobTitle {
+	margin-top: 20px;
+	font-size: 22px;
+}
+.jobDescription {
+	text-align: left;
+	text-overflow: ellipsis;
+}
+.full .jobDescription {
+	margin-top: 30px;
+}
+.partial .jobDescription {
+	height: 60px;
+	overflow: hidden;
+}
+.position {
 	color: #036;
 	font-size: 14pt;
 	font-family: Arial, Helvetica, Verdana, sans-serif;
 	font-weight: bold;
 	text-decoration: none;
 }
-.jobDescription {
-	height: 60px;
-	overflow: hidden;
-	text-overflow: ellipsis;
-}
-.position {
-}
 .company {
+	text-align: left;
 	font-size: 13pt;
 	font-family: Arial, Helvetica, Verdana, sans-serif;
 	font-weight: bold;
 }
+.full .company {
+	padding-top: 10px;
+}
 .hours {
-	height: 40px;
-	overflow: hidden;
 	text-align: center;
 }
-.hours > div {
-	font-weight: bold;
+.partial .hours {
+	height: 40px;
+	overflow: hidden;
 }
 .wage {
-	height: 40px;
-	overflow: hidden;
 	text-align: center;
 }
-.wage > div {
-	font-weight: bold;
+.partial .wage {
+	height: 35px;
+	overflow: hidden;
+	margin-bottom: 5px;
+}
+.email {
+	height: 40px;
+}
+.phone {
+	height: 40px;
 }
 .date {
 	padding: 3px 0 0 5px;
 	overflow: hidden;
+	text-align: left;
 }
-.profilePage .rightSide > div:first-child {
-	margin-bottom: 3px;
-	text-align: center;
+.rightSide .bold {
+	font-weight: bold;
+	margin-bottom: 2px;
 }
-.profilePage .rightSide a.job {
-	height: 40px;
-	margin: auto;
-	display: block;
-	font-size: 14px;
-}
-.profilePage .rightSide .job .jobTitle {
-	color: #036;
-	height: 15px;
-	padding-top: 5px;
-}
-.profilePage .rightSide .job .jobDescription {
-	color: #000;
-	height: 17px;
-	margin-top: 5px;
+.full .tall {
+	margin: 10px 0;
 }
 #jobEditForm {
 	text-align: center;
@@ -338,4 +389,10 @@ body {
 	top: 23px;
 }
 #form_container #register_button {
+}
+.jobControls {
+	margin-bottom: 5px;
+}
+.jobControls a {
+	margin: 0 5px;
 }

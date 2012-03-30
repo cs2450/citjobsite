@@ -10,11 +10,11 @@
 	}
 	else if ($_POST['logout']){
 		session_destroy();
-		header("Location:../index.php");
+		header("Location:../index.php?page=home");
 		exit();
 	}
 	else if ($_POST['Matches']){
-		header("Location:../matches.php>page=Matches");
+		header("Location:../matches.php?page=Matches");
 		exit();
 	}
 	else if ($_POST['Post_Job']){
