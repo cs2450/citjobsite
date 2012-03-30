@@ -19,6 +19,22 @@ $pass = mysql_real_escape_string($_POST['register_password']);
 $company = isset($_POST['company']) ? mysql_real_escape_string($_POST['company']) : NULL;
 $description = isset($_POST['description']) ? mysql_real_escape_string($_POST['description']) : NULL;
 
+// Check if email is already in employers and kick them out if so.
+$sql = "SELECT * FROM employers WHERE email='$email'";
+$result = mysql_query($sql) or die(mysql_error());
+if (mysql_num_rows($result) > 0){
+	header("Location:../register.php?error=user_exists");
+	exit();
+}
+
+// Check if email is already in students and kick them out if so.
+$sql = "SELECT * FROM students WHERE email='$email'";
+$result = mysql_query($sql) or die(mysql_error());
+if (mysql_num_rows($result) > 0){
+	header("Location:../register.php?error=user_exists");
+	exit();
+}
+
 if($user == 'employer')
 {
 	$sql = "INSERT INTO employers (email, password, name, company, description, phone, access) VALUES('$email', '$pass', '$name', '$company', '$description', '$phone', '1');";

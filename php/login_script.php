@@ -26,8 +26,10 @@
 		exit();
 	}
 	else if ($_POST['login']){
-		if (validate($_POST['email'],$_POST['password'],'employer') || 
-			validate($_POST['email'],$_POST['password'],'student')) {
+		$email = mysql_real_escape_string($_POST['email']);
+		$pass = mysql_real_escape_string($_POST['password']);
+		if (validate($email,$pass,'employer') || 
+			validate($email,$pass,'student')) {
 			header("Location:../profile.php?page=home");
 			exit();
 		}

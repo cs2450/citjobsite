@@ -4,7 +4,7 @@ include_once("../inc/connect.php");
 session_start();
 
 // This script is for student skills only
-if (!(isset($_SESSION['email']) || $_SESSION['user_type'] != 'student') {
+if (!(isset($_SESSION['email']) || $_SESSION['user_type'] != 'student')) {
 	header("Location:../index.php");
 	exit();
 }

@@ -105,7 +105,7 @@ function validate($user, $pass, $type){
 			$result = mysql_query($sql) or die(mysql_error());
 			$queryrows = mysql_num_rows($result);
 			
-			if($queryrows > 0) {
+			if($queryrows == 1) {
 			  srand(time());
 			  $SecurityHash = "";
 			  
