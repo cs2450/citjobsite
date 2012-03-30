@@ -3,20 +3,19 @@
 if(!isset($_SESSION['email']))
 	header("Location:prompt_login.php");
 */
-include_once("inc/connect.php");
 include_once("inc/header.php");
 include_once("inc/func.php");
 
 // If the session isn't set by logging in or registering, re-route to login.php
 if(!isset($_SESSION['email']) || $_SESSION['user_type'] != 'student') {
-	header("Location:index.php");
+	header("Location:index.php?page=home");
 	exit();
 }
 
 // This variable is used to pass on the get variables
 $get = '';
 if ($_GET['student_register'] == true) {
-	echo "<p class='text'>Thank you for registering, <b>".$_SESSION['name']."</b>. Now, take some time to fill out your skills so that employers can find you.</p>";
+	echo "<div class='centerJustify big tall text'>Thank you for registering ".$_SESSION['name'].".</div><div class='centerJustify big tall text'>Now, take some time to fill out your skills so that employers can find you.</div>";
 	$get = "?".$_SERVER['QUERY_STRING'];
 }
 // Get the students current skills so we can auto check them when editing
@@ -35,44 +34,29 @@ if ($_SESSION['user_type'] == 'student') {
 }
 ?>
 <form method="post" name="student_skills" action="php/skills_script.php<?php echo $get; ?>">
-		<table id="skills_table" class="text">
-		<!--
+		<table id="skills_table" class="text" align=center>
 			<tr>
-				<td colspan="2">
-					<p><b>Fill out what skills you possess to aid employers in finding you.</b></p>
-				</td>
-			</tr>
-		-->
-			<tr>
-				<td colspan="2">Computer Information Technology skills you possess (check all that apply):</td>
+				<td colspan="2" class="top">Computer Information Technology skills you possess (check all that apply):</td>
 			</tr>
 			<tr>
-				<td colspan="2">
-					<br />
-					<a href="#" class="sections" id="cs">Computer Science Skills</a>
+				<td class="floatLeft">
+					<h3 class="sections" id="cs">Computer Science Skills</h3>
 					<div class="sub" id="cs_list">
 						<?php query('cs',$current_skills); ?>
 					</div>
 				</td>
-			</tr>
-			<tr>
-				<td colspan="2">
-					<br />
-					<a href="#" class="sections" id="it">Information Technology Skills</a>
+				<td class="floatLeft">
+					<h3 class="sections" id="it">Information Technology Skills</h3>
 					<div class="sub" id="it_list">
 						<?php query('it',$current_skills); ?>
 					</div>
 				</td>
-			</tr>
-			<tr>
-				<td colspan="2">
-					<br />
-					<a href="#" class="sections" id="vt">Visual Technology Skills</a>
+				<td class="floatLeft">
+					<h3 class="sections" id="vt">Visual Technology Skills</h3>
 					<div class="sub" id="vt_list">
 						<?php query('vt',$current_skills); ?>
 					<div>
 				</td>
-			</tr>	
 			<tr>
 				<td colspan="2">
 					<br />

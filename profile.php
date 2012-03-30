@@ -7,15 +7,13 @@
 	include_once('inc/header.php');
 
 	// If students registration or employer registration is complete, let them know their profile is ready for view
-	if($_GET['student_register'] == true || $_GET['employer_register'] == true)
-	{
+	if($_GET['student_register'] == true || $_GET['employer_register'] == true) {
 		echo '<script type="text/javascript">
 			$(document).ready(function () { 
 				alert("Thank you for registering ' . $_SESSION['name'] . '! You may now view your profile.");
 			})
 			</script>';
 	}
-
 	// Prepare all the differences between the student and employer profile pages here
 	// so I dont have to keep asking "if (user_type==student)" OVER AND OVER AGAIN!! (rawr)
 	if (isset($_GET['employer'])) {
@@ -52,16 +50,12 @@
 <div class="profilePage">
 	<div class="leftSide">
 		<div class="profileImage"></div>
-		<div class="profileName">
-			<?php echo $name; ?>
-		</div>
+		<div class="profileName"><?php echo $name; ?></div>
 		<div class="profileContact"><?php echo $email; ?></div>
-		<div class="profileAbout">
-			<div class="CHANGEMEPLEASE">
-				<?php echo $desc_header; ?>
-			</div>
-			<?php echo $desc; ?> 
-		</div>
+		<div class="profileAbout leftJustify">
+			<div class="centerJustify"><?php
+				echo $desc_header; ?></div><?php
+			echo $desc; ?></div>
 <?php
 /*
 	Sample result from the below PHP based on student skills
@@ -88,9 +82,9 @@
 			}
 			$result = mysql_query($sql) or die('cannot fetch skills');
 
-			echo "<div class='studentSkills'><div>Skills <a href='skills.php'>[edit]</a></div>\n";
+			echo "<div class='studentSkills topDivider'><div>Skills <a href='skills.php'>[edit]</a></div>\n";
 			while($row=mysql_fetch_array($result)) {
-				echo "<div class='skill threeCols'>".$row['skill']."</div>\n";
+				echo "<div class='skill threeCols leftJustify'>".$row['skill']."</div>\n";
 			}
 
 			// Make sure to grab any skills that they put in manually
