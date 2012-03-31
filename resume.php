@@ -19,7 +19,7 @@ $result = mysql_query($sql);
 $info = mysql_fetch_array($result);
 $resume = $info['resume'];
 if ( !($resume == "NULL" || $resume == '') )
-	$resume_link = "<a href='$resume'>Current resume</a>";
+	$resume_link = "<a href='resumes/$resume'>Current resume</a>";
 
 if(isset($_GET['error'])) 
 	{

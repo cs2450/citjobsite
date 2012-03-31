@@ -131,4 +131,98 @@ function validate($user, $pass, $type){
 	
     return false;
 }
+
+// This function calls the match functions and returns the SQL statement
+function fetch_matches($id,$numMatches) {
+	$matches = begin_match($id);
+	$size = sizeof($matches);
+	// Lets get a maximum of $numMatches
+	if($size > 0) {
+		$job_id = key($matches);
+		next($matches);
+		$sql="SELECT * FROM jobs WHERE id='$job_id'";
+		if($size>$numMatches)
+			$size = $numMatches;
+		for($i=1;$i<$size;$i++)
+		{	
+			$job_id = key($matches);
+			$sql = $sql." UNION SELECT * FROM jobs WHERE id='$job_id'";
+			next($matches);
+		}
+	}
+	// No matches? Just display the normal job list.
+	else
+		$sql="SELECT * FROM jobs WHERE status='active' ORDER BY date DESC LIMIT 10";
+	
+	return $sql;
+}
+
+
+// This is a helper function for the matching it gathers the student's skills into an array
+// It then calls the main match function and returns the matched jobs
+function begin_match($id) {
+	$sql = "SELECT skill_id FROM student_skills WHERE student_id='$id'";
+	$result= mysql_query($sql) or die("failed fetching skills");
+	$current_skills = array();
+	while ($row=mysql_fetch_array($result)) {
+		    if($row['skill_id'] != 0)
+				        array_push($current_skills,$row['skill_id']);
+	}                                                                   
+	return match($current_skills);
+}
+
+// This is the matching function.
+// It takes an array of student skills (ids) and returns an array[job_id] = matchRating
+// sorted by the rating.
+function match($student_skills) {
+	$sql = "SELECT * from job_skills WHERE active=1";
+	$result = mysql_query($sql) or die(mysql_error());
+	$final = array();
+	$jobMatchCount = 0;
+	$matchCount = 0;
+	$unqualified = false;
+	$row = mysql_fetch_array($result);
+	$lastID = $row['job_id'];
+	do {
+		// If we are on a new job, calculate and store the info and start on the next job
+		if($row['job_id'] != $lastID) {
+			// Don't count jobs for which student is unqualified or jobs that have no skills set for matching
+			if(!$unqualified && $jobMatchCount != 0) {
+				$percent = 1.0*$matchCount/$jobMatchCount;
+				$final[$lastID] = $percent;
+			}
+			$matchCount = 0;
+			$jobMatchCount = 0;
+			$unqualified = false;
+		}
+		$lastID = $row['job_id'];
+		// Don't keep checking if they are unqualified for this job
+		if (!$unqualified) {
+			// If this job's skill has matched priority, inc our counter
+			if($row['match_priority'] == 2)
+				$jobMatchCount += 1;
+			// If student's skills match this one and it is a priority skill, inc the student's counter
+			if($row['match_priority'] == 2 && in_array($row['skill_id'], $student_skills))
+				$matchCount += 1;
+			// If this is a required skill that the student does not have, mark them unqualified until the next job
+			if($row['match_priority'] == 1 && !in_array($row['skill_id'], $student_skills))
+				$unqualified = true;
+		}
+	} while($row = mysql_fetch_array($result));
+
+	// Due to poor loop planning, I need to repeat this again :(
+			// Don't count jobs for which student is unqualified or jobs that have no skills set for matching
+			if(!$unqualified && $jobMatchCount != 0) {
+				$percent = 1.0*$matchCount/$jobMatchCount;
+				$final[$lastID] = $percent;
+			}
+			$matchCount = 0;
+			$jobMatchCount = 0;
+			$unqualified = false;
+
+	// Now we want to sort the array first by skill percentage.
+	arsort(&$final);
+	return $final;
+}
+
 ?>

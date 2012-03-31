@@ -5,6 +5,7 @@
 		exit();
 	}
 	include_once('inc/header.php');
+	include_once("inc/func.php");
 
 	// If students registration or employer registration is complete, let them know their profile is ready for view
 	if($_GET['student_register'] == true || $_GET['employer_register'] == true) {
@@ -104,21 +105,17 @@
 	</div>
 	<div class="rightSide"><!-- title in next command -->
 <?php echo "<div class='top centerJustify'>$jobs_list</div>";
-/*
-		// Sample output from the below PHP loop
-		<div class="job">
-			<div class="jobTitle">Example Job</div>
-			<div class="jobDescription">
-				This is a short fake job.
-			</div>
-		</div>
-*/
+
+	// If employer, display their own posted jobs. 
 	if ($_SESSION['user_type']=='employer') {
 		$sql="SELECT * FROM jobs WHERE contact_email='$email' ORDER BY date DESC LIMIT 10";
+	// else if we are anyone viewing an employers profile
 	} else if (isset($_GET['employer'])) {
 		$sql="SELECT * FROM jobs WHERE contact_email='$email' AND status='active' ORDER BY date DESC LIMIT 10";
+	// else we must be a student, display our matches
 	} else {
-		$sql="SELECT * FROM jobs WHERE status='active' ORDER BY date DESC LIMIT 10";
+		// Fetch the first 10 matches
+		$sql = fetch_matches($_SESSION['student_id'], 10);
 	}
 
 	$result = mysql_query($sql) or die(mysql_error());

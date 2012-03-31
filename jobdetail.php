@@ -16,7 +16,7 @@
 		$control_buttons .= "<a href='php/post_job_script.php?action=filled&id=$i'>job filled</a>";
 		$control_buttons .= "<a href='php/post_job_script.php?action=deleted&id=$i'>remove</a>";
 		if($row['status'] == 'expired')
-			$control_buttons = "This job has expired, please renew it.<br/>".$control_buttons;
+			$control_buttons = "This job has expired, and is no longer listed. You may want to renew it.<br/>".$control_buttons;
 	}
 	else if($row['status'] == 'filled' || $row['status'] == 'deleted')
 		$control_buttons = "This job has been ".$row['status'];

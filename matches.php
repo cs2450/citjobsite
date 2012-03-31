@@ -1,20 +1,14 @@
 <?php
 	include_once("inc/header.php");
-	
-	$sql="SELECT * FROM jobs WHERE status='active' ORDER BY date DESC LIMIT 20";
+
+	// These are the only two lines different from index.php (thus far)
+	include_once("inc/func.php");	
+	$sql = fetch_matches($_SESSION['student_id'], 20);
+
 	$result = mysql_query($sql) or die(mysql_error());
 	
 	$expired = date('Y-m-d', strtotime('-120 month'));
 ?>	
-	<!-- This div is for the labels -->
-<!--
-	<div class="jobHeader">
-		<div class="position">Position</div>
-		<div class="hours">Hours</div>
-		<div class="wage">Wage</div>
-	</div>
--->
-	<!-- This div encompasses the entire list -->
 	<div>
 <?php
 while($row=mysql_fetch_array($result)) {

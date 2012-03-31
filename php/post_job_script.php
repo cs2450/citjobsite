@@ -9,8 +9,7 @@ if ( !(isset($_SESSION['email'])) || $_SESSION['user_type'] != 'employer') {
 	exit();
 }
 $action = $_GET['action'];
-// GOING TO FIX THIS LATER SO IT DOESNT USE GET (not sure what I was thinking)
-// Also make sure theres no funny business, allow only what we want in GET
+// Make sure theres no funny business, allow only what we want in GET
 if ($action != 'create' && $action != 'edit' && $action != 'renew' && $action != 'deleted' && $action != 'filled')  {
 	header("Location:../index.php");
 	exit();
@@ -28,16 +27,22 @@ if ($action != 'create') {
 	}
 	// Renewing a job is simple. We handle it here
 	if ($action == 'renew') {
-		$expires = date('Y-m-d', strtotime('+1 month'));
-		$sql = "UPDATE jobs SET expire_date='$expires' WHERE id='$job_id'";
+		$expires = date('Y-m-d', strtotime('+6 month'));
+		$sql = "UPDATE jobs SET expire_date='$expires', status='active' WHERE id='$job_id'";
+		mysql_query($sql) or die(mysql_error());
+		// Also reactivate any skills associated
+		$sql = "UPDATE job_skills SET active=1 WHERE job_id='$job_id'";
 		mysql_query($sql) or die(mysql_error());
 		header("Location:../jobdetail.php?$job_id");
 		exit();
 	}
-	// So is deleting. We don't actually delete it though.
+	// So is deleting and marking as filled. We don't actually delete it though.
 	else if ($action == 'filled' || $action == 'deleted') {
 		$rm = &$_GET['action'];
 		$sql = "UPDATE jobs SET status='$rm' WHERE id='$job_id'";
+		mysql_query($sql) or die(mysql_error());
+		// We also need to deactivate any associated skills
+		$sql = "UPDATE job_skills SET active=0 WHERE job_id='$job_id'";
 		mysql_query($sql) or die(mysql_error());
 		header("Location:../jobdetail.php?$job_id");
 		exit();
