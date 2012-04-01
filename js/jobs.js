@@ -110,7 +110,7 @@ jQuery(document).ready(function($) {
 		$('div[id=formspacer]').remove();
 		
 		$('<label for="company"><strong>Company Name:</strong></label>\n<label for="description"><strong>Company Description:</strong></label><div id="formspacer" style="height: 40px;"></div>').insertAfter('label[for=confirm_password]').hide().fadeIn('slow');
-		$('<input type="text" name="company" style="display:inline; margin-top: 0px;" /><strong>Please fill out</strong>\n<textarea rows="5" cols="50" name="description" style="display:inline; margin-top: 0px; margin-left: 10px;"></textarea>').insertAfter('input[name=confirm_password]').hide().fadeIn('slow');
+		$('<input type="text" name="company" style="display:inline; margin-top: 0px;" /><strong>Please fill out</strong>\n<textarea rows="5" cols="50" name="description" style="display:inline; margin-top: 0px; margin-left: 10px; border: 1px solid green;"></textarea>').insertAfter('input[name=confirm_password]').hide().fadeIn('slow');
 		$('input[name=company]').css('border', '1px solid green');
 	});
 	
@@ -201,6 +201,27 @@ jQuery(document).ready(function($) {
 		}
 		
 		$('form[name=upload]').submit();
+	});
+	
+	///////////////////////////////////////////////
+	// Edit company information handler for logo //
+	///////////////////////////////////////////////
+	$('#edit_company_submit').click(function () {
+		var file = $('input[name=img_upload]').prop('files')[0];
+		
+		// Check the file type. If it isn't JPG, GIF, or PNG throw an error
+		var mime = file.type;
+		alert(mime);
+		
+		if(mime != 'image/jpeg' && mime != 'image/gif' && mime != 'image/png')
+		{
+			$('.error').remove();
+			$('input[type=file]').after('<span class="error" style="position:absolute;">Invalid file type. JPG, GIF, or PNG only.</span>');
+			$('.error').fadeIn();
+			return false;
+		}
+		
+		$('form[name=edit_company]').submit();
 	});
 	
 	// Hide the contact information div if clicked

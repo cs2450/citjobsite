@@ -1,14 +1,14 @@
 <?php
-	session_start();
+	include_once('inc/header.php');
+	include_once("inc/func.php");
+
 	if (!isset($_SESSION['email']) && !isset($_GET['employer']) ) {
 		header("Location:index.php");
 		exit();
 	}
-	include_once('inc/header.php');
-	include_once("inc/func.php");
-
+	
 	// If students registration or employer registration is complete, let them know their profile is ready for view
-	if($_GET['student_register'] == true || $_GET['employer_register'] == true) {
+	if(isset($_GET['student_register']) && $_GET['student_register'] == true || isset($_GET['employer_register']) && $_GET['employer_register'] == true) {
 		echo '<script type="text/javascript">
 			$(document).ready(function () { 
 				alert("Thank you for registering ' . $_SESSION['name'] . '! You may now view your profile.");
@@ -50,7 +50,9 @@
 ?>
 <div class="profilePage">
 	<div class="leftSide">
-		<div class="profileImage"></div>
+		<div class="profileImage">
+			<a href="edit_company.php" style="position:relative; top:100px;">[Add a Logo]</a>
+		</div>
 		<div class="profileName"><?php echo $name; ?></div>
 		<div class="profileContact"><?php echo $email; ?></div>
 		<div class="profileAbout leftJustify">

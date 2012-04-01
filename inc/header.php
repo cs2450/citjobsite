@@ -21,7 +21,7 @@ require_once('connect.php');
 	<body>
 		<div id="citNav"><img src="images/bannerMain.png"></img></div>
 		<div id="sticky-anchor"></div>
-<?php	if ($_SESSION['email']) { 
+<?php	if (isset($_SESSION['email'])) { 
 	// The matches button changes to 'Post Job' if we are an employer
 	if ($_SESSION['user_type'] == 'student')
 		$match_button = "Matches";

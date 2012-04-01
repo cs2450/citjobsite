@@ -221,7 +221,7 @@ function match($student_skills) {
 			$unqualified = false;
 
 	// Now we want to sort the array first by skill percentage.
-	arsort(&$final);
+	arsort($final);
 	return $final;
 }
 
