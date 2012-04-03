@@ -19,6 +19,9 @@ body {
 .big.text {
 	font-size: 18px;
 }
+.bold.text {
+	font-weight: bold;
+}
 .tall.text {
 	padding-top: 10px;
 	padding-bottom: 10px;
@@ -430,4 +433,10 @@ body {
 }
 .jobControls a {
 	margin: 0 5px;
+}
+.editCompanyForm {
+	width: 100%;
+	text-align: center;
+}
+.editCompanyForm form {
 }

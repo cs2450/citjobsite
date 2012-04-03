@@ -18,7 +18,7 @@
 			$error = 'extension';
 		}
 
-		// If an error is set, redirect to resume.php with an error
+		// If an error is set, redirect to edit_company.php with an error
 		if($error != '')
 			header("Location:../edit_company.php?error=".$error);
 
@@ -28,7 +28,9 @@
 			$document_name = $_SESSION['email'] ."_". Date("Y-m-d_g:i:s") . $ext;
 			$company = $_SESSION['company'];
 		
-			// Check the database to see if there is already a logo. If there is, go to the directory and delete the previous resume to make room for the new one
+			// Check the database to see if there is already a logo. If there is,
+			// go to the directory and delete the previous resume to make room for
+			// the new one
 			$sql = "SELECT logo FROM employers WHERE company='$company'";
 			$result = mysql_query($sql) or die("Cannot query database: " . mysql_error());
 			if(mysql_num_rows($result) == 1)
