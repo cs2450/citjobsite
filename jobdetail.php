@@ -1,8 +1,8 @@
 <?php
 	include_once("inc/header.php");
-	$i = $_SERVER["QUERY_STRING"];
+	$i = mysql_real_escape_string($_SERVER["QUERY_STRING"]);
 	$sql="select * from jobs where id='$i';";
-	$result=mysql_query($sql);
+	$result=mysql_query($sql) or die(mysql_error());
 	$row=mysql_fetch_array($result); 		
 	$posted=date('M d, Y', strtotime($row["date"]));
 	$expire=date('M d, Y', strtotime($row['expire_date']));
@@ -23,9 +23,33 @@
 	else if($row['status'] == 'expired')
 		$control_buttons = "This job has expired";
 
+	// Link employer name to their profile
 	$company = "<a href='profile.php?employer=".$row['contact_email']."'>".$row['company']."</a>";
-?>
 
+	// If we are a student then give them an apply button 
+	$apply_button = "";
+	if($_SESSION['user_type'] == 'student'){
+		$apply_button = "<input type='hidden' name='title' value='".$row['title']."' />\n";
+		$apply_button .= "<input type='hidden' name='email' value='".$row['contact_email']."' />\n";
+		$apply_button .= "<button class='button' id='apply_button'>Apply for this job</button>";
+	}
+
+	// Get skill data from skills table
+	$sql = "SELECT skill_id, skill FROM skills";
+	$result=mysql_query($sql) or die(mysql_error());
+	$skills = array();
+	while($skill=mysql_fetch_assoc($result))
+		$skills[$skill['skill_id']] = $skill['skill'];
+
+	// Grab and format the skills for the job.
+	$job_skills = "<div class='studentSkills topDivider'><div>Skills</div>\n";
+	$sql = "SELECT * FROM job_skills WHERE job_id='$i'";
+	$result=mysql_query($sql) or die(mysql_error());
+	while($skill=mysql_fetch_assoc($result)) {
+		$job_skills .= "<div class='skill threeCols leftJustify'>".$skills[$skill['skill_id']]."</div>\n";
+	}
+	$job_skills .="</div>\n";
+?>
 <div>
 	<div class="jobControls"><?php echo $control_buttons; ?></div>
 	<div class="profileImage"></div>
@@ -45,6 +69,14 @@
 		<div class="company"><?php echo $company; ?></div>
 		<div class="jobTitle"><?php echo $row[title]; ?></div>
 		<div class="jobDescription"><?php echo $row[job_description]; ?></div>
+	</div>
+	<div class="jobDetailSkills">
+		<?php echo $job_skills; ?>
+	</div>
+	<div class="apply">
+		<form id='apply' action='php/apply_script.php' method='post'>
+			<?php echo $apply_button; ?>
+		</form>
 	</div>
 </div>
 

@@ -29,6 +29,7 @@
 		$hours = $row['hours'];
 		$desc = $row['job_description'];
 		
+		// This does the hours select box
 		if($hours=="Full Time")
 			$full="Selected";
 		else if($hours=="Part Time")
@@ -42,7 +43,7 @@
 		else if($hours=="Internship")
 			$intern="Selected";
 
-		// Now gather the attached skills and match settings
+		// Now gather the associated skills and match settings
 		$sql = "SELECT * FROM job_skills WHERE job_id='$job_id'";
 		$result = mysql_query($sql) or die(mysql_error());
 		$current_skills = array();
@@ -72,9 +73,9 @@
 					<option value="Full Time" <?php echo $full;?>>Full Time</option>
 					<option value="Part Time" <?php echo $part;?>>Part Time</option>
 					<option value="Full/Part" <?php echo $both;?>>Full/Part</option>
-					<option value="Negotiable"<?php echo$nego;?>>Negotiable</option>
+					<option value="Negotiable"<?php echo $nego;?>>Negotiable</option>
 					<option value="Temporary" <?php echo $temp;?>>Temporary</option>
-					<option value="Internship"<?php echo$intern;?>>Internship</option>
+					<option value="Internship"<?php echo $intern;?>>Internship</option>
 				</select>
 			</td>
 		</tr>
@@ -142,13 +143,14 @@
 							// Hidden value is the number of 'other_skills
 							// pulled from db. Value used in jobs.js
 							echo '<input type="hidden" name="other_count" id="other_count" value="'.count($other_skills).'" />';
+							// This loop fills in any "other skills" that previously existed
 							for ($c = 0;$c < count($other_skills);$c++) {
 								echo '<br /><input type="text" id="other'.($c+1).'" name="other'.($c+1).'" value="'.$other_skills[$c].'"><input type="button" value="Remove" id="skill_remove'.($c+1).'" class="skill_remove" />';
 						}} ?>
 				</td>
 			</tr>
 			<tr>
-				<td colspan="2"><br /><button class="button" onclick="document.student_skills.submit()"><?php echo $submit_button; ?></button></td>
+				<td colspan="2"><br /><button class="button" id="submit_job_button" onclick="document.student_skills.submit()"><?php echo $submit_button; ?></button></td>
 			</tr>
 		</table>
 	</div>

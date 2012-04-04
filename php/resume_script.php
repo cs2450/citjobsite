@@ -76,6 +76,8 @@ else
 	// Dump all inputs to db
 	foreach ($_POST as $key => $value) {
 		echo $key.": ".$value."<br/>";
+		$key = mysql_real_escape_string($key);
+		$value = mysql_real_escape_string($value);
 		$sql = "UPDATE students SET $key='$value' WHERE email='".$_SESSION['email']."'";
 		if ($key == 'notification' && $value="on")
 			$sql = "UPDATE students SET $key=1 WHERE email='".$_SESSION['email']."'";

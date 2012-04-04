@@ -238,4 +238,18 @@ jQuery(document).ready(function($) {
 		else
 			$('.sticky-handle').removeClass('stick');
 	});
+	/////////////////////////////////////////////////////////
+	//	POST_JOB.PHP REQUIRED FIELDS HANDLER
+	/////////////////////////////////////////////////////////
+	$('#submit_job_button').click(function () {
+		// Get register form values for validation
+		var title = $('input[name=title]').val();
+		var desc = $('input[name=job_description]').val();
+		
+		if (title == '')
+			return false;
+		else if (desc == '')
+			return false;
+		return true;
+	});
 });
