@@ -51,7 +51,12 @@
 <div class="profilePage">
 	<div class="leftSide">
 		<div class="profileImage">
-			<a href="edit_company.php" style="position:relative; top:100px;">[Add a Logo]</a>
+		<?php
+			if($_SESSION['user_type'] == 'employer')
+				echo '<a href="edit_company.php" style="position:relative; top:100px;">[Add a Logo]</a>';
+			else
+				echo '<a href="resume.php" style="position:relative; top:100px;">[Add a Picture]</a>';
+		?>
 		</div>
 		<div class="profileName"><?php echo $name; ?></div>
 		<div class="profileContact"><?php echo $email; ?></div>

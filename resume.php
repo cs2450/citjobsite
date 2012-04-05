@@ -3,12 +3,11 @@ include_once("inc/connect.php");
 include_once("inc/header.php");
 
 // If the session isn't set by logging in or registering, re-route to login.php
-/*
+
 if(!isset($_SESSION['email'])) {
 	header("Location:prompt_login.php");
 	exit();
 }
-*/
 
 // Grab the student's resume, if any, so we can display a link to it
 // Also grab from the db so we can autofill any inputs
@@ -58,7 +57,7 @@ if(isset($_GET['error']))
 		<td>Now, take some time to upload a resume and fill out some basic information in the fields below. While nothing on this page is required, more information can improve your chances for employment. Or <a href="profile.php">continue to profile</a></td>
 	</tr>
 	<tr>
-		<td><p><b>Upload your resume: (.pdf only)</b></p></td>
+		<td><br /><p><b>Upload your resume: (.pdf only)</b></p></td>
 	</tr>
 	<tr>
 		<td><?php echo $resume_link; ?></td>
@@ -67,14 +66,22 @@ if(isset($_GET['error']))
 		<td><br /><input type="file" name="resume" /></td>
 	</tr>
 	<tr>
-		<td><br /><input type="button" class="button" id="upload_button" value="Upload Resume" /></td>
+		<td><hr /></td>
 	</tr>
-</table>
-</form>
-<form method="post" action="php/resume_script.php">
-<table class="text">
 	<tr>
-		<td><br /><p><b>Fill out your information below:</b></p></td>
+		<td><br /><p><b>Upload your profile picture: (.jpg, .gif, .png only)</b></p></td>
+	</tr>
+	<tr>
+		<td><p>It will only be displayed as 100x100 so don't waste our space by uploading anything bigger.</p></td>
+	</tr>
+	<tr>
+		<td>
+			<br />
+			<input type="file" name="image" />
+		</td>
+	</tr>
+	<tr>
+		<td><br /><br /><p><b>Fill out your information below:</b></p></td>
 	</tr>
 	<tr>
 		<td><hr /></td>
@@ -101,7 +108,8 @@ if(isset($_GET['error']))
 		<td>
 		<br />
 		<div id="contact_info">
-			<label for="phone">Contact Phone Number: </label><input type="text" name="phone" maxlength="10" size="10" value="<?php echo $info['contact_phone']; ?>"/> (10 digits)<br />
+			<label for="phone">Contact Phone Number: </label><input type="text" name="phone" maxlength="10" size="10" value="<?php echo $info['contact_phone']; ?>"/> (10 digits)
+			<br /><br />
 			<label for="contact_email">Contact Email: </label><input type="text" name="contact_email" size="40" value="<?php echo $info['contact_email']; ?>" />
 		</div>
 		</td>
@@ -110,7 +118,7 @@ if(isset($_GET['error']))
 		<td><br />Receive new job notifications via email? <input type="checkbox" name="notification" <?php if($info['notification']){ echo "checked"; } ?>/></td>	
 	</tr>
 	<tr>
-		<td><br /><button class="button" id="resume_submit">Submit Resume</button></td>
+		<td><br /><button class="button" id="resume_submit">Submit Info</button></td>
 	</tr>
 </table>
 </form>

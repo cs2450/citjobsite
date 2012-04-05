@@ -1,11 +1,20 @@
 <?php
 include_once("../inc/connect.php");
+include_once("../inc/func.php");
 session_start();
 
 // If a resume file was uploaded, handle the resume placement and validation
 if(isset($_FILES['resume']))
 {
+	handleFileUpload($_FILES['resume'], 'resume');
+}
 
+if(isset($_FILES['image']))
+{
+	handleFileUpload($_FILES['image'], 'profile');
+}
+
+	/*
 	// Store file in variable
 	$file = $_FILES["resume"];
 
@@ -63,11 +72,9 @@ if(isset($_FILES['resume']))
 			exit();
 		}
 	}
+	*/
 }
 
-// Else handle the resume form information and insert it into the student database.
-else
-{
 	// An unchecked 'notification' checkbox doesn't seem to show up in post
 	// So to allow for toggling it we always set to false then true if needed
 	$sql = "UPDATE students SET notification=0 WHERE email='".$_SESSION['email']."'";

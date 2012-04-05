@@ -225,4 +225,144 @@ function match($student_skills) {
 	return $final;
 }
 
+// This function handles file uploads of resumes and profile pics for students and employers
+
+function handleFileUpload($file, $type)
+{
+	// Get file extension
+		$ext = substr($file['name'], strripos($file['name'], '.'));
+		$ext = strtolower($ext);
+		
+		$error = '';
+
+		if($type == 'profile' || $type == 'logo')
+		{
+			if($ext != '.jpg' && $ext != '.jpeg' && $ext != '.gif' && $ext != '.png')
+			{
+				$error = 'extension&type=image';
+			}
+		}
+		
+		// if it is a resume
+		if($type == 'resume')
+		{
+			if($ext != '.pdf')
+			{
+				$error = 'extension&type=resume';
+			}
+
+			else if($file['size'] > 5000000)
+			{
+				$error = 'size';
+			}
+		}
+		
+		// If an error is set, redirect to edit_company.php with an error
+		if($error != '' && $type == 'logo')
+			header("Location:../edit_company.php?error=".$error);
+		else if($error != '' && $type == 'profile' || $type == 'resume')
+			header("Location:../resume.php?error=".$error);
+
+		// Else, upload the file
+		else
+		{
+			$document_name = $_SESSION['email'] ."_". Date("Y-m-d_g:i:s") . $ext;
+			$directory = '';
+			
+			if($type == 'logo')
+			{
+				$company = $_SESSION['company'];
+				$directory = "../logos/";
+		
+				// Check the database to see if there is already a logo. If there is,
+				// go to the directory and delete the previous logo to make room for
+				// the new one
+				$sql = "SELECT logo FROM employers WHERE company='$company'";
+				$result = mysql_query($sql) or die("Cannot query database: " . mysql_error());
+				if(mysql_num_rows($result) == 1)
+				{
+					$row = mysql_fetch_assoc($result);
+					if($row['logo'] != NULL)
+					{
+						if(chdir($directory))
+							$delete_file = @unlink($row['logo']);
+					}
+				}
+			}
+			
+			else if($type == 'profile')
+			{
+				$email = $_SESSION['email'];
+				$directory = "../profile_pics/";
+			
+				// Check the database to see if there is already a resume. If there is,
+				// go to the directory and delete the previous resume to make room for
+				// the new one
+				$sql = "SELECT profile_pic FROM students WHERE email='$email'";
+				$result = mysql_query($sql) or die("Cannot query database: " . mysql_error());
+				if(mysql_num_rows($result) == 1)
+				{
+					$row = mysql_fetch_assoc($result);
+					if($row['profile_pic'] != NULL)
+					{
+						if(chdir($directory))
+							$delete_file = @unlink($row['profile_pic']);
+					}
+				}
+			}
+			
+			else if($type == 'resume')
+			{
+				$email = $_SESSION['email'];
+				$directory = "../resumes/";
+				
+				// Check the database to see if there is already a resume. If there is,
+				// go to the directory and delete the previous resume to make room for
+				// the new one
+				$sql = "SELECT resume FROM students WHERE email='$email'";
+				$result = mysql_query($sql) or die("Cannot query database: " . mysql_error());
+				if(mysql_num_rows($result) == 1)
+				{
+					$row = mysql_fetch_assoc($result);
+					if($row['resume'] != NULL)
+					{
+						if(chdir($directory))
+							$delete_file = @unlink($row['resume']);
+					}
+				}
+			}
+
+			// Move temporary file to resumes 
+			if(!move_uploaded_file($file['tmp_name'], "$directory$document_name"))
+			{
+				if($type == 'logo')
+					header("Location:../edit_company.php?error=move_fail");
+				else if($type == 'profile' || $type == 'resume')
+					header("Location:../resume.php?error=move_fail");
+			}
+			
+			else
+				chmod("$directory$document_name", 0744);
+		}
+	
+	// Once everything has been handled properly, update the mysql database
+	if($type == 'resume')
+	{
+		$sql = "UPDATE students SET resume='$document_name' WHERE email='$email'";
+		mysql_query($sql) or die("Cannot query database: " . mysql_error());
+	}
+	
+	else if($type == 'profile')
+	{
+		$sql = "UPDATE students SET profile='$document_name' WHERE email='$email'";
+		mysql_query($sql) or die("Cannot query database: " . mysql_error());
+	}
+	
+	else if($type == 'logo')
+	{
+		$sql = "UPDATE employers SET logo='$document_name' WHERE email='$email'";
+		mysql_query($sql) or die("Cannot query database: " . mysql_error());
+	}
+}
+
 ?>

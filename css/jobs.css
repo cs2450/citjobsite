@@ -90,6 +90,7 @@ background: url("images/sleep.png") 0 -31px;
 
 #resume_table {
 width: 500px;
+text-align: left;
 }
 
 #jobs_list {
