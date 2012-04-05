@@ -211,7 +211,6 @@ jQuery(document).ready(function($) {
 		
 		// Check the file type. If it isn't JPG, GIF, or PNG throw an error
 		var mime = file.type;
-		alert(mime);
 		
 		if(mime != 'image/jpeg' && mime != 'image/gif' && mime != 'image/png')
 		{

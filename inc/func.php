@@ -259,20 +259,26 @@ function handleFileUpload($file, $type)
 		
 		// If an error is set, redirect to edit_company.php with an error
 		if($error != '' && $type == 'logo')
-			header("Location:../edit_company.php?error=".$error);
-		else if($error != '' && $type == 'profile' || $type == 'resume')
-			header("Location:../resume.php?error=".$error);
+		{
+			//header("Location:../edit_company.php?error=".$error);
+		}
+
+		else if($error != '' && ($type == 'profile' || $type == 'resume'))
+		{
+			//header("Location:../resume.php?error=".$error);
+		}
 
 		// Else, upload the file
 		else
 		{
-			$document_name = $_SESSION['email'] ."_". Date("Y-m-d_g:i:s") . $ext;
+			$document_name = $_SESSION['email'] . $ext;
 			$directory = '';
 			
 			if($type == 'logo')
 			{
 				$company = $_SESSION['company'];
-				$directory = "../logos/";
+				$email = $_SESSION['email'];
+				$directory = "logos/";
 		
 				// Check the database to see if there is already a logo. If there is,
 				// go to the directory and delete the previous logo to make room for
@@ -285,7 +291,10 @@ function handleFileUpload($file, $type)
 					if($row['logo'] != NULL)
 					{
 						if(chdir($directory))
+						{
+							$directory = '';
 							$delete_file = @unlink($row['logo']);
+						}
 					}
 				}
 			}
@@ -293,7 +302,7 @@ function handleFileUpload($file, $type)
 			else if($type == 'profile')
 			{
 				$email = $_SESSION['email'];
-				$directory = "../profile_pics/";
+				$directory = "profile_pics/";
 			
 				// Check the database to see if there is already a resume. If there is,
 				// go to the directory and delete the previous resume to make room for
@@ -306,7 +315,10 @@ function handleFileUpload($file, $type)
 					if($row['profile_pic'] != NULL)
 					{
 						if(chdir($directory))
+						{
+							$directory = '';
 							$delete_file = @unlink($row['profile_pic']);
+						}
 					}
 				}
 			}
@@ -314,7 +326,7 @@ function handleFileUpload($file, $type)
 			else if($type == 'resume')
 			{
 				$email = $_SESSION['email'];
-				$directory = "../resumes/";
+				$directory = "resumes/";
 				
 				// Check the database to see if there is already a resume. If there is,
 				// go to the directory and delete the previous resume to make room for
@@ -327,7 +339,10 @@ function handleFileUpload($file, $type)
 					if($row['resume'] != NULL)
 					{
 						if(chdir($directory))
+						{
+							$directory = '';
 							$delete_file = @unlink($row['resume']);
+						}
 					}
 				}
 			}
@@ -335,34 +350,35 @@ function handleFileUpload($file, $type)
 			// Move temporary file to resumes 
 			if(!move_uploaded_file($file['tmp_name'], "$directory$document_name"))
 			{
-				if($type == 'logo')
-					header("Location:../edit_company.php?error=move_fail");
-				else if($type == 'profile' || $type == 'resume')
-					header("Location:../resume.php?error=move_fail");
+				if($type == 'logo') {}
+					//header("Location:../edit_company.php?error=move_fail");
+				else if($type == 'profile' || $type == 'resume') {}
+					//header("Location:../resume.php?error=move_fail");
 			}
 			
 			else
+			{
 				chmod("$directory$document_name", 0744);
+			}
 		}
 	
 	// Once everything has been handled properly, update the mysql database
 	if($type == 'resume')
 	{
 		$sql = "UPDATE students SET resume='$document_name' WHERE email='$email'";
-		mysql_query($sql) or die("Cannot query database: " . mysql_error());
 	}
 	
 	else if($type == 'profile')
 	{
-		$sql = "UPDATE students SET profile='$document_name' WHERE email='$email'";
-		mysql_query($sql) or die("Cannot query database: " . mysql_error());
+		$sql = "UPDATE students SET profile_pic='$document_name' WHERE email='$email'";
 	}
 	
 	else if($type == 'logo')
 	{
 		$sql = "UPDATE employers SET logo='$document_name' WHERE email='$email'";
-		mysql_query($sql) or die("Cannot query database: " . mysql_error());
 	}
+
+	mysql_query($sql) or die("Cannot query database: " . mysql_error());
 }
 
 ?>

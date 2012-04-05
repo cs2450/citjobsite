@@ -1,7 +1,15 @@
 <?php
-	require_once("../inc/connect.php");
+	chdir('..');
+	require_once("inc/connect.php");
+	require_once("inc/func.php");
 	session_start();
-	
+
+	if(isset($_FILES['img_upload']) && !empty($_FILES['img_upload']['name']))
+	{
+		handleFileUpload($_FILES['img_upload'], 'logo');
+	}
+
+	/*
 	$file = $_FILES['img_upload'];
 	$document_name = null;
 	
@@ -50,6 +58,7 @@
 			}
 		}
 	}
+*/
 	
 	$desc = mysql_real_escape_string($_POST['description']);
 	$sql = "UPDATE employers SET description='$desc', logo='$document_name' WHERE email='".$_SESSION['email']."'";

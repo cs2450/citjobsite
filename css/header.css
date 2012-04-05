@@ -181,11 +181,16 @@ body {
 	width: 100px;
 	height: 100px;
 	margin-right: 4px;
-	background: url('../images/empty-100.png');
 	border-radius: 5px;
 	-moz-border-radius: 5px;
 	-webkit-border-radius: 5px;
 }
+
+.profileImage img {
+	max-width: 100px;
+	max-height: 100px;
+}
+
 .profilePage .profileName {
 	float: left;
 	height: 30px;

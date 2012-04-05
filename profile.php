@@ -26,16 +26,18 @@
 		$desc = $row['description'];
 		$desc_header = "About employer's company:";
 		$jobs_list = "Employer's posted jobs:";
+		$logo = $row['logo'];
 	}
 	else if ($_SESSION['user_type'] == 'student'){
 		$email = &$_SESSION['email'];
 		$name = $_SESSION['name'];
 		$jobs_list = "Matched Jobs";
 		$desc_header="About me/Resume <a href='resume.php'>[edit]</a>";
-		$sql = "SELECT description FROM students WHERE email='$email'";
+		$sql = "SELECT * FROM students WHERE email='$email'";
 		$result=mysql_query($sql) or die("cant fetch description");
-		$desc=mysql_fetch_array($result);
-		$desc=$desc['description'];
+		$row=mysql_fetch_array($result);
+		$desc=$row['description'];
+		$pic = $row['profile_pic'];
 	}
 	else if ($_SESSION['user_type'] == 'employer'){
 		$email = &$_SESSION['email'];
@@ -53,9 +55,15 @@
 		<div class="profileImage">
 		<?php
 			if($_SESSION['user_type'] == 'employer')
+			{
+				echo '<img src="'.($pic ? "logos/$logo" : "images/empty-100.png").'" />';
 				echo '<a href="edit_company.php" style="position:relative; top:100px;">[Add a Logo]</a>';
+			}	
 			else
+			{
+				echo '<img src="'.($pic ? "profile_pics/$pic" : "images/empty-100.png").'" />';
 				echo '<a href="resume.php" style="position:relative; top:100px;">[Add a Picture]</a>';
+			}
 		?>
 		</div>
 		<div class="profileName"><?php echo $name; ?></div>
