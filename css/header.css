@@ -117,30 +117,30 @@ body {
 	cursor: pointer;
 }
 #loginButton,
-#homeButton { background: url('../images/home-4.png') 0 0; }
+#homeButton { background: url('../images/home.png') 0 0; }
 #loginButton:hover,
-#homeButton:hover { background: url('../images/home-4.png') 0 -31px; }
+#homeButton:hover { background: url('../images/home.png') 0 -31px; }
 #loginButton:active,
 #loginButton.active,
 #homeButton:active,
-#homeButton.active { background: url('../images/home-4.png') -31px 0; }
+#homeButton.active { background: url('../images/home.png') -31px 0; }
 #loginButton.active:hover,
-#homeButton.active:hover { background: url('../images/home-4.png') -31px -31px; }
-#registerButton { background: url('../images/sleep-4.png') 0 0; }
-#registerButton:hover { background: url('../images/sleep-4.png') 0 -31px; }
+#homeButton.active:hover { background: url('../images/home.png') -31px -31px; }
+#registerButton { background: url('../images/sleep.png') 0 0; }
+#registerButton:hover { background: url('../images/sleep.png') 0 -31px; }
 #registerButton:active,
-#registerButton.active { background: url('../images/sleep-4.png') -31px 0; }
-#registerButton.active:hover { background: url('../images/sleep-4.png') -31px -31px; }
-#matchesButton { background: url('../images/restart-4.png') 0 0; }
-#matchesButton:hover { background: url('../images/restart-4.png') 0 -31px; }
+#registerButton.active { background: url('../images/sleep.png') -31px 0; }
+#registerButton.active:hover { background: url('../images/sleep.png') -31px -31px; }
+#matchesButton { background: url('../images/restart.png') 0 0; }
+#matchesButton:hover { background: url('../images/restart.png') 0 -31px; }
 #matchesButton:active,
-#matchesButton.active { background: url('../images/restart-4.png') -31px 0; }
-#matchesButton.active:hover { background: url('../images/restart-4.png') -31px -31px; }
-#logoutButton { background: url('../images/shutdown-4.png') 0 0; }
-#logoutButton:hover { background: url('../images/shutdown-4.png') 0 -31px; }
+#matchesButton.active { background: url('../images/restart.png') -31px 0; }
+#matchesButton.active:hover { background: url('../images/restart.png') -31px -31px; }
+#logoutButton { background: url('../images/shutdown.png') 0 0; }
+#logoutButton:hover { background: url('../images/shutdown.png') 0 -31px; }
 #logoutButton:active,
-#logoutButton.active { background: url('../images/shutdown-4.png') -31px 0; }
-#logoutButton.active:hover { background: url('../images/shutdown-4.png') -31px -31px; }
+#logoutButton.active { background: url('../images/shutdown.png') -31px 0; }
+#logoutButton.active:hover { background: url('../images/shutdown.png') -31px -31px; }
 .buttonText {
 	float: left;
 	text-align: center;
