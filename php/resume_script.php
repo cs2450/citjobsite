@@ -4,12 +4,12 @@ include_once("../inc/func.php");
 session_start();
 
 // If a resume file was uploaded, handle the resume placement and validation
-if(isset($_FILES['resume']))
+if(isset($_FILES['resume']) && !empty($_FILES['resume']))
 {
 	handleFileUpload($_FILES['resume'], 'resume');
 }
 
-if(isset($_FILES['image']))
+if(isset($_FILES['image']) && !empty($_FILES['image']))
 {
 	handleFileUpload($_FILES['image'], 'profile');
 }
