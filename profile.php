@@ -136,14 +136,14 @@ if(isset($_get['employer'])) { ?>
 	// else we must be a student, display our matches
 	} else {
 		// Fetch the first 10 matches
-		$sql = fetch_matches($_SESSION['student_id'], 10);
+		$sql = fetch_matches($_SESSION['student_id'], 10, 0);
 	}
 
 	$result = mysql_query($sql) or die(mysql_error());
 
 	while($row=mysql_fetch_array($result)) {
 		?>
-		<a class="job" href="jobdetail.php?<?php echo $row['id']?>">
+		<a class="job" href="job_detail.php?job=<?php echo $row['id']?>">
 			<div class="jobTitle"><?php echo $row['title']; ?></div>
 			<div class="jobDescription"><?php echo $row['job_description']; ?></div>
 		</a>

@@ -1,7 +1,7 @@
 <?php
 	include_once("inc/header.php");
-	$i = mysql_real_escape_string($_SERVER["QUERY_STRING"]);
-	$sql="select * from jobs where id='$i';";
+	$job_id = mysql_real_escape_string($_GET['job']);
+	$sql="select * from jobs where id='$job_id';";
 	$result=mysql_query($sql) or die(mysql_error());
 	$row=mysql_fetch_array($result); 		
 	$posted=date('M d, Y', strtotime($row["date"]));
@@ -17,10 +17,10 @@
 	// These statements will also tell anyone viewing a filled/delete/expired job
 	// the respective status at the top.
 	if ($_SESSION['user_type'] == 'employer' && $row['contact_email'] == $_SESSION['email'] && $row['status'] != 'filled' && $row['status'] != 'deleted') {
-		$control_buttons = "<a href='post_job.php?page=Post%20Job&action=edit&id=$i'>edit</a>";
-		$control_buttons .= "<a href='php/post_job_script.php?action=renew&id=$i'>renew</a>";
-		$control_buttons .= "<a href='php/post_job_script.php?action=filled&id=$i'>job filled</a>";
-		$control_buttons .= "<a href='php/post_job_script.php?action=deleted&id=$i'>remove</a>";
+		$control_buttons = "<a href='post_job.php?page=Post%20Job&action=edit&id=$job_id'>edit</a>";
+		$control_buttons .= "<a href='php/post_job_script.php?action=renew&id=$job_id'>renew</a>";
+		$control_buttons .= "<a href='php/post_job_script.php?action=filled&id=$job_id'>job filled</a>";
+		$control_buttons .= "<a href='php/post_job_script.php?action=deleted&id=$job_id'>remove</a>";
 		if($row['status'] == 'expired')
 			$control_buttons = "This job has expired, and is no longer listed. You may want to renew it.<br/>".$control_buttons;
 	}
@@ -49,7 +49,7 @@
 
 	// Grab and format the skills for the job.
 	$job_skills = "<div class='studentSkills topDivider'><div>Skills</div>\n";
-	$sql = "SELECT * FROM job_skills WHERE job_id='$i'";
+	$sql = "SELECT * FROM job_skills WHERE job_id='$job_id'";
 	$result=mysql_query($sql) or die(mysql_error());
 	while($skill=mysql_fetch_assoc($result)) {
 		$job_skills .= "<div class='skill threeCols leftJustify'>".$skills[$skill['skill_id']]."</div>\n";

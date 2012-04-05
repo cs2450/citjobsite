@@ -1,22 +1,44 @@
 <?php
-	include_once("inc/header.php");
-	
-	$sql="SELECT * FROM jobs WHERE status='active' ORDER BY date DESC LIMIT 20";
-	$result = mysql_query($sql) or die(mysql_error());
-	
-	$expired = date('Y-m-d', strtotime('-120 month'));
-?>	
-	<!-- This div is for the labels -->
-<!--
-	<div class="jobHeader">
-		<div class="position">Position</div>
-		<div class="hours">Hours</div>
-		<div class="wage">Wage</div>
-	</div>
--->
-	<!-- This div encompasses the entire list -->
-	<div>
-<?php
+include_once("inc/header.php");
+include_once("inc/func.php");	
+
+// Grab the page offset, if any, from get
+$pagelimit = 10;
+$offset = 0;
+if(isset($_GET['pagenumber']) && is_numeric($_GET['pagenumber']))
+	$offset = ($_GET['pagenumber']-1)*$pagelimit;
+if($offset < 0)
+	$offset = 0;
+
+if($_SESSION['user_type'] == 'student' && $_GET['page'] == "Matches")
+	$sql = fetch_matches($_SESSION['student_id'], $pagelimit, $offset);
+else
+	$sql="SELECT * FROM jobs WHERE status='active' ORDER BY date DESC LIMIT $pagelimit OFFSET $offset";
+
+$result = mysql_query($sql) or die(mysql_error());
+
+// Handle the pagination menu here. it has to be sometime after the sql query
+if($offset > 0)
+	$prev = "<a href='index.php?page=".$_GET['page']."&pagenumber=".($_GET['pagenumber']-1)."'>[prev]</a>";
+else
+	$prev = "[prev]";
+if(mysql_num_rows($result) == $pagelimit){
+	// Takes care of the dead link if there is no get['pagenumber']
+	if (!isset($_GET['pagenumber']))
+		$pn = 2;
+	else
+		$pn = $_GET['pagenumber']+1;
+	$next = "<a href='index.php?page=".$_GET['page']."&pagenumber=$pn'>[next]</a>";
+}else
+	$next = "[next]";
+
+echo $prev." ".$next;
+
+
+$expired = date('Y-m-d', strtotime('-120 month'));
+
+echo "<div>";
+
 while($row=mysql_fetch_array($result)) {
 	if($row['date']  < $expired ){
 		mysql_query("UPDATE jobs SET status='expired' where id='$row[id]'");
@@ -24,7 +46,7 @@ while($row=mysql_fetch_array($result)) {
 	}
 	else {
 		// This div encompasses one entire job ?>
-		<a class="partial job" href="jobdetail.php?<?php echo $row['id']; ?>">
+		<a class="partial job" href="job_detail.php?job=<?php echo $row['id']; ?>">
 			<div class="profileImage"></div>
 			<div class="rightSide">
 				<div class='hours'><div class="bold">Hours</div><?php
@@ -45,6 +67,7 @@ while($row=mysql_fetch_array($result)) {
 		</a>
 <?php	}
 	}
+echo $prev." ".$next;
 echo "</div>";
 include_once("inc/footer.php");
 ?>

@@ -13,8 +13,12 @@
 		header("Location:../index.php?page=home");
 		exit();
 	}
+	else if ($_POST['All_Jobs']){
+		header("Location:../index.php?page=Jobs&pagenumber=1");
+		exit();
+	}
 	else if ($_POST['Matches']){
-		header("Location:../matches.php?page=Matches");
+		header("Location:../index.php?page=Matches&pagenumber=1");
 		exit();
 	}
 	else if ($_POST['Post_Job']){

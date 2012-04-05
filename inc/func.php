@@ -133,26 +133,28 @@ function validate($user, $pass, $type){
 }
 
 // This function calls the match functions and returns the SQL statement
-function fetch_matches($id,$numMatches) {
+function fetch_matches($id,$pagelimit,$offset) {
 	$matches = begin_match($id);
 	$size = sizeof($matches);
-	// Lets get a maximum of $numMatches
+	// Lets get a maximum of $pagelimit
 	if($size > 0) {
 		$job_id = key($matches);
 		next($matches);
 		$sql="SELECT * FROM jobs WHERE id='$job_id'";
-		if($size>$numMatches)
-			$size = $numMatches;
+		if($size>$pagelimit)
+			$size = $pagelimit;
 		for($i=1;$i<$size;$i++)
 		{	
 			$job_id = key($matches);
-			$sql = $sql." UNION SELECT * FROM jobs WHERE id='$job_id'";
+			$sql .= " UNION SELECT * FROM jobs WHERE id='$job_id'";
 			next($matches);
 		}
+		// Finish up by adding the the page offset, if any
+		$sql .= " LIMIT $pagelimit OFFSET $offset";
 	}
 	// No matches? Just display the normal job list.
 	else
-		$sql="SELECT * FROM jobs WHERE status='active' ORDER BY date DESC LIMIT 10";
+		$sql="SELECT * FROM jobs WHERE status='active' ORDER BY date DESC LIMIT $pagelimit OFFSET $offset";
 	
 	return $sql;
 }
