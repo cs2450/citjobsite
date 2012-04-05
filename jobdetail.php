@@ -6,6 +6,12 @@
 	$row=mysql_fetch_array($result); 		
 	$posted=date('M d, Y', strtotime($row["date"]));
 	$expire=date('M d, Y', strtotime($row['expire_date']));
+	// TODO
+	// There is no way to link the jobs table to the employers table in order to
+	// extract the company logo.
+	// - The emails are not guaranteed to be the same.
+	// - The contact is not guaranteed to be the same name as the employer.
+	// - The company name is not guaranteed to be unique.
 
 	// If we are an employer and own this job then we get some controls
 	// These statements will also tell anyone viewing a filled/delete/expired job
@@ -52,7 +58,9 @@
 ?>
 <div>
 	<div class="jobControls"><?php echo $control_buttons; ?></div>
-	<div class="profileImage"></div>
+	<div class="profileImage">
+		<img src="<?php echo $logo ? "logos/$logo" : "images/empty-100.png"; ?>" />
+	</div>
 	<div class="full rightSide">
 		<div class="hours"><div class="bold">Hours</div><?php
 			echo $row['hours']; ?></div>

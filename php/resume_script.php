@@ -35,9 +35,9 @@ if(isset($_FILES['image']) && !empty($_FILES['image']['name']))
 	}
 	
 	if ($_GET['student_register'])
-		header("Location:../profile.php?student_register=true");
+		header("Location:../profile.php?page=home&student_register=true");
 	else
-		header("Location:../profile.php");
+		header("Location:../profile.php?page=home");
 
 	exit();
 ?>

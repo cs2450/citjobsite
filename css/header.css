@@ -185,17 +185,14 @@ body {
 	-moz-border-radius: 5px;
 	-webkit-border-radius: 5px;
 }
-
 .profileImage img {
 	max-width: 100px;
 	max-height: 100px;
 }
-
 .profilePage .profileName {
 	float: left;
-	height: 30px;
 	font-size: 14pt;
-	margin-top: 70px;
+	margin-top: 10px;
 	padding-left: 10px;
 }
 .profilePage .profileContact {

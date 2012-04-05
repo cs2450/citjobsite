@@ -18,7 +18,7 @@
 	// Prepare all the differences between the student and employer profile pages here
 	// so I dont have to keep asking "if (user_type==student)" OVER AND OVER AGAIN!! (rawr)
 	if (isset($_GET['employer'])) {
-		$email = &$_GET['employer'];
+		$email = $_GET['employer'];
 		$sql = "SELECT * FROM employers WHERE email='$email'";
 		$result=mysql_query($sql) or die(mysql_error());
 		$row = mysql_fetch_array($result);
@@ -53,18 +53,24 @@
 <div class="profilePage">
 	<div class="leftSide">
 		<div class="profileImage">
-		<?php
-			if($_SESSION['user_type'] == 'employer')
-			{
-				echo '<img src="'.($pic ? "logos/$logo" : "images/empty-100.png").'" />';
-				echo '<a href="edit_company.php" style="position:relative; top:100px;">[Add a Logo]</a>';
-			}	
-			else
-			{
-				echo '<img src="'.($pic ? "profile_pics/$pic" : "images/empty-100.png").'" />';
-				echo '<a href="resume.php" style="position:relative; top:100px;">[Add a Picture]</a>';
-			}
-		?>
+<?php
+if(isset($_get['employer'])) { ?>
+			<img src="<?php echo $logo ? "logos/$logo" : "images/empty-100.png"; ?>" />
+<?php
+	// Don't show this unless I'm logged in as an employer
+	if ($_SESSION['user_type'] == 'employer') { ?>
+			<br /><a href="edit_company.php">[Add a Logo]</a>
+<?php
+	}
+} else { ?>
+			<img src="<?php echo $pic ? "profile_pics/$pic" : "images/empty-100.png"; ?>" />
+<?php
+	// Don't show this unless I'm logged in as a student
+	if ($_SESSION['user_type'] == 'student') { ?>
+			<br /><a href="resume.php">[Add a Picture]</a>
+<?php
+	}
+} ?>
 		</div>
 		<div class="profileName"><?php echo $name; ?></div>
 		<div class="profileContact"><?php echo $email; ?></div>
