@@ -283,7 +283,7 @@ function handleFileUpload($file, $type)
 				// Check the database to see if there is already a logo. If there is,
 				// go to the directory and delete the previous logo to make room for
 				// the new one
-				$sql = "SELECT logo FROM employers WHERE company='$company'";
+				$sql = "SELECT logo FROM employers WHERE email='$email'";
 				$result = mysql_query($sql) or die("Cannot query database: " . mysql_error());
 				if(mysql_num_rows($result) == 1)
 				{
@@ -381,4 +381,58 @@ function handleFileUpload($file, $type)
 	mysql_query($sql) or die("Cannot query database: " . mysql_error());
 }
 
+// This function detects class="foo" and replaces it with the inlined styles
+// Works with both class="foo" AND class='foo'
+function inline_styles($page, $css) {
+	// What we are looking for
+	$findme = "class=";
+	$length = strlen($findme);
+
+	$classloc = strpos($page,$findme);
+
+	// While there is a class to be replaced...
+	while($classloc !== false) {
+		$start = $classloc+$length;
+		// Store what the next char is (' or ")
+		$quote = $page[$start];
+		// Find the one on the other end
+		$endquote = strpos($page, $quote, $start+1);
+		// This will be our class(es)
+		$inside = substr($page, $start+1, $endquote-$start-1);
+		$classes = explode(" ", $inside);
+		$inline = "";
+		// For each class, find it in the css, chop it up (as above but with {}), and place into string
+		// In hindsight, I should have parsed the css into a nice array first... these will get sliced multiple times
+		foreach($classes as $class) {
+			$cssloc = strpos($css, $class);
+			if($cssloc !== false) {
+				$lbrace = strpos($css, '{', $cssloc);
+				$rbrace = strpos($css, '}', $cssloc);
+				$inline .= substr($css, $lbrace+1, $rbrace-$lbrace-1);
+			}
+		}
+		// Tack on the before and after
+		$inline = "style='$inline'";
+		// Clean off any newlines and tabs
+		$junk = array("\n","\r","\t");
+		$inline = str_replace($junk, "", $inline);
+		// Finally, we put it where it goes
+		$replace = substr($page, $classloc, $endquote-$classloc-1);
+		$page = str_replace($replace, $inline, $page);
+
+		$classloc = strpos($page,$findme, $classloc+1);
+	}
+	return $page;
+}
+
 ?>
+
+
+
+
+
+
+
+
+
+

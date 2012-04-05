@@ -63,5 +63,5 @@
 	$desc = mysql_real_escape_string($_POST['description']);
 	$sql = "UPDATE employers SET description='$desc', logo='$document_name' WHERE email='".$_SESSION['email']."'";
 	mysql_query($sql) or die(mysql_error());
-	//header("Location:../profile.php");
+	header("Location:../profile.php");
 ?>
