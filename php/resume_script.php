@@ -73,7 +73,6 @@ if(isset($_FILES['image']))
 		}
 	}
 	*/
-}
 
 	// An unchecked 'notification' checkbox doesn't seem to show up in post
 	// So to allow for toggling it we always set to false then true if needed
@@ -94,8 +93,7 @@ if(isset($_FILES['image']))
 	if ($_GET['student_register'])
 		header("Location:../profile.php?student_register=true");
 	else
-		header("Location:../profile.php");
+		header("Location:profile.php");
 
 	exit();
-}
 ?>

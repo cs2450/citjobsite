@@ -4,10 +4,12 @@ include_once("inc/header.php");
 
 // If the session isn't set by logging in or registering, re-route to login.php
 
+/*
 if(!isset($_SESSION['email'])) {
 	header("Location:prompt_login.php");
 	exit();
 }
+*/
 
 // Grab the student's resume, if any, so we can display a link to it
 // Also grab from the db so we can autofill any inputs
