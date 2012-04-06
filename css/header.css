@@ -231,8 +231,9 @@ h3 {
 	display: list-item;
 	list-style: circle;
 }
-.jobDetail .jobDetailSkills .skill.threeCols {
-	width: 30.3333%;
+.jobDetail .jobDetailSkills .skill.threeCols,
+.profilePage .studentSkills .skill.threeCols {
+	width: 30%;
 	margin-left: 3%;
 }
 .profilePage .rightSide {
