@@ -194,7 +194,6 @@ h3 {
 .jobDetail .leftSide {
 	float: left;
 	width: 74%;
-	border-right: 1px solid #ddd;
 }
 .profileImage {
 	float: left;
@@ -308,9 +307,11 @@ h3 {
 	border-left: 1px solid #ddd;
 }
 .jobDetail .full.rightSide {
+	float: right;
 	width: 25%;
-	padding: 20px 0;
 	border: 0;
+	padding: 20px 0;
+	border-left: 1px solid #ddd;
 }
 .jobHeader {
 	color: #fff;
@@ -428,6 +429,12 @@ h3 {
 }
 .jobSkills h4 {
 	font-size: 14px;
+}
+.jobDetail .apply {
+	clear: both;
+	width: 100%;
+	margin-bottom: 10px;
+	padding-top: 10px;
 }
 #skills_table .top {
 	padding-top: 10px;

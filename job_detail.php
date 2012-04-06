@@ -77,11 +77,6 @@
 		<div class="jobDetailSkills">
 			<?php echo $job_skills; ?>
 		</div>
-		<div class="apply">
-			<form id='apply' action='php/apply_script.php' method='post'>
-				<?php echo $apply_button; ?>
-			</form>
-		</div>
 	</div>
 	<div class="full rightSide">
 		<div class="hours"><div class="bold">Hours</div><?php
@@ -94,6 +89,11 @@
 			echo $row[phone]; ?></div>
 		<div class="date">Posted: <?php echo $posted; ?></div>
 		<div class="date">Expires: <?php echo $expire; ?></div>
+	</div>
+	<div class="apply topDivider">
+		<form id='apply' action='php/apply_script.php' method='post'>
+			<?php echo $apply_button; ?>
+		</form>
 	</div>
 </div>
 
