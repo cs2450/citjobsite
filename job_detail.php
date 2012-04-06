@@ -48,7 +48,7 @@
 		$skills[$skill['skill_id']] = $skill['skill'];
 
 	// Grab and format the skills for the job.
-	$job_skills = "<div class='studentSkills topDivider'><div>Skills</div>\n";
+	$job_skills = "<div class='studentSkills topDivider'><div><b>Skills</b></div>\n";
 	$sql = "SELECT * FROM job_skills WHERE job_id='$job_id'";
 	$result=mysql_query($sql) or die(mysql_error());
 	while($skill=mysql_fetch_assoc($result)) {
@@ -56,17 +56,32 @@
 	}
 	$job_skills .="</div>\n";
 ?>
-<div>
-	<div class="jobControls"><?php echo $control_buttons; ?></div>
-	<div class="profileImage">
-		<?php
-		$company = addslashes($row['company']);
-		$sql = "SELECT logo FROM employers WHERE company='$company'";
-		$res = mysql_query($sql) or die("Cannot query database: " . mysql_error());
-		$emp = mysql_fetch_assoc($res);
-		$logo = $emp['logo'];				
-		?>
-		<img src="<?php echo $logo ? 'logos/'.$logo : 'images/empty-100.png'; ?>" />
+<div class="jobControls"><?php echo $control_buttons; ?></div>
+<div class="jobDetail">
+	<div class="leftSide">
+		<div class="profileImage">
+			<?php
+			$company = addslashes($row['company']);
+			$sql = "SELECT logo FROM employers WHERE company='$company'";
+			$res = mysql_query($sql) or die("Cannot query database: " . mysql_error());
+			$emp = mysql_fetch_assoc($res);
+			$logo = $emp['logo'];				
+			?>
+			<img src="<?php echo $logo ? 'logos/'.$logo : 'images/empty-100.png'; ?>" />
+		</div>
+		<div class="full jobInfo">
+			<div class="company"><?php echo $company; ?></div>
+			<div class="jobTitle"><?php echo $row[title]; ?></div>
+			<div class="jobDescription"><?php echo $row[job_description]; ?></div>
+		</div>
+		<div class="jobDetailSkills">
+			<?php echo $job_skills; ?>
+		</div>
+		<div class="apply">
+			<form id='apply' action='php/apply_script.php' method='post'>
+				<?php echo $apply_button; ?>
+			</form>
+		</div>
 	</div>
 	<div class="full rightSide">
 		<div class="hours"><div class="bold">Hours</div><?php
@@ -79,19 +94,6 @@
 			echo $row[phone]; ?></div>
 		<div class="date">Posted: <?php echo $posted; ?></div>
 		<div class="date">Expires: <?php echo $expire; ?></div>
-	</div>
-	<div class="full jobInfo">
-		<div class="company"><?php echo $company; ?></div>
-		<div class="jobTitle"><?php echo $row[title]; ?></div>
-		<div class="jobDescription"><?php echo $row[job_description]; ?></div>
-	</div>
-	<div class="jobDetailSkills">
-		<?php echo $job_skills; ?>
-	</div>
-	<div class="apply">
-		<form id='apply' action='php/apply_script.php' method='post'>
-			<?php echo $apply_button; ?>
-		</form>
 	</div>
 </div>
 

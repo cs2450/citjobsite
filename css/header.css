@@ -182,12 +182,18 @@ h3 {
 	min-width: 600px;
 	max-width: 900px;		
 }
+.jobDetail,
 .profilePage {
 	width: 100%;
 }
 .profilePage .leftSide {
 	float: left;
 	width: 69%;
+	border-right: 1px solid #ddd;
+}
+.jobDetail .leftSide {
+	float: left;
+	width: 74%;
 	border-right: 1px solid #ddd;
 }
 .profileImage {
@@ -199,6 +205,7 @@ h3 {
 	-moz-border-radius: 5px;
 	-webkit-border-radius: 5px;
 }
+.jobDetail img,
 .profileImage img {
 	max-width: 100px;
 	max-height: 100px;
@@ -217,8 +224,16 @@ h3 {
 .profilePage .profileAbout {
 	padding: 10px;
 }
+.jobDetail .jobDetailSkills .skill,
 .profilePage .studentSkills .skill {
 	float: left;
+	margin: 2px 0;
+	display: list-item;
+	list-style: circle;
+}
+.jobDetail .jobDetailSkills .skill.threeCols {
+	width: 30.3333%;
+	margin-left: 3%;
 }
 .profilePage .rightSide {
 	float: left;
@@ -291,9 +306,10 @@ h3 {
 	margin-left: 4px;
 	border-left: 1px solid #ddd;
 }
-.full.rightSide {
+.jobDetail .full.rightSide {
 	width: 25%;
 	padding: 20px 0;
+	border: 0;
 }
 .jobHeader {
 	color: #fff;
