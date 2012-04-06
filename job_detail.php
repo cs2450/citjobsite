@@ -59,7 +59,14 @@
 <div>
 	<div class="jobControls"><?php echo $control_buttons; ?></div>
 	<div class="profileImage">
-		<img src="<?php echo $logo ? "logos/$logo" : "images/empty-100.png"; ?>" />
+		<?php
+		$company = addslashes($row['company']);
+		$sql = "SELECT logo FROM employers WHERE company='$company'";
+		$res = mysql_query($sql) or die("Cannot query database: " . mysql_error());
+		$emp = mysql_fetch_assoc($res);
+		$logo = $emp['logo'];				
+		?>
+		<img src="<?php echo $logo ? 'logos/'.$logo : 'images/empty-100.png'; ?>" />
 	</div>
 	<div class="full rightSide">
 		<div class="hours"><div class="bold">Hours</div><?php

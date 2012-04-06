@@ -262,12 +262,12 @@ function handleFileUpload($file, $type)
 		// If an error is set, redirect to edit_company.php with an error
 		if($error != '' && $type == 'logo')
 		{
-			//header("Location:../edit_company.php?error=".$error);
+			header("Location:../edit_company.php?error=".$error);
 		}
 
 		else if($error != '' && ($type == 'profile' || $type == 'resume'))
 		{
-			//header("Location:../resume.php?error=".$error);
+			header("Location:../resume.php?error=".$error);
 		}
 
 		// Else, upload the file
@@ -352,10 +352,10 @@ function handleFileUpload($file, $type)
 			// Move temporary file to resumes 
 			if(!move_uploaded_file($file['tmp_name'], "$directory$document_name"))
 			{
-				if($type == 'logo') {}
-					//header("Location:../edit_company.php?error=move_fail");
-				else if($type == 'profile' || $type == 'resume') {}
-					//header("Location:../resume.php?error=move_fail");
+				if($type == 'logo')
+					header("Location:../edit_company.php?error=move_fail");
+				else if($type == 'profile' || $type == 'resume')
+					header("Location:../resume.php?error=move_fail");
 			}
 			
 			else

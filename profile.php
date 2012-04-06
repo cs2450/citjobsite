@@ -6,6 +6,9 @@
 		header("Location:index.php");
 		exit();
 	}
+
+	$error = isset($_GET['error']) ? $_GET['error'] : NULL;
+	$error_type = isset($_GET['type']) ? $_GET['type'] : NULL;
 	
 	// If students registration or employer registration is complete, let them know their profile is ready for view
 	if(isset($_GET['student_register']) && $_GET['student_register'] == true || isset($_GET['employer_register']) && $_GET['employer_register'] == true) {
@@ -49,19 +52,25 @@
 		$name = $_SESSION['company'];
 		$jobs_list = "My Posted Jobs <a href='post_job.php?action=create'>[post job]</a>";
 		$desc_header="About my company: <a href='edit_company.php'>[edit]</a>";
-		$sql = "SELECT description FROM employers WHERE email='$email'";
+		$sql = "SELECT * FROM employers WHERE email='$email'";
 		$result=mysql_query($sql) or die("cant fetch description");
-		$desc=mysql_fetch_array($result);
-		$desc=$desc['description'];
+		$row=mysql_fetch_array($result);
+		$desc=$row['description'];
 		if ($row['logo']) {
 			$pic = "logos/".$row['logo'];
 		};
 	}
 ?>
 <div class="profilePage">
+	<span class="error">
+	<?php
+		if($error == 'extension' && $error_type == 'image')
+			echo 'Invalid file type. Please upload a JPG, GIF, or PNG';
+	?>
+	</span>
 	<div class="leftSide">
 		<div class="profileImage">
-			<img src="<?php echo $pic ?>" />
+			<img src="<?php echo $pic; ?>" />
 <?php
 // Don't show this unless I'm logged in as an employer
 if ($_SESSION['user_type'] == 'employer') { ?>
