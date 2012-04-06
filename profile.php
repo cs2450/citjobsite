@@ -17,6 +17,7 @@
 	}
 	// Prepare all the differences between the student and employer profile pages here
 	// so I dont have to keep asking "if (user_type==student)" OVER AND OVER AGAIN!! (rawr)
+	$pic = 'images/empty-100.png';
 	if (isset($_GET['employer'])) {
 		$email = $_GET['employer'];
 		$sql = "SELECT * FROM employers WHERE email='$email'";
@@ -26,7 +27,9 @@
 		$desc = $row['description'];
 		$desc_header = "About employer's company:";
 		$jobs_list = "Employer's posted jobs:";
-		$logo = $row['logo'];
+		if ($row['logo']) {
+			$pic = "logos/".$row['logo'];
+		};
 	}
 	else if ($_SESSION['user_type'] == 'student'){
 		$email = &$_SESSION['email'];
@@ -37,7 +40,9 @@
 		$result=mysql_query($sql) or die("cant fetch description");
 		$row=mysql_fetch_array($result);
 		$desc=$row['description'];
-		$pic = $row['profile_pic'];
+		if ($row['profile_pic']) {
+			$pic = 'profile_pics/'.$row['profile_pic'];
+		}
 	}
 	else if ($_SESSION['user_type'] == 'employer'){
 		$email = &$_SESSION['email'];
@@ -48,28 +53,24 @@
 		$result=mysql_query($sql) or die("cant fetch description");
 		$desc=mysql_fetch_array($result);
 		$desc=$desc['description'];
+		if ($row['logo']) {
+			$pic = "logos/".$row['logo'];
+		};
 	}
 ?>
 <div class="profilePage">
 	<div class="leftSide">
 		<div class="profileImage">
+			<img src="<?php echo $pic ?>" />
 <?php
-if(isset($_get['employer'])) { ?>
-			<img src="<?php echo $logo ? "logos/$logo" : "images/empty-100.png"; ?>" />
-<?php
-	// Don't show this unless I'm logged in as an employer
-	if ($_SESSION['user_type'] == 'employer') { ?>
+// Don't show this unless I'm logged in as an employer
+if ($_SESSION['user_type'] == 'employer') { ?>
 			<br /><a href="edit_company.php">[Add a Logo]</a>
 <?php
-	}
-} else { ?>
-			<img src="<?php echo $pic ? "profile_pics/$pic" : "images/empty-100.png"; ?>" />
-<?php
-	// Don't show this unless I'm logged in as a student
-	if ($_SESSION['user_type'] == 'student') { ?>
+// Don't show this unless I'm logged in as a student
+} else if ($_SESSION['user_type'] == 'student') { ?>
 			<br /><a href="resume.php">[Add a Picture]</a>
 <?php
-	}
 } ?>
 		</div>
 		<div class="profileName"><?php echo $name; ?></div>

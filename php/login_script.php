@@ -14,7 +14,7 @@
 		exit();
 	}
 	else if ($_POST['All_Jobs']){
-		header("Location:../index.php?page=Jobs&pagenumber=1");
+		header("Location:../index.php?page=Matches&pagenumber=1");
 		exit();
 	}
 	else if ($_POST['Matches']){
@@ -27,6 +27,10 @@
 	}
 	else if ($_POST['home']){
 		header("Location:../profile.php?page=home");
+		exit();
+	}
+	else if ($_POST['index']){
+		header("Location:../index.php?page=home");
 		exit();
 	}
 	else if ($_POST['login']){

@@ -131,10 +131,15 @@ body {
 #registerButton:active,
 #registerButton.active { background: url('../images/sleep.png') -31px 0; }
 #registerButton.active:hover { background: url('../images/sleep.png') -31px -31px; }
+#indexButton,
 #matchesButton { background: url('../images/restart.png') 0 0; }
+#indexButton:hover,
 #matchesButton:hover { background: url('../images/restart.png') 0 -31px; }
+#indexButton:active,
+#indexButton.active,
 #matchesButton:active,
 #matchesButton.active { background: url('../images/restart.png') -31px 0; }
+#indexButton.active:hover,
 #matchesButton.active:hover { background: url('../images/restart.png') -31px -31px; }
 #logoutButton { background: url('../images/shutdown.png') 0 0; }
 #logoutButton:hover { background: url('../images/shutdown.png') 0 -31px; }

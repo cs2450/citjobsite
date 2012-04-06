@@ -47,7 +47,9 @@ while($row=mysql_fetch_array($result)) {
 	else {
 		// This div encompasses one entire job ?>
 		<a class="partial job" href="job_detail.php?job=<?php echo $row['id']; ?>">
-			<div class="profileImage"></div>
+			<div class="profileImage">
+				<img src="<?php echo $row['logo'] ? "logos/".$row['logo'] : "images/empty-100.png"; ?>" />
+			</div>
 			<div class="rightSide">
 				<div class='hours'><div class="bold">Hours</div><?php
 					echo $row[hours]; ?></div>

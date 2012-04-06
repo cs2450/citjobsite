@@ -40,7 +40,7 @@ require_once('connect.php');
 <?php if (isset($_GET['page']) && $_GET['page']=='home') echo ' class="active"' ?>></button>
 				</div>
 				<div class="formButton threeCols">
-					<button type="submit" name="<?php echo $match_button; ?>" value="<?php echo $match_button; ?>" id="matchesButton" <?php if ($fancy && isset($_GET['page']) && in_array($_GET['page'],array("Jobs","Matches"))) echo ' class="active"' ?>></button>
+					<button type="submit" name="<?php echo $match_button; ?>" value="<?php echo $match_button; ?>" id="matchesButton" <?php if (/*$fancy &&*/ isset($_GET['page']) && in_array($_GET['page'],array("Jobs","Matches"))) echo ' class="active"' ?>></button>
 				</div>
 				<div class="formButton threeCols">
 					<button type="submit" name="logout" value="logout" id="logoutButton"<?php if (isset($_GET['page']) && $_GET['page']=='logout') echo 'class="active"' ?>></button>
@@ -72,17 +72,23 @@ require_once('connect.php');
 						<input type="password" name="password" id="password"></input>
 				</div>
 				<div class="formBottom">
-					<div class="formButton twoCols">
-						<button type="submit" name="login" value="login" id="loginButton" class="active"></button>
+					<div class="formButton threeCols">
+						<button type="submit" name="login" value="login" id="loginButton"></button>
 					</div>
-					<div class="formButton twoCols">
+					<div class="formButton threeCols">
 						<button type="submit" name="register" value="register" id="registerButton"></button>
 					</div>
-					<div class="buttonText twoCols">
+					<div class="formButton threeCols">
+						<button type="submit" name="index" value="index" id="indexButton" class="active"></button>
+					</div>
+					<div class="buttonText threeCols">
 						<label for="loginButton">Log-In</label>
 					</div>
-					<div class="buttonText twoCols">
+					<div class="buttonText threeCols">
 						<label for="registerButton">Register</label>
+					</div>
+					<div class="buttonText threeCols">
+						<label for="indexButton">Jobs List</label>
 					</div>
 				</div>
 			</form>
