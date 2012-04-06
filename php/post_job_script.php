@@ -33,7 +33,7 @@ if ($action != 'create') {
 		// Also reactivate any skills associated
 		$sql = "UPDATE job_skills SET active=1 WHERE job_id='$job_id'";
 		mysql_query($sql) or die(mysql_error());
-		header("Location:../jobdetail.php?$job_id");
+		header("Location:../job_detail.php?job=$job_id");
 		exit();
 	}
 	// So is deleting and marking as filled. We don't actually delete it though.
@@ -44,7 +44,7 @@ if ($action != 'create') {
 		// We also need to deactivate any associated skills
 		$sql = "UPDATE job_skills SET active=0 WHERE job_id='$job_id'";
 		mysql_query($sql) or die(mysql_error());
-		header("Location:../jobdetail.php?$job_id");
+		header("Location:../job_detail.php?job=$job_id");
 		exit();
 	}
 }
@@ -121,5 +121,5 @@ foreach($_POST as $key => $value)
 		$match = 0;
 	}
 }
-header("Location:../jobdetail.php?$job_id");
+header("Location:../job_detail.php?job=$job_id");
 ?>

@@ -48,7 +48,18 @@ while($row=mysql_fetch_array($result)) {
 		// This div encompasses one entire job ?>
 		<a class="partial job" href="job_detail.php?job=<?php echo $row['id']; ?>">
 			<div class="profileImage">
+<<<<<<< Updated upstream
 				<img src="<?php echo $row['logo'] ? "logos/".$row['logo'] : "images/empty-100.png"; ?>" />
+=======
+				<?php
+					$company = addslashes($row['company']);
+					$sql = "SELECT logo FROM employers WHERE company='$company'";
+					$res = mysql_query($sql) or die("Cannot query database: " . mysql_error());
+					$emp = mysql_fetch_assoc($res);
+					$logo = $emp['logo'];				
+				?>
+				<img src="<?php echo $logo ? 'logos/'.$logo : 'images/empty-100.png'; ?>" />			
+>>>>>>> Stashed changes
 			</div>
 			<div class="rightSide">
 				<div class='hours'><div class="bold">Hours</div><?php

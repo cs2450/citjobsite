@@ -9,6 +9,11 @@
 		exit();
 	}
 
+	else if($_SESSION['user_type'] != 'employer') {
+		header("Location:index.php");
+		exit();
+	}
+
 	// Get the existing description
 	$sql = "SELECT description FROM employers WHERE email='".$_SESSION['email']."'";
 	$result = mysql_query($sql) or die(mysql_error());
