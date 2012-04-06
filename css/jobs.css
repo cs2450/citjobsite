@@ -88,11 +88,6 @@ cursor: pointer;
 background: url("images/sleep.png") 0 -31px;
 }
 
-#resume_table {
-width: 500px;
-text-align: left;
-}
-
 #jobs_list {
 	width: 100%;	
 	border: 1px #ddd solid;
