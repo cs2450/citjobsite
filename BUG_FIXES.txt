@@ -31,7 +31,7 @@ profile.php
 	*Gray out the deleted from the employer profile page
 
 prompt_login.php
-	Needs image
+	(Done)Needs image
 
 post_job.php
 	*Expiration drop down needs to pull correct months
@@ -43,3 +43,4 @@ post_job_script.php
 
 Check for active icon across all pages
 
+Add SUPER user
