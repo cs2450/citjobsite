@@ -14,7 +14,7 @@ resume.php
 	*Hide Contact didn't auto-fill when returning to page
 
 index.php
-	Images for prev and next
+	(Done)Images for prev and next
 	Show page number
 	Site map at bottom of page
 

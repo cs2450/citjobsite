@@ -19,18 +19,18 @@ $result = mysql_query($sql) or die(mysql_error());
 
 // Handle the pagination menu here. it has to be sometime after the sql query
 if($offset > 0)
-	$prev = "<a href='index.php?page=".$_GET['page']."&pagenumber=".($_GET['pagenumber']-1)."'>[prev]</a>";
+	$prev = "<a class='prev arrow' href='index.php?page=".$_GET['page']."&pagenumber=".($_GET['pagenumber']-1)."'></a>";
 else
-	$prev = "[prev]";
+	$prev = "<img class='prev arrow' src='images/blank.png' />";
 if(mysql_num_rows($result) == $pagelimit){
 	// Takes care of the dead link if there is no get['pagenumber']
 	if (!isset($_GET['pagenumber']))
 		$pn = 2;
 	else
 		$pn = $_GET['pagenumber']+1;
-	$next = "<a href='index.php?page=".$_GET['page']."&pagenumber=$pn'>[next]</a>";
+	$next = "<a class='next arrow' href='index.php?page=".$_GET['page']."&pagenumber=$pn'></a>";
 }else
-	$next = "[next]";
+	$next = "<img class='next arrow' src='images/blank.png'/>";
 
 echo $prev." ".$next;
 

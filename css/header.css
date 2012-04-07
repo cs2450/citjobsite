@@ -182,6 +182,30 @@ h3 {
 	min-width: 600px;
 	max-width: 900px;		
 }
+.arrow {
+	width: 59px;
+	height: 40px;
+}
+img.arrow {
+	border: none;
+	border-style: none;
+}
+a.arrow {
+	display: inline-block;
+}
+.prev.arrow {
+	background: url('../images/dir-arrows.png') 0 0;
+}
+a.prev.arrow:hover {
+	background: url('../images/dir-arrows.png') 0 -40px;
+}
+.next.arrow {
+	background: url('../images/dir-arrows.png') -61px 0;
+}
+a.next.arrow:hover {
+	background: url('../images/dir-arrows.png') -61px -39px;
+}
+#
 .jobDetail,
 .profilePage {
 	width: 100%;
