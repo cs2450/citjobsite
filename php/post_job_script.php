@@ -25,15 +25,16 @@ if ($action != 'create') {
 		header("Location:../index.php");
 		exit();
 	}
+
 	// Renewing a job is simple. We handle it here
 	if ($action == 'renew') {
-		$expires = date('Y-m-d', strtotime('+6 month'));
+		$expires = date('Y-m-d', strtotime($_GET['lifetime']));
 		$sql = "UPDATE jobs SET expire_date='$expires', status='active' WHERE id='$job_id'";
 		mysql_query($sql) or die(mysql_error());
 		// Also reactivate any skills associated
 		$sql = "UPDATE job_skills SET active=1 WHERE job_id='$job_id'";
 		mysql_query($sql) or die(mysql_error());
-		header("Location:../job_detail.php?job=$job_id");
+		header("Location:../job_detail.php?job=$job_id&renew=true");
 		exit();
 	}
 	// So is deleting and marking as filled. We don't actually delete it though.
