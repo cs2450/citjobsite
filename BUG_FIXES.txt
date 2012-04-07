@@ -1,10 +1,11 @@
 CIT Job Board fixes
 
 job_detail.php
-	*Click on employer name to go to profile
+	(DONE)*Click on employer name to go to profile
 	*Apply for job is severely broken
 	*Renew needs to display success and new expiration date
 	*Job already filled needs to be more prominent
+	Allow employer to un-fill a job
 
 resume.php
 	*Remove employment history

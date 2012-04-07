@@ -163,9 +163,9 @@ jQuery(document).ready(function($) {
 		element.parentNode.removeChild(element);
 	});
 	
-	//////////////////////////////////////////////////////////////////////////////
+	//////////////////////////////////////////////////////////////////////////////////
 	//	RESUME.PHP HANDLERS FOR FILE VALIDATION BEFORE UPLOADING TO THE SERVER	//
-	//////////////////////////////////////////////////////////////////////////////
+	//////////////////////////////////////////////////////////////////////////////////
 	
 	$('#upload_button').click(function () {
 		var file = $('input[type=file]').prop('files')[0];
@@ -228,9 +228,9 @@ jQuery(document).ready(function($) {
 		$('#contact_info').slideToggle();
 	});
 
-	/////////////////////////////////////////
-	//	HEADER.PHP STICKY HANDLER FOR LOGIN AND MENU BOXES
-	/////////////////////////////////////////
+	/////////////////////////////////////////////////////////////
+	//	HEADER.PHP STICKY HANDLER FOR LOGIN AND MENU BOXES //
+	/////////////////////////////////////////////////////////////
 	$(window).scroll(function () {
 		if ($(window).scrollTop() > $('#sticky-anchor').offset().top)
 			$('.sticky-handle').addClass('stick')
@@ -250,5 +250,28 @@ jQuery(document).ready(function($) {
 		else if (desc == '')
 			return false;
 		return true;
+	});
+
+	//////////////////////////////////////////////////////////////////////////////////////////////////////////
+	//	JOB_DETAIL.PHP RENEW BUTTON CLICK HANDLER TO HAVE THEM SELECT AN AMOUNT OF TIME TO RENEW ON	//
+	//////////////////////////////////////////////////////////////////////////////////////////////////////////
+	$('#renew').one('click', function () {
+		$(this).after('<select name="lifetime" id="update_renewal">'+
+				'<option value="+6 month">6 Months</option>'+
+				'<option value="+3 month">3 Months</option>'+
+				'<option value="+1 month">1 Month</option>'+
+			'</select>');
+
+		$('#update_renewal').change(function () {
+			$.ajax({
+				url: 'php/post_job_script.php',
+				data: {
+					action: 'renew',
+					lifetime: $('#update_renewal').val(),
+				},			
+			});	
+		});
+		
+		return false;
 	});
 });

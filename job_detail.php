@@ -18,7 +18,7 @@
 	// the respective status at the top.
 	if ($_SESSION['user_type'] == 'employer' && $row['contact_email'] == $_SESSION['email'] && $row['status'] != 'filled' && $row['status'] != 'deleted') {
 		$control_buttons = "<a href='post_job.php?page=Post%20Job&action=edit&id=$job_id'>edit</a>";
-		$control_buttons .= "<a href='php/post_job_script.php?action=renew&id=$job_id'>renew</a>";
+		$control_buttons .= "<a href='php/post_job_script.php?action=renew&id=$job_id' id='renew'>renew</a>";
 		$control_buttons .= "<a href='php/post_job_script.php?action=filled&id=$job_id'>job filled</a>";
 		$control_buttons .= "<a href='php/post_job_script.php?action=deleted&id=$job_id'>remove</a>";
 		if($row['status'] == 'expired')
@@ -30,7 +30,7 @@
 		$control_buttons = "This job has expired";
 
 	// Link employer name to their profile
-	$company = "<a href='profile.php?employer=".$row['contact_email']."'>".$row['company']."</a>";
+	$company_link = "<a href='profile.php?employer=".$row['contact_email']."'>".$row['company']."</a>";
 
 	// If we are a student then give them an apply button 
 	$apply_button = "";
@@ -70,7 +70,7 @@
 			<img src="<?php echo $logo ? 'logos/'.$logo : 'images/empty-100.png'; ?>" />
 		</div>
 		<div class="full jobInfo">
-			<div class="company"><?php echo $company; ?></div>
+			<div class="company"><?php echo $company_link; ?></div>
 			<div class="jobTitle"><?php echo $row[title]; ?></div>
 			<div class="jobDescription"><?php echo $row[job_description]; ?></div>
 		</div>
