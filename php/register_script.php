@@ -6,7 +6,7 @@ session_start();
 
 $error = validate_data($_POST['name'], $_POST['register_email'], $_POST['confirm_email'], $_POST['phone'], $_POST['register_password'], $_POST['confirm_password']);
 
-if($error != '');
+if($error != '')
 	header("Location:../register.php?error=".$error);
 
 // If no errors, go ahead and finish registering the individual

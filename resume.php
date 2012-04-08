@@ -78,19 +78,16 @@ if(isset($_GET['error'])) {
 		<td colspan=2><hr /></td>
 	</tr>
 	<tr>
-		<td colspan=2><b>Employment history:</b></td>
-	</tr>
-	<tr>
 		<td><br />
 			<label for="phone">Contact Phone Number: </label>
-			<input type="text" name="phone" maxlength="10" size="10" value="<?php echo $info['contact_phone']; ?>"/> (10 digits)</td>
+			<input type="text" name="phone" maxlength="10" size="10" value="<?php echo $info['phone']; ?>"/> (10 digits)</td>
 		<td><br />
 			<label for="contact_email">Contact Email: </label>
 			<input type="text" name="contact_email" size="40" value="<?php echo $info['contact_email']; ?>" /></td>
 	</tr>
 	<tr>
 		<td colspan=2 style="text-align: left; padding-left: 27%;"><br />
-			<input type="checkbox" id="hide_contact" /> Hide my contact information from potential employers?</td>
+			<input type="checkbox" name="hide_info" id="hide_contact" <?php echo ($info['hide_info']) ? "checked": ""; ?> /> Hide my contact information from potential employers?</td>
 	</tr>
 	<tr>
 		<td colspan=2 style="text-align: left; padding-left: 27%;">

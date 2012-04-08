@@ -5,7 +5,7 @@
 	require_once("../inc/connect.php");
 	include_once("../inc/func.php");
 	if ($_POST['register']) {
-		header("Location:../register.php");
+		header("Location:../register.php?email=".urlencode($_POST['email']));
 		exit();
 	}
 	else if ($_POST['logout']){

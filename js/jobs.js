@@ -257,6 +257,7 @@ jQuery(document).ready(function($) {
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////
 	$('#renew').one('click', function () {
 		$(this).after('<select name="lifetime" id="update_renewal">'+
+				'<option>Select one</option>'+
 				'<option value="+6 month">6 Months</option>'+
 				'<option value="+3 month">3 Months</option>'+
 				'<option value="+1 month">1 Month</option>'+
@@ -268,10 +269,29 @@ jQuery(document).ready(function($) {
 				data: {
 					action: 'renew',
 					lifetime: $('#update_renewal').val(),
-				},			
+				},
+				success: function (data) {
+					alert(data);
+				}			
 			});	
 		});
 		
 		return false;
+	});
+
+	//////////////////////////////////////////////////////////////////////////////////
+	//	JOB_DETAIL.PHP UNFILL BUTTON CLICK AJAX. RESETS STATUS TO ACTIVE	//
+	//////////////////////////////////////////////////////////////////////////////////
+	$('input[name=unfill]').click(function () {
+		$.ajax({
+			url: 'job_detail.php',
+			data: {
+				unfill: $('input[name=unfill_id]').val()	
+			},
+			success: function (data) {
+				alert('Job is active again.');
+				window.location.reload(true);
+			}
+		});
 	});
 });

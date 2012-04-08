@@ -1,5 +1,8 @@
 <?php
 include_once("inc/header.php");
+
+// Set the email variable if someone input their email address into the email field and clicked Register
+$email = isset($_GET['email']) ? $_GET['email'] : NULL;
 ?>
 <div id="form_container" class="text">
 	<p class="head">Register for the CIT Jobs Board</p>
@@ -11,7 +14,7 @@ include_once("inc/header.php");
 			<tr><td class="labels"><label for="name">Name:</label></td>
 				<td class="inputs"><input type="text" name="name" /></td></tr>
 			<tr><td class="labels"><label for="register_email">Email:</label></td>
-				<td class="inputs"><input type="text" name="register_email" /></td></tr>
+				<td class="inputs"><input type="text" name="register_email" value="<?php echo $email; ?>" /></td></tr>
 			<tr><td class="labels"><label for="confirm_email">Confirm Email:</label></td>
 				<td class="inputs"><input type="text" name="confirm_email" /></td></tr>
 			<tr><td class="labels"><label for="phone">(10 Digit) Phone Number:</label></td>

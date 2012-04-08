@@ -19,7 +19,7 @@ if(isset($_FILES['image']) && !empty($_FILES['image']['name']))
 
 	// An unchecked 'notification' checkbox doesn't seem to show up in post
 	// So to allow for toggling it we always set to false then true if needed
-	$sql = "UPDATE students SET notification=0 WHERE email='".$_SESSION['email']."'";
+	$sql = "UPDATE students SET notification=0,hide_info=0 WHERE email='".$_SESSION['email']."'";
 	mysql_query($sql) or die(mysql_error());
 	
 	// Dump all inputs to db
@@ -28,7 +28,7 @@ if(isset($_FILES['image']) && !empty($_FILES['image']['name']))
 		$key = mysql_real_escape_string($key);
 		$value = mysql_real_escape_string($value);
 		$sql = "UPDATE students SET $key='$value' WHERE email='".$_SESSION['email']."'";
-		if ($key == 'notification' && $value="on")
+		if (($key == 'notification' && $value="on") || ($key == 'hide_info' && $value=="on"))
 			$sql = "UPDATE students SET $key=1 WHERE email='".$_SESSION['email']."'";
 			
 		mysql_query($sql) or die(mysql_error());

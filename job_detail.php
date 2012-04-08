@@ -16,6 +16,13 @@
 	// If we are an employer and own this job then we get some controls
 	// These statements will also tell anyone viewing a filled/delete/expired job
 	// the respective status at the top.
+
+	if(isset($_GET['unfill']))
+	{
+		$sql = "UPDATE jobs SET status='active' WHERE id=".$_GET['unfill'];
+		mysql_query($sql) or die("Cannot query database: " . mysql_error());
+	}
+
 	if ($_SESSION['user_type'] == 'employer' && $row['contact_email'] == $_SESSION['email'] && $row['status'] != 'filled' && $row['status'] != 'deleted') {
 		$control_buttons = "<a href='post_job.php?page=Post%20Job&action=edit&id=$job_id'>edit</a>";
 		$control_buttons .= "<a href='php/post_job_script.php?action=renew&id=$job_id' id='renew'>renew</a>";
@@ -25,9 +32,9 @@
 			$control_buttons = "This job has expired, and is no longer listed. You may want to renew it.<br/>".$control_buttons;
 	}
 	else if($row['status'] == 'filled' || $row['status'] == 'deleted')
-		$control_buttons = "This job has been ".$row['status'];
+		$control_buttons = "<span class=\"notice\">This job has been ".$row['status']."</span>";
 	else if($row['status'] == 'expired')
-		$control_buttons = "This job has expired";
+		$control_buttons = "<span class=\"notice\">This job has expired</span>";
 
 	// Link employer name to their profile
 	$company_link = "<a href='profile.php?employer=".$row['contact_email']."'>".$row['company']."</a>";
@@ -56,7 +63,7 @@
 	}
 	$job_skills .="</div>\n";
 ?>
-<div class="jobControls"><?php echo $control_buttons; ?></div>
+<div class="jobControls"><?php echo $control_buttons; echo ($row['status']=='filled') ? ' <input type="hidden" name="unfill_id" value="'.$job_id.'" /><input type="button" name="unfill" value="Unfill?" />':''; ?></div>
 <div class="jobDetail">
 	<div class="leftSide">
 		<div class="profileImage">

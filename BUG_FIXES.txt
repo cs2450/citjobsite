@@ -4,15 +4,15 @@ job_detail.php
 	(DONE)*Click on employer name to go to profile
 	*Apply for job is severely broken
 	*Renew needs to display success and new expiration date
-	*Job already filled needs to be more prominent
-	Allow employer to un-fill a job
+	(DONE)*Job already filled needs to be more prominent
+	(DONE)Allow employer to un-fill a job
 
 resume.php
-	*Remove employment history
+	(DONE)*Remove employment history
 	Display uploaded picture next to button
-	*Auto-fill phone number and email address
+	(DONE)*Auto-fill phone number and email address
 	*Resume didn't upload
-	*Hide Contact didn't auto-fill when returning to page
+	(DONE)*Hide Contact didn't auto-fill when returning to page
 
 index.php
 	(Done)Images for prev and next
@@ -20,7 +20,7 @@ index.php
 	Site map at bottom of page
 
 register.php
-	*Auto-fill 1 email and password when register clicked
+	(DONE, only did email because of password strings in the URL...)*Auto-fill 1 email and password when register clicked
 
 register_script.php 
 	*Encrypt the password
