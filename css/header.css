@@ -194,16 +194,16 @@ a.arrow {
 	display: inline-block;
 }
 .prev.arrow {
-	background: url('../images/dir-arrows.png') 0 0;
+	background: url('../images/dir-arrows.png') -1px 0;
 }
 a.prev.arrow:hover {
-	background: url('../images/dir-arrows.png') 0 -40px;
+	background: url('../images/dir-arrows.png') -2px -41px;
 }
 .next.arrow {
 	background: url('../images/dir-arrows.png') -61px 0;
 }
 a.next.arrow:hover {
-	background: url('../images/dir-arrows.png') -61px -39px;
+	background: url('../images/dir-arrows.png') -60px -40px;
 }
 #
 .jobDetail,
