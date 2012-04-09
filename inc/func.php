@@ -70,7 +70,7 @@ function validate($user, $pass, $type){
   if($user != "" and $pass != "") {
 		if($type == 'employer')
 		{
-			$sql = "SELECT * FROM employers WHERE email='$user' AND password='$pass'";
+			$sql = "SELECT * FROM employers WHERE email='$user' AND password=PASSWORD('$pass')";
 			$result = mysql_query($sql) or die(mysql_error());
 			$queryrows = mysql_num_rows($result);
 			
@@ -101,7 +101,7 @@ function validate($user, $pass, $type){
 		
 		else if($type == 'student')
 		{
-			$sql = "SELECT * FROM students WHERE email='$user' AND password='$pass'";
+			$sql = "SELECT * FROM students WHERE email='$user' AND password=PASSWORD('$pass')";
 			$result = mysql_query($sql) or die(mysql_error());
 			$queryrows = mysql_num_rows($result);
 			

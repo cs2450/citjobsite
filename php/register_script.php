@@ -37,7 +37,7 @@ if (mysql_num_rows($result) > 0){
 
 if($user == 'employer')
 {
-	$sql = "INSERT INTO employers (email, password, name, company, description, phone, access) VALUES('$email', '$pass', '$name', '$company', '$description', '$phone', '1');";
+	$sql = "INSERT INTO employers (email, password, name, company, description, phone, access) VALUES('$email', PASSWORD('$pass'), '$name', '$company', '$description', '$phone', '1');";
 	
     mysql_query($sql) or die(mysql_error());
     
@@ -50,7 +50,7 @@ if($user == 'employer')
 // if the user_type is a student
 else if($user == 'student')
 {
-	$sql = "INSERT INTO students (name, email, phone, password) VALUES('$name', '$email', '$phone', 	'$pass');";
+	$sql = "INSERT INTO students (name, email, phone, password) VALUES('$name', '$email', '$phone', PASSWORD('$pass'));";
 	
     mysql_query($sql) or die(mysql_error());
     

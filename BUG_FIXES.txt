@@ -23,7 +23,7 @@ register.php
 	(DONE, only did email because of password strings in the URL...)*Auto-fill 1 email and password when register clicked
 
 register_script.php 
-	*Encrypt the password
+	(DONE)*Encrypt the password
 
 profile.php
 	*Logged-in student looking at an employer profile shouldn't see the add logo
@@ -45,3 +45,4 @@ post_job_script.php
 Check for active icon across all pages
 
 Add SUPER user
+Get database table info for Steve

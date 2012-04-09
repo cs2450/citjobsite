@@ -68,8 +68,8 @@
 	<div class="leftSide">
 		<div class="profileImage">
 			<?php
-			$company = addslashes($row['company']);
-			$sql = "SELECT logo FROM employers WHERE company='$company'";
+			$email = $row['contact_email'];
+			$sql = "SELECT logo FROM employers WHERE email='$email'";
 			$res = mysql_query($sql) or die("Cannot query database: " . mysql_error());
 			$emp = mysql_fetch_assoc($res);
 			$logo = $emp['logo'];				
