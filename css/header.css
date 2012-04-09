@@ -504,3 +504,8 @@ a.next.arrow:hover {
 }
 .editCompanyForm form {
 }
+.promptLoginMsg {
+	color: #f00;
+	padding: 20px;
+	font-size: 24px;
+}

@@ -42,7 +42,7 @@
 			exit();
 		}
 		else {
-			header("Location:../prompt_login.php");
+			header("Location:../prompt_login.php?error=bad_info");
 			exit();
 		}
 		exit();
