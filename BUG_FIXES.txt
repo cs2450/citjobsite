@@ -26,10 +26,9 @@ register_script.php
 	(DONE)*Encrypt the password
 
 profile.php
-	*Logged-in student looking at an employer profile shouldn't see the add logo
-	*Consolidate the add picture and edit resume to edit profile
-
-	*Gray out the deleted from the employer profile page
+	(REMOVED, SEE SPECIFICATION BENEATH THIS ONE)*Logged-in student looking at an employer profile shouldn't see the add logo
+	(DONE)*Consolidate the add picture and edit resume to edit profile
+	(DONE, .5 OPACITY AND STRIKETHROUGH TEXT)*Gray out the deleted from the employer profile page
 
 prompt_login.php
 	(Done)Needs image

@@ -48,6 +48,17 @@ h3 {
 	border: 1px solid #ddd;
 	background: #fafafa;
 }
+.deleted {
+opacity: .5;
+}
+.deleted div {
+text-decoration: line-through;
+}
+
+#edit_profile {
+font-size: 14px;
+}
+
 #citNav {
 	text-align: center;
 	background: url("../images/bannerBack.png") repeat-x;

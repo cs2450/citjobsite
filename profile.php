@@ -51,7 +51,7 @@
 		$email = &$_SESSION['email'];
 		$name = $_SESSION['company'];
 		$jobs_list = "My Posted Jobs <a href='post_job.php?action=create'>[post job]</a>";
-		$desc_header="About my company: <a href='edit_company.php'>[edit]</a>";
+		$desc_header="About my company:";
 		$sql = "SELECT * FROM employers WHERE email='$email'";
 		$result=mysql_query($sql) or die("cant fetch description");
 		$row=mysql_fetch_array($result);
@@ -71,18 +71,28 @@
 	<div class="leftSide">
 		<div class="profileImage">
 			<img src="<?php echo $pic; ?>" />
-<?php
+<!--<?php
 // Don't show this unless I'm logged in as an employer
-if ($_SESSION['user_type'] == 'employer') { ?>
+if ($_SESSION['user_type'] == 'employer' && $_GET['employer'] == $_SESSION['email']) { ?>
 			<br /><a href="edit_company.php">[Add a Logo]</a>
 <?php
 // Don't show this unless I'm logged in as a student
-} else if ($_SESSION['user_type'] == 'student') { ?>
+} else if ($_SESSION['user_type'] == 'student' && !isset($_GET['employer'])) { ?>
 			<br /><a href="resume.php">[Add a Picture]</a>
 <?php
-} ?>
+} ?>-->
 		</div>
-		<div class="profileName"><?php echo $name; ?></div>
+		<div class="profileName">
+		<?php echo $name . "&nbsp;";
+			if(($_SESSION['user_type'] == 'employer' || $_SESSION['user_type'] == 'student') && !isset($_GET['employer']))
+			{
+				if($_SESSION['user_type'] == 'employer')
+					echo '<a id="edit_profile" href="edit_company.php">[Edit Profile]</a>';
+				else
+					echo '<a id="edit_profile" href="resume.php">[Edit Profile]</a>';
+			}
+		?>
+		</div>
 		<div class="profileContact"><?php echo $email; ?></div>
 		<div class="profileAbout leftJustify">
 			<div class="centerJustify"><?php
@@ -106,15 +116,16 @@ if ($_SESSION['user_type'] == 'employer') { ?>
 		// Get the students skills
 		$sql = "select * from student_skills where student_id=".$_SESSION['student_id']; 
 		$result = mysql_query($sql) or die('cannot find student');;
-
-		if ($row=mysql_fetch_array($result)) {
+			
+	if ($row=mysql_fetch_array($result)) {
 			$sql = "SELECT skill FROM skills WHERE skill_id=".$row['skill_id'];
 			while($row=mysql_fetch_array($result)) {
 				$sql = $sql." UNION SELECT skill FROM skills WHERE skill_id=".$row['skill_id'];
 			}
 			$result = mysql_query($sql) or die('cannot fetch skills');
 
-			echo "<div class='studentSkills topDivider'><div>Skills <a href='skills.php'>[edit]</a></div>\n";
+			echo "<div class='studentSkills topDivider'><div>Skills&nbsp;<a href='skills.php'>[edit]</a></div>\n";
+
 			while($row=mysql_fetch_array($result)) {
 				echo "<div class='skill threeCols leftJustify'>".$row['skill']."</div>\n";
 			}
@@ -129,6 +140,8 @@ if ($_SESSION['user_type'] == 'employer') { ?>
 			}
 			echo "</div>";
 		}
+	else
+		echo '<b>No Skills Specified.</b> <a href="skills.php">[Add skills]</a>';
 	}
 ?>
 
@@ -153,7 +166,7 @@ if ($_SESSION['user_type'] == 'employer') { ?>
 
 	while($row=mysql_fetch_array($result)) {
 		?>
-		<a class="job" href="job_detail.php?job=<?php echo $row['id']?>">
+		<a class="job <?php echo ($row['status'] == 'deleted') ? "deleted" : ""; ?>" href="job_detail.php?job=<?php echo $row['id']?>">
 			<div class="jobTitle"><?php echo $row['title']; ?></div>
 			<div class="jobDescription"><?php echo $row['job_description']; ?></div>
 		</a>
