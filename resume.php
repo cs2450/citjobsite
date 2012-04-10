@@ -52,6 +52,10 @@ if(isset($_GET['error'])) {
 	
 	echo '<center><div class="error">A server error occured: '. $printout . '</div></center><br />';
 }
+$pic = 'images/empty-100.png';
+if ($info['profile_pic']) {
+	$pic = 'profile_pics/'.$info['profile_pic'];
+}
 ?>
 <form method="post" name="upload" action="php/resume_script.php" enctype="multipart/form-data">
 <table id="resume_table">
@@ -62,26 +66,10 @@ if(isset($_GET['error'])) {
 		<td colspan=2><hr /></td>
 	</tr>
 	<tr>
-		<td style="width:50%;"><b>Upload your profile picture: (.jpg, .gif, .png only)</b>
-		<td style="width:50%;"><b>Upload your resume: (.pdf only)</b></td>
-	</tr>
-	<tr>
-		<td>It will only be displayed as 100x100, so don't<br />waste our space by uploading anything bigger.</td>
-		<td></td>
-	</tr>
-	<tr>
-		<td><br /><input type="file" name="image" /></td>
-		<td><br /><?php echo $resume_link; ?><br /><input type="file" name="resume" /><br />
-		</td>
-	</tr>
-	<tr>
-		<td colspan=2><hr /></td>
-	</tr>
-	<tr>
-		<td><br />
+		<td style="width:50%;"><br />
 			<label for="phone">Contact Phone Number: </label>
 			<input type="text" name="phone" maxlength="10" size="10" value="<?php echo $info['phone']; ?>"/> (10 digits)</td>
-		<td><br />
+		<td style="width:50%;"><br />
 			<label for="contact_email">Contact Email: </label>
 			<input type="text" name="contact_email" size="40" value="<?php echo $info['contact_email']; ?>" /></td>
 	</tr>
@@ -92,6 +80,26 @@ if(isset($_GET['error'])) {
 	<tr>
 		<td colspan=2 style="text-align: left; padding-left: 27%;">
 			<input type="checkbox" name="notification" <?php if($info['notification']){ echo "checked"; } ?>/> Receive new job notifications via email?</td>
+	</tr>
+	<tr>
+		<td colspan=2><hr /></td>
+	</tr>
+	<tr>
+		<td><b>Upload your profile picture: (.jpg, .gif, .png only)</b>
+		<td><b>Upload your resume: (.pdf only)</b></td>
+	</tr>
+	<tr>
+		<td>It will only be displayed as 100x100 pixels.</td>
+		<td></td>
+	</tr>
+	<tr>
+		<td><br /><img src="<?php echo $pic; ?>" /></td>
+		<td><br /><?php echo $resume_link; ?></td>
+	</tr>
+	<tr>
+		<td><br /><input type="file" name="image" /></td>
+		<td><br /><input type="file" name="resume" /><br />
+		</td>
 	</tr>
 	<tr>
 		<td style="text-align: right;"></td>
