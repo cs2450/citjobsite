@@ -9,7 +9,7 @@ job_detail.php
 
 resume.php
 	(DONE)*Remove employment history
-	Display uploaded picture next to button
+	(Done)Display uploaded picture next to button
 	(DONE)*Auto-fill phone number and email address
 	*Resume didn't upload
 	(DONE)*Hide Contact didn't auto-fill when returning to page
