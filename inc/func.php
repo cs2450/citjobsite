@@ -159,7 +159,6 @@ function fetch_matches($id,$pagelimit,$offset) {
 	return $sql;
 }
 
-
 // This is a helper function for the matching it gathers the student's skills into an array
 // It then calls the main match function and returns the matched jobs
 function begin_match($id) {

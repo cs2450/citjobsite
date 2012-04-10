@@ -10,21 +10,32 @@ if(isset($_GET['pagenumber']) && is_numeric($_GET['pagenumber']))
 if($offset < 0)
 	$offset = 0;
 
-if($_SESSION['user_type'] == 'student' && $_GET['page'] == "Matches")
+if($_SESSION['user_type'] == 'student' && $_GET['page'] == "Matches") {
 	$sql = fetch_matches($_SESSION['student_id'], $pagelimit, $offset);
-else
+} else {
 	$sql="SELECT * FROM jobs WHERE status='active' ORDER BY date DESC LIMIT $pagelimit OFFSET $offset";
+}
 
 $result = mysql_query($sql) or die(mysql_error());
 
+// Get the total number of pages available
+$maxPages = mysql_query('SELECT COUNT(*) AS r FROM jobs WHERE status="active"');
+$maxPages = mysql_fetch_array($maxPages);
+$maxPages = ceil($maxPages['r'] / $pagelimit);
+
+// Get the current page number
+$currentPage = isset($_GET['pagenumber']) ? $_GET['pagenumber'] : 1;
+
 // Handle the pagination menu here. it has to be sometime after the sql query
-if($offset > 0)
+if ($offset > 0) {
 	$prev = "<a href='index.php?page=".$_GET['page']."&pagenumber=".($_GET['pagenumber']-1)."'>[prev page]</a>";
 	/*$prev = "<a class='prev arrow' href='index.php?page=".$_GET['page']."&pagenumber=".($_GET['pagenumber']-1)."'></a>";*/
-else
+} else {
 	$prev = "<span>[prev page]</span>";
 	/*$prev = "<img class='prev arrow' src='images/blank.png' />";*/
-if(mysql_num_rows($result) == $pagelimit){
+}
+//if (mysql_num_rows($result) == $pagelimit) {
+if ($currentPage < $maxPages) {
 	// Takes care of the dead link if there is no get['pagenumber']
 	if (!isset($_GET['pagenumber']))
 		$pn = 2;
@@ -32,12 +43,12 @@ if(mysql_num_rows($result) == $pagelimit){
 		$pn = $_GET['pagenumber']+1;
 	$next = "<a href='index.php?page=".$_GET['page']."&pagenumber=$pn'>[next page]</a>";
 	/*$next = "<a class='next arrow' href='index.php?page=".$_GET['page']."&pagenumber=$pn'></a>";*/
-}else
+} else {
 	$next = "<span>[next page]</span>";
 	/*$next = "<img class='next arrow' src='images/blank.png'/>";*/
+}
 
-echo $prev." ".$next;
-
+echo $prev.' - '.$currentPage.'/'.$maxPages.' - '.$next;
 
 $expired = date('Y-m-d', strtotime('-120 month'));
 
@@ -80,7 +91,7 @@ while($row=mysql_fetch_array($result)) {
 		</a>
 <?php	}
 	}
-echo $prev." ".$next;
+echo $prev.' - '.$currentPage.'/'.$maxPages.' - '.$next;
 echo "</div>";
 include_once("inc/footer.php");
 ?>

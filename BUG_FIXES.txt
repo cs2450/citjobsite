@@ -16,7 +16,7 @@ resume.php
 
 index.php
 	(Done)Images for prev and next
-	Show page number
+	(Done)Show page number
 	Site map at bottom of page
 
 register.php

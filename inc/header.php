@@ -79,7 +79,7 @@ require_once('connect.php');
 						<button type="submit" name="register" value="register" id="registerButton"></button>
 					</div>
 					<div class="formButton threeCols">
-						<button type="submit" name="index" value="index" id="indexButton" class="active"></button>
+						<button type="submit" name="index" value="index" id="indexButton" <?php if (isset($_GET['page']) && $_GET['page']=='home') echo ' class="active"' ?>></button>
 					</div>
 					<div class="buttonText threeCols">
 						<label for="loginButton">Log-In</label>
