@@ -258,19 +258,21 @@ jQuery(document).ready(function($) {
 	$('#renew').one('click', function () {
 		$(this).after('<select name="lifetime" id="update_renewal">'+
 				'<option>Select one</option>'+
-				'<option value="+6 month">6 Months</option>'+
-				'<option value="+3 month">3 Months</option>'+
-				'<option value="+1 month">1 Month</option>'+
+				'<option value="6">6 Months</option>'+
+				'<option value="3">3 Months</option>'+
+				'<option value="1">1 Month</option>'+
 			'</select>');
 
 		$('#update_renewal').change(function () {
 			$.ajax({
 				url: 'php/post_job_script.php',
 				data: {
+					id: $('input[name=job_id]').val(),
 					action: 'renew',
 					lifetime: $('#update_renewal').val(),
 				},
 				success: function (data) {
+					//alert('Job renewed successfully!');
 					alert(data);
 				}			
 			});	

@@ -35,7 +35,7 @@ prompt_login.php
 
 post_job.php
 	*Expiration drop down needs to pull correct months
-	*Adding other skills doesn't show up on job_detail
+	(DONE)*Adding other skills doesn't show up on job_detail
 
 post_job_script.php
 	*Need to update the database with the correct expire date (always doing 6 months)

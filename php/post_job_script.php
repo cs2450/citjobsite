@@ -10,7 +10,7 @@ if ( !(isset($_SESSION['email'])) || $_SESSION['user_type'] != 'employer') {
 }
 $action = $_GET['action'];
 // Make sure theres no funny business, allow only what we want in GET
-if ($action != 'create' && $action != 'edit' && $action != 'renew' && $action != 'deleted' && $action != 'filled')  {
+if ($action != 'create' && $action != 'edit' && $action != 'renew' && $action != 'deleted' && $action != 'filled') { 
 	header("Location:../index.php");
 	exit();
 }
@@ -20,6 +20,7 @@ if ($action != 'create') {
 	$job_id = $_GET['id'];
 	$email = $_SESSION['email'];
 	$sql = "SELECT id FROM jobs WHERE id='$job_id' AND contact_email='$email'";
+	echo $sql;
 	$result = mysql_query($sql);
 	if (!mysql_num_rows($result)){
 		header("Location:../index.php");
@@ -28,7 +29,12 @@ if ($action != 'create') {
 
 	// Renewing a job is simple. We handle it here
 	if ($action == 'renew') {
-		$expires = date('Y-m-d', strtotime($_GET['lifetime']));
+		$sql = "SELECT expire_date FROM jobs WHERE id='$job_id'";
+		$result = mysql_query($sql) or die("Cannot query database: " . mysql_error());
+		$row = mysql_fetch_assoc($result);
+
+		$expires  = date('Y-m-d', strtotime($row['expire_date'] . "+".$_GET['lifetime']." months"));
+	
 		$sql = "UPDATE jobs SET expire_date='$expires', status='active' WHERE id='$job_id'";
 		mysql_query($sql) or die(mysql_error());
 		// Also reactivate any skills associated

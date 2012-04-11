@@ -25,7 +25,7 @@
 
 	if ($_SESSION['user_type'] == 'employer' && $row['contact_email'] == $_SESSION['email'] && $row['status'] != 'filled' && $row['status'] != 'deleted') {
 		$control_buttons = "<a href='post_job.php?page=Post%20Job&action=edit&id=$job_id'>edit</a>";
-		$control_buttons .= "<a href='php/post_job_script.php?action=renew&id=$job_id' id='renew'>renew</a>";
+		$control_buttons .= "<a href='#' id='renew'>renew</a>";
 		$control_buttons .= "<a href='php/post_job_script.php?action=filled&id=$job_id'>job filled</a>";
 		$control_buttons .= "<a href='php/post_job_script.php?action=deleted&id=$job_id'>remove</a>";
 		if($row['status'] == 'expired')
@@ -59,12 +59,13 @@
 	$sql = "SELECT * FROM job_skills WHERE job_id='$job_id'";
 	$result=mysql_query($sql) or die(mysql_error());
 	while($skill=mysql_fetch_assoc($result)) {
-		$job_skills .= "<div class='skill threeCols leftJustify'>".$skills[$skill['skill_id']]."</div>\n";
+		$job_skills .= "<div class='skill threeCols leftJustify'>". ($skill['skill_id']==0 ? $skill['other_skill'] : $skills[$skill['skill_id']]) ."</div>\n";
 	}
 	$job_skills .="</div>\n";
 ?>
 <div class="jobControls"><?php echo $control_buttons; echo ($row['status']=='filled') ? ' <input type="hidden" name="unfill_id" value="'.$job_id.'" /><input type="button" name="unfill" value="Unfill?" />':''; ?></div>
 <div class="jobDetail">
+	<input type="hidden" name="job_id" value="<?php echo $job_id; ?>" />
 	<div class="leftSide">
 		<div class="profileImage">
 			<?php

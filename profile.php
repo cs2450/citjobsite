@@ -135,7 +135,7 @@ if ($_SESSION['user_type'] == 'employer' && $_GET['employer'] == $_SESSION['emai
 			$result = mysql_query($sql) or die('cannot fetch "other" skills');
 			while($row=mysql_fetch_array($result)) {
 				if ($row['other_skill'] != ''){
-					echo "<div class='skill threeCols'>"."*".$row['other_skill']."</div>\n";
+					echo "<div class='skill threeCols leftJustify'>"."*".$row['other_skill']."</div>\n";
 				}
 			}
 			echo "</div>";
