@@ -10,6 +10,9 @@ function validate_data($name,$email,$con_email,$phone,$pass,$con_passwd){
   if($name=="" or $phone=="" or $email=="" or $pass=="" or $con_passwd=="") {
     $error="* Please fill out all fields";
   }
+  else if($email != $con_email) {
+	$error="* Emails do not match";
+  }
   else if ( !preg_match($regexp, $email) ) {
     $error="* Please enter a valid e-mail address";
   }
@@ -431,6 +434,17 @@ function inline_styles($page, $css) {
 		$classloc = strpos($page,$findme, $classloc+1);
 	}
 	return $page;
+}
+
+function gen_random_string($length) {
+	$rstr = '';
+	// No vowells. Never know what you could end up with.
+	$possible = "2346789bcdfghjkmnpqrtvwxyzBCDFGHJKLMNPQRTVWXYZ";
+	$poss_length = strlen($possible); 
+	for($i=0;$i<$length;$i++) {
+		$rstr .= substr($possible, mt_rand(0, $poss_length-1), 1);
+	}
+	return $rstr;
 }
 
 ?>

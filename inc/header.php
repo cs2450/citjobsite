@@ -52,7 +52,6 @@ require_once('connect.php');
 					<label for="logoutButton">Log-Out</label>
 				</div>
 			</form>
-		</div>
 <?php	} else { ?>
 		<div id="loginBox" class="regColors sticky-handle">
 			<form id="loginForm" class="regColors" method="post" action="php/login_script.php">
@@ -89,6 +88,6 @@ require_once('connect.php');
 					</div>
 				</div>
 			</form>
+<?php	} include_once("inc/sitemap.php");  ?>
 		</div>
-<?php	} ?>
 		<div id="mainBody" class="regColors">
