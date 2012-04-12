@@ -124,5 +124,9 @@ foreach($_POST as $key => $value)
 		$match = 0;
 	}
 }
+// If we made it this far and action==create, we run the mail list
+if($action=='create') {
+	include_once('mail_list_script.php');
+}
 header("Location:../job_detail.php?job=$job_id");
 ?>
