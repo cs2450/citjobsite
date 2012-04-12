@@ -26,6 +26,12 @@
 		$sql = "SELECT * FROM employers WHERE email='$email'";
 		$result=mysql_query($sql) or die(mysql_error());
 		$row = mysql_fetch_array($result);
+		// Dont show suspended employers
+		// For now just kick to index.php
+		if($row['access']==-1){
+			header("Location:index.php");
+			exit();
+		}
 		$name = $row['company'];
 		$desc = $row['description'];
 		$desc_header = "About employer's company:";

@@ -66,7 +66,7 @@ function query($dept,$current_skills,$form_type='student')
 // This function sets the session variables and validates the specific user. Function requires a username, a password, and the type of person logging in.
 // Selects records from the database and sets the session variables upon successful validation.
 
-function validate($user, $pass, $type){
+function validate($user, $pass, $type, &$error=NULL){
   if($user != "" and $pass != "") {
 		if($type == 'employer')
 		{
@@ -75,13 +75,17 @@ function validate($user, $pass, $type){
 			$queryrows = mysql_num_rows($result);
 			
 			if($queryrows > 0) {
+			  $row=mysql_fetch_array($result);
+			  if($row['access'] == -1){
+				  $error = 'account_suspended';
+				  return false;
+			  }
 			  srand(time());
 			  $SecurityHash = "";
 			  
 			  for($i = 0; $i < 32; $i++)
 				$SecurityHash .= (string)rand(0, 9);
 				
-			  $row=mysql_fetch_array($result);
 			  $_SESSION['name'] = $row['name'];
 			  $_SESSION['company'] = $row['company'];
 			  $_SESSION['email'] = $user;          
@@ -89,7 +93,10 @@ function validate($user, $pass, $type){
 			  $_SESSION['access_level']=$row['access'];
 			  $_SESSION['Security_Hash'] = $SecurityHash;
 			  $_SESSION['Security_TokenMd5'] = md5($SecurityHash . "This Is not For you to see");
-			  $_SESSION['user_type'] = $type;
+			  if($row['access']==5)
+				  $_SESSION['user_type'] = 'admin';
+			  else
+			  	  $_SESSION['user_type'] = $type;
 			  
 			  return true;
 			 }

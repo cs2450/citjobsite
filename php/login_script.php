@@ -36,7 +36,7 @@
 	else if ($_POST['login']){
 		$email = mysql_real_escape_string($_POST['email']);
 		$pass = mysql_real_escape_string($_POST['password']);
-		if (validate($email,$pass,'employer') || 
+		if (validate($email,$pass,'employer',$error) || 
 			validate($email,$pass,'student')) {
 
 			if($_SESSION['user_type'] == 'admin')
@@ -50,7 +50,10 @@
 				exit();
 			}
 		}
-
+		else if($error != NULL) {
+			header("Location:../prompt_login.php?error=$error");
+			exit();
+		}
 		else {
 			header("Location:../prompt_login.php?error=bad_info");
 			exit();
