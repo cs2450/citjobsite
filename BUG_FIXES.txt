@@ -9,15 +9,15 @@ job_detail.php
 
 resume.php
 	(DONE)*Remove employment history
-	(Done)Display uploaded picture next to button
+	(DONE)Display uploaded picture next to button
 	(DONE)*Auto-fill phone number and email address
 	*Resume didn't upload
 	(DONE)*Hide Contact didn't auto-fill when returning to page
 
 index.php
-	(Done)Images for prev and next
-	(Done)Show page number
-	Site map at bottom of page
+	(DONE)Images for prev and next
+	(DONE)Show page number
+	(DONE. Its now underneath the login form)Site map at bottom of page
 
 register.php
 	(DONE, only did email because of password strings in the URL...)*Auto-fill 1 email and password when register clicked
