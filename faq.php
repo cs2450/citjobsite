@@ -1,7 +1,9 @@
 <?php
 include("inc/header.php");
+?>
 
-echo "FAQ";
+<h1>FAQ</h1>
 
+<?php
 include("inc/footer.php");
 ?>

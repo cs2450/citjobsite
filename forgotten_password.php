@@ -12,8 +12,8 @@ elseif(isset($_GET['error'])) {
 }
 ?>
 <div>
-	If you have forgotten your password, you may use this form to recover your account.
-	<br/><br/>
+	<h1>If you have forgotten your password, you may use this form to recover your account.</h1>
+	<br/>An email will be sent to you with a new password. It is strongly recomended that you log in and reset it as soon as possible.<br/><br/><br/>
 	<form name="reset_pass" method="post" action="php/reset_pass_script.php">
 		<label for="email">Account Email Address: </label>
 		<input type="text" name="email" />

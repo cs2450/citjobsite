@@ -49,24 +49,24 @@ h3 {
 	background: #fafafa;
 }
 .deleted {
-opacity: .5;
+	opacity: 0.5;
 }
 .deleted div {
-text-decoration: line-through;
+	text-decoration: line-through;
 }
 
 .admin_controls {
-float: right;
-padding: 10px;
-border: 2px solid #036;
-margin: 0px 10px;
-border-radius: 5px;
--moz-border-radius: 5px;
--webkit-border-radius: 5px;
+	float: right;
+	padding: 10px;
+	border: 2px solid #036;
+	margin: 0px 10px;
+	border-radius: 5px;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
 }
 
 #edit_profile {
-font-size: 14px;
+	font-size: 14px;
 }
 
 #citNav {
@@ -196,6 +196,15 @@ font-size: 14px;
 	-moz-border-radius: 0 0 15px 15px;
 	-webkit-border-radius: 0 0 15px 15px;
 }
+.sitemap {
+	clear: both;
+	text-align: left;
+	padding-top: 20px;
+}
+.sitemap a {
+	color: #777;
+	text-decoration: none;
+}
 #mainBody {
 	left: 235px;
 	padding: 5px;
@@ -226,7 +235,6 @@ a.prev.arrow:hover {
 a.next.arrow:hover {
 	background: url('../images/dir-arrows.png') -60px -40px;
 }
-#
 .jobDetail,
 .profilePage {
 	width: 100%;
@@ -532,4 +540,18 @@ a.next.arrow:hover {
 }
 #resume_table b {
 	font-size: 17px;
+}
+.privacyPolicy {
+	text-align: left;
+}
+.privacyPolicy h1 {
+	padding: 10px 0 20px 0;
+	text-align: center;
+}
+.privacyPolicy ol {
+	padding: 15px 0 30px 0;
+}
+.privacyPolicy li {
+	margin-left: 30px;
+	list-style: decimal;
 }
