@@ -16,9 +16,6 @@
 	// If we are an employer and own this job then we get some controls
 	// These statements will also tell anyone viewing a filled/delete/expired job
 	// the respective status at the top.
-	foreach($_GET as $k => $v){
-		echo $k.$v;
-	}
 	if(isset($_GET['unfill']))
 	{
 		echo "+++++++++++++++++###############3===================";

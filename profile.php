@@ -43,7 +43,7 @@
 	else if ($_SESSION['user_type'] == 'student'){
 		$email = &$_SESSION['email'];
 		$name = $_SESSION['name'];
-		$jobs_list = "Matched Jobs";
+		$jobs_list = "Matched Jobs<a href='index.php?page=Matches&pagenumber=1'>[more]</a>";
 		$desc_header="About me/Resume <a href='resume.php'>[edit]</a>";
 		$sql = "SELECT * FROM students WHERE email='$email'";
 		$result=mysql_query($sql) or die("cant fetch description");

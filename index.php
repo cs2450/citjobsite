@@ -58,17 +58,18 @@ if($offset < 0)
 	$offset = 0;
 
 if($_SESSION['user_type'] == 'student' && $_GET['page'] == "Matches") {
-	$sql = fetch_matches($_SESSION['student_id'], $pagelimit, $offset);
+	$sql = fetch_matches($_SESSION['student_id'], $pagelimit, $offset, $maxPages);
 } else {
 	$sql="SELECT * FROM jobs WHERE status='active' ORDER BY date DESC LIMIT $pagelimit OFFSET $offset";
+	// Get the total number of pages available
+	$maxPages = mysql_query('SELECT COUNT(*) AS r FROM jobs WHERE status="active"');
+	$maxPages = mysql_fetch_array($maxPages);
+	$maxPages = ceil($maxPages['r'] / $pagelimit);
 }
 
 $result = mysql_query($sql) or die(mysql_error());
 
-// Get the total number of pages available
-$maxPages = mysql_query('SELECT COUNT(*) AS r FROM jobs WHERE status="active"');
-$maxPages = mysql_fetch_array($maxPages);
-$maxPages = ceil($maxPages['r'] / $pagelimit);
+
 
 // Get the current page number
 $currentPage = isset($_GET['pagenumber']) ? $_GET['pagenumber'] : 1;

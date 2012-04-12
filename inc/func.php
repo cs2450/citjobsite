@@ -143,9 +143,11 @@ function validate($user, $pass, $type, &$error=NULL){
 }
 
 // This function calls the match functions and returns the SQL statement
-function fetch_matches($id,$pagelimit,$offset) {
+// Also returns the total matches by reference in $total
+function fetch_matches($id,$pagelimit,$offset,&$total=NULL) {
 	$matches = begin_match($id);
 	$size = sizeof($matches);
+	$total = ceil($size/$pagelimit);
 	// Lets get a maximum of $pagelimit
 	if($size > 0) {
 		$job_id = key($matches);
