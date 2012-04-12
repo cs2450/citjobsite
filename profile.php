@@ -91,6 +91,9 @@ if ($_SESSION['user_type'] == 'employer' && $_GET['employer'] == $_SESSION['emai
 				else
 					echo '<a id="edit_profile" href="resume.php">[Edit Profile]</a>';
 			}
+
+			else if($_SESSION['user_type'] == 'admin' && !isset($_GET['employer']))
+				echo 'You are admin. We are all pretty jealous.';
 		?>
 		</div>
 		<div class="profileContact"><?php echo $email; ?></div>
@@ -157,11 +160,11 @@ if ($_SESSION['user_type'] == 'employer' && $_GET['employer'] == $_SESSION['emai
 	} else if (isset($_GET['employer'])) {
 		$sql="SELECT * FROM jobs WHERE contact_email='$email' AND status='active' ORDER BY date DESC LIMIT 10";
 	// else we must be a student, display our matches
-	} else {
+	} else if($_SESSION['user_type'] == 'student'){
 		// Fetch the first 10 matches
 		$sql = fetch_matches($_SESSION['student_id'], 10, 0);
 	}
-
+	
 	$result = mysql_query($sql) or die(mysql_error());
 
 	while($row=mysql_fetch_array($result)) {

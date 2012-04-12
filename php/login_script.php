@@ -38,9 +38,19 @@
 		$pass = mysql_real_escape_string($_POST['password']);
 		if (validate($email,$pass,'employer') || 
 			validate($email,$pass,'student')) {
-			header("Location:../profile.php?page=home");
-			exit();
+
+			if($_SESSION['user_type'] == 'admin')
+			{
+				header("Location:../index.php");
+				exit();
+			}
+			
+			else {
+				header("Location:../profile.php?page=home");
+				exit();
+			}
 		}
+
 		else {
 			header("Location:../prompt_login.php?error=bad_info");
 			exit();

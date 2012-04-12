@@ -16,7 +16,6 @@
 	// If we are an employer and own this job then we get some controls
 	// These statements will also tell anyone viewing a filled/delete/expired job
 	// the respective status at the top.
-
 	if(isset($_GET['unfill']))
 	{
 		$sql = "UPDATE jobs SET status='active' WHERE id=".$_GET['unfill'];
@@ -63,6 +62,8 @@
 	}
 	$job_skills .="</div>\n";
 ?>
+
+<div class="admin_controls"><a href="index.php?delete_job=<?php echo $job_id; ?>" onclick="return confirm('Are you sure you want to delete this job?');"><img src="images/red_x.png" /></a></div>
 <div class="jobControls"><?php echo $control_buttons; echo ($row['status']=='filled') ? ' <input type="hidden" name="unfill_id" value="'.$job_id.'" /><input type="button" name="unfill" value="Unfill?" />':''; ?></div>
 <div class="jobDetail">
 	<input type="hidden" name="job_id" value="<?php echo $job_id; ?>" />
@@ -96,7 +97,7 @@
 		<div class="phone tall"><div class="bold">Contact Phone</div><?php
 			echo $row[phone]; ?></div>
 		<div class="date">Posted: <?php echo $posted; ?></div>
-		<div class="date">Expires: <?php echo $expire; ?></div>
+		<div class="date" id="expires">Expires: <?php echo $expire; ?></div>
 	</div>
 	<div class="apply topDivider">
 		<form id='apply' action='php/apply_script.php' method='post'>

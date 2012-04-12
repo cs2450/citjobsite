@@ -21,7 +21,7 @@ jQuery(document).ready(function($) {
              var passwordVal = $("#password").val();
              var email = $("#email").val();
 			        
-             if (email == '' | !validateEmail(email)) {
+             if (email == '') {
                  $(".formBottom").after('<span class="error">Please enter a valid email.</span>');
                  hasError = true;
              } else if (passwordVal == '') {
@@ -30,7 +30,7 @@ jQuery(document).ready(function($) {
              hasError = true;
              }
 
-             if(hasError == true) {return false;}
+             if(hasError == true) {$('.error').fadeIn();  return false;}
 	
 	});
 	
@@ -272,8 +272,9 @@ jQuery(document).ready(function($) {
 					lifetime: $('#update_renewal').val(),
 				},
 				success: function (data) {
-					//alert('Job renewed successfully!');
-					alert(data);
+					alert('Job renewed successfully!');
+					$('#expires').html('Expires: '+data);
+					$('#update_renewal').remove();
 				}			
 			});	
 		});

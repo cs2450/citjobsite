@@ -20,7 +20,6 @@ if ($action != 'create') {
 	$job_id = $_GET['id'];
 	$email = $_SESSION['email'];
 	$sql = "SELECT id FROM jobs WHERE id='$job_id' AND contact_email='$email'";
-	echo $sql;
 	$result = mysql_query($sql);
 	if (!mysql_num_rows($result)){
 		header("Location:../index.php");
@@ -29,18 +28,15 @@ if ($action != 'create') {
 
 	// Renewing a job is simple. We handle it here
 	if ($action == 'renew') {
-		$sql = "SELECT expire_date FROM jobs WHERE id='$job_id'";
-		$result = mysql_query($sql) or die("Cannot query database: " . mysql_error());
-		$row = mysql_fetch_assoc($result);
-
-		$expires  = date('Y-m-d', strtotime($row['expire_date'] . "+".$_GET['lifetime']." months"));
+		$expires  = date('Y-m-d', strtotime(date('Y-m-d') . "+".$_GET['lifetime']." months"));
 	
 		$sql = "UPDATE jobs SET expire_date='$expires', status='active' WHERE id='$job_id'";
 		mysql_query($sql) or die(mysql_error());
 		// Also reactivate any skills associated
 		$sql = "UPDATE job_skills SET active=1 WHERE job_id='$job_id'";
 		mysql_query($sql) or die(mysql_error());
-		header("Location:../job_detail.php?job=$job_id&renew=true");
+		
+		echo date('M d, Y', strtotime($expires));
 		exit();
 	}
 	// So is deleting and marking as filled. We don't actually delete it though.

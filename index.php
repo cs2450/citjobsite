@@ -2,6 +2,21 @@
 include_once("inc/header.php");
 include_once("inc/func.php");	
 
+// If an admin deletes a job posting, handle it here
+
+if($_SESSION['user_type'] == 'admin' && isset($_GET['delete_job']))
+{
+	$job_id = $_GET['delete_job'];
+	$sql = "UPDATE jobs SET status='deleted' WHERE id='$job_id'";	
+	mysql_query($sql) or die("Cannot query database: " . mysql_error());
+
+	echo '<script type="text/javascript">
+		$(document).ready(function () {
+			alert("Job successfully deleted");
+		});
+	</script>';	
+}
+
 // Grab the page offset, if any, from get
 $pagelimit = 10;
 $offset = 0;
@@ -59,7 +74,12 @@ while($row=mysql_fetch_array($result)) {
 		mysql_query("UPDATE jobs SET status='expired' where id='$row[id]'");
 		mysql_query("UPDATE job_skills SET active=0 where job_id='$row[id]'");
 	}
-	else {
+	else {				
+		if($_SESSION['user_type'] == 'admin')
+		{	
+			echo '<div class="admin_controls"><a href="?page=Jobs&delete_job='.$row['id'].'" onclick="return confirm(\'Are you sure you want to delete this 			job?\')"><img src="images/red_x.png" /></a></div>';
+		}		
+
 		// This div encompasses one entire job ?>
 		<a class="partial job" href="job_detail.php?job=<?php echo $row['id']; ?>">
 			<div class="profileImage">

@@ -55,6 +55,16 @@ opacity: .5;
 text-decoration: line-through;
 }
 
+.admin_controls {
+float: right;
+padding: 10px;
+border: 2px solid #036;
+margin: 0px 10px;
+border-radius: 5px;
+-moz-border-radius: 5px;
+-webkit-border-radius: 5px;
+}
+
 #edit_profile {
 font-size: 14px;
 }
