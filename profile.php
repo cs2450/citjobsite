@@ -175,7 +175,7 @@ if ($_SESSION['user_type'] == 'employer' && $_GET['employer'] == $_SESSION['emai
 
 	while($row=mysql_fetch_array($result)) {
 		?>
-		<a class="job <?php echo ($row['status'] == 'deleted') ? "deleted" : ""; ?>" href="job_detail.php?job=<?php echo $row['id']?>">
+		<a class="job <?php echo ($row['status'] != 'active') ? "deleted" : ""; ?>" href="job_detail.php?job=<?php echo $row['id']?>">
 			<div class="jobTitle"><?php echo $row['title']; ?></div>
 			<div class="jobDescription"><?php echo $row['job_description']; ?></div>
 		</a>

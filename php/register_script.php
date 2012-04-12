@@ -41,7 +41,7 @@ if($user == 'employer')
 	
     mysql_query($sql) or die(mysql_error());
     
-	if(validate($email, $pass, $user)){
+	if(validate($email, $pass, $user, $error)){
 		header("Location:../profile.php?page=home&employer_register=true");
 		exit();
 	}
@@ -53,10 +53,10 @@ else if($user == 'student')
 	$sql = "INSERT INTO students (name, email, phone, password) VALUES('$name', '$email', '$phone', PASSWORD('$pass'));";
 	
     mysql_query($sql) or die(mysql_error());
-    
-	if(validate($email, $pass, $user))
+	if(validate($email, $pass, $user, $error)){
 		header("Location: ../skills.php?page=home&student_register=true");
 		exit();
+	}
 }
 
 else

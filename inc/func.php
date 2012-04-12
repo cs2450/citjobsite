@@ -76,6 +76,7 @@ function validate($user, $pass, $type, &$error=NULL){
 			
 			if($queryrows > 0) {
 			  $row=mysql_fetch_array($result);
+			  // Don't allow suspended accounts to login
 			  if($row['access'] == -1){
 				  $error = 'account_suspended';
 				  return false;
@@ -111,7 +112,6 @@ function validate($user, $pass, $type, &$error=NULL){
 			$sql = "SELECT * FROM students WHERE email='$user' AND password=PASSWORD('$pass')";
 			$result = mysql_query($sql) or die(mysql_error());
 			$queryrows = mysql_num_rows($result);
-			
 			if($queryrows == 1) {
 			  srand(time());
 			  $SecurityHash = "";
@@ -434,13 +434,3 @@ function inline_styles($page, $css) {
 }
 
 ?>
-
-
-
-
-
-
-
-
-
-

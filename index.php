@@ -1,7 +1,10 @@
 <?php
+// Default the page to home
+if(!isset($_GET['page']))
+	$_GET['page'] = 'home';
+
 include_once("inc/header.php");
 include_once("inc/func.php");	
-
 // If an admin deletes a job posting, handle it here
 
 if($_SESSION['user_type'] == 'admin' && isset($_GET['delete_job']))
@@ -9,12 +12,41 @@ if($_SESSION['user_type'] == 'admin' && isset($_GET['delete_job']))
 	$job_id = $_GET['delete_job'];
 	$sql = "UPDATE jobs SET status='deleted' WHERE id='$job_id'";	
 	mysql_query($sql) or die("Cannot query database: " . mysql_error());
+	// We also need to deactivate any associated skills
+	// If these are not kept in sync, it will show up in matches
+	$sql = "UPDATE job_skills SET active=0 WHERE job_id='$job_id'";
+	mysql_query($sql) or die(mysql_error());
 
 	echo '<script type="text/javascript">
 		$(document).ready(function () {
 			alert("Job successfully deleted");
 		});
 	</script>';	
+}
+
+// If an someone reports a job posting, handle it here.
+
+if(isset($_GET['report_job']))
+{
+	if(isset($_SESSION['email'])) {
+		$job_id = $_GET['report_job'];
+
+		// Do something here. Email?
+
+		echo '<script type="text/javascript">
+			$(document).ready(function () {
+			alert("Job reported. An admin has been alerted. Thank you!");
+			});
+			</script>';
+	}
+	else { // We are not logged in
+		echo '<script type="text/javascript">
+			$(document).ready(function () {
+			alert("You must be logged in to report a job.");
+			});
+			</script>';
+	}
+
 }
 
 // Grab the page offset, if any, from get

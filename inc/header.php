@@ -5,9 +5,6 @@ session_start();
 //require_once('../includes/functions.php');
 //myheader('CIT Jobs');
 
-// This toggles the toggle(?!) for the middle button
-$fancy = false;
-
 require_once('connect.php');
 ?>
 <html>
@@ -27,7 +24,7 @@ require_once('connect.php');
 <?php	if (isset($_SESSION['email'])) { 
 	// The matches button changes to 'Post Job' if we are an employer
 	if ($_SESSION['user_type'] == 'student' && isset($_GET['page']) && $_GET['page']=='Jobs')
-		$match_button = "Matches";
+		$match_button = "All Jobs";
 	else if($_SESSION['user_type']=='employer')
 		$match_button = "Post Job";
 	else
@@ -40,7 +37,7 @@ require_once('connect.php');
 <?php if (isset($_GET['page']) && $_GET['page']=='home') echo ' class="active"' ?>></button>
 				</div>
 				<div class="formButton threeCols">
-					<button type="submit" name="<?php echo $match_button; ?>" value="<?php echo $match_button; ?>" id="matchesButton" <?php if (/*$fancy &&*/ isset($_GET['page']) && in_array($_GET['page'],array("Jobs","Matches"))) echo ' class="active"' ?>></button>
+					<button type="submit" name="<?php echo $match_button; ?>" value="<?php echo $match_button; ?>" id="matchesButton" <?php if (isset($_GET['page']) && in_array($_GET['page'],array("Jobs","Matches"))) echo ' class="active"' ?>></button>
 				</div>
 				<div class="formButton threeCols">
 					<button type="submit" name="logout" value="logout" id="logoutButton"<?php if (isset($_GET['page']) && $_GET['page']=='logout') echo 'class="active"' ?>></button>

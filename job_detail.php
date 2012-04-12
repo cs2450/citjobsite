@@ -16,10 +16,21 @@
 	// If we are an employer and own this job then we get some controls
 	// These statements will also tell anyone viewing a filled/delete/expired job
 	// the respective status at the top.
+	foreach($_GET as $k => $v){
+		echo $k.$v;
+	}
 	if(isset($_GET['unfill']))
 	{
-		$sql = "UPDATE jobs SET status='active' WHERE id=".$_GET['unfill'];
-		mysql_query($sql) or die("Cannot query database: " . mysql_error());
+		echo "+++++++++++++++++###############3===================";
+		// We must either own this job, or be admin to do this
+		if($_SESSION['user_type']=='admin' || ($_SESSION['user_type']=='employer' && $row['contact_email']==$_SESSION['email']))
+		{
+			$sql = "UPDATE jobs SET status='active' WHERE id=".$_GET['unfill_id'];
+			mysql_query($sql) or die("Cannot query database: " . mysql_error());
+			// Also reactivate any skills associated
+			$sql = "UPDATE job_skills SET active=1 WHERE job_id='$job_id'";
+			mysql_query($sql) or die(mysql_error());
+		}
 	}
 
 	if ($_SESSION['user_type'] == 'employer' && $row['contact_email'] == $_SESSION['email'] && $row['status'] != 'filled' && $row['status'] != 'deleted') {
@@ -61,10 +72,22 @@
 		$job_skills .= "<div class='skill threeCols leftJustify'>". ($skill['skill_id']==0 ? $skill['other_skill'] : $skills[$skill['skill_id']]) ."</div>\n";
 	}
 	$job_skills .="</div>\n";
+
+	if($_SESSION['user_type']=='admin') { // Show delete button if admin
 ?>
 
 <div class="admin_controls"><a href="index.php?delete_job=<?php echo $job_id; ?>" onclick="return confirm('Are you sure you want to delete this job?');"><img src="images/red_x.png" /></a></div>
+<?php
+	} else { // Everyone else gets the report button
+		?>
+<div class="admin_controls"><a href="index.php?report_job=<?php echo $job_id; ?>" onclick="return confirm('Are you sure you want to report this job?');"><img src="images/report.png" /></a></div>
+<?php
+	}
+	if($_SESSION['user_type']=='admin' || ($_SESSION['user_type']=='employer' && $row['contact_email']==$_SESSION['email'])) {
+?>
 <div class="jobControls"><?php echo $control_buttons; echo ($row['status']=='filled') ? ' <input type="hidden" name="unfill_id" value="'.$job_id.'" /><input type="button" name="unfill" value="Unfill?" />':''; ?></div>
+<?php 
+	} ?>
 <div class="jobDetail">
 	<input type="hidden" name="job_id" value="<?php echo $job_id; ?>" />
 	<div class="leftSide">
