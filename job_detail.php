@@ -6,12 +6,6 @@
 	$row=mysql_fetch_array($result); 		
 	$posted=date('M d, Y', strtotime($row["date"]));
 	$expire=date('M d, Y', strtotime($row['expire_date']));
-	// TODO
-	// There is no way to link the jobs table to the employers table in order to
-	// extract the company logo.
-	// - The emails are not guaranteed to be the same.
-	// - The contact is not guaranteed to be the same name as the employer.
-	// - The company name is not guaranteed to be unique.
 
 	// If we are an employer and own this job then we get some controls
 	// These statements will also tell anyone viewing a filled/delete/expired job
@@ -76,9 +70,7 @@
 <div class="admin_controls"><a href="index.php?delete_job=<?php echo $job_id; ?>" onclick="return confirm('Are you sure you want to delete this job?');"><img src="images/red_x.png" /></a></div>
 <?php
 	} else { // Everyone else gets the report button
-		?>
-<div class="admin_controls"><a href="index.php?report_job=<?php echo $job_id; ?>" onclick="return confirm('Are you sure you want to report this job?');"><img src="images/report.png" /></a></div>
-<?php
+		$adminControls = "<div class='admin_controls'><a href='index.php?report_job=$job_id' onclick='return confirm('Are you sure you want to report this job?');'><img src='images/report.png' /></a><br/>Report</div>";
 	}
 	if($_SESSION['user_type']=='admin' || ($_SESSION['user_type']=='employer' && $row['contact_email']==$_SESSION['email'])) {
 ?>
@@ -120,6 +112,7 @@
 		<div class="date" id="expires">Expires: <?php echo $expire; ?></div>
 	</div>
 	<div class="apply topDivider">
+		<?php echo $adminControls; ?>
 		<form id='apply' action='php/apply_script.php' method='post'>
 			<?php echo $apply_button; ?>
 		</form>
