@@ -22,6 +22,10 @@ function validate_data($name,$email,$con_email,$phone,$pass,$con_passwd){
   else if(strlen($pass) < 6){
     $error="* Password needs to be at least 6 characters";
   }
+  // Only test recaptcha if it is a field
+  if(isset($_POST["recaptcha_challenge_field"])) {
+	  require_once("../inc/recaptcha_server.php");
+  }
   
   return $error; 
 }

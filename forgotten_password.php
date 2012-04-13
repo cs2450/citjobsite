@@ -21,6 +21,8 @@ elseif(isset($_GET['error'])) {
 		<label for="confirm_email">Confirm Email Address: </label>
 		<input type="text" name="confirm_email" />
 		<br/><br/>
+		<?php require_once("inc/recaptcha_client.php"); ?>
+		<br/><br/>
 		<button class="button" type="submit">Submit</button>
 	</form>
 </div>

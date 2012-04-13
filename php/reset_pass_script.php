@@ -37,7 +37,7 @@ if(isset($_POST['email'])) {
 	}
 
 	// Getting here means all is well lets generate the recovery key and store it
-	$recovery_key = gen_random_string(40);
+	$recovery_key = mysql_real_escape_string(gen_random_string(40));
 	$sql = "UPDATE $table SET recovery_key='$recovery_key' WHERE email='$email'";
 	$result = mysql_query($sql) or die(mysql_error());
 

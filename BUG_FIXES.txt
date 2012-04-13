@@ -2,7 +2,7 @@ CIT Job Board fixes
 
 job_detail.php
 	(DONE)*Click on employer name to go to profile
-	*Apply for job is severely broken
+	(DISABLED)*Apply for job is severely broken
 	(DONE)*Renew needs to display success and new expiration date
 	(DONE)*Job already filled needs to be more prominent
 	(DONE)Allow employer to un-fill a job
@@ -45,3 +45,27 @@ Check for active icon across all pages
 
 (DONE)Add SUPER user
 (DONE)Get database table info for Steve
+
+---The list goes on. Add more below if you remember (fixed ones too)---
+
+---Still broken---
+	no employer report button (for reporting employers)
+	job_detail unfill button not working (no idea)
+	employers cannot change their phone number
+	student 'hide info' does nothing yet
+	about time we got rid of the giant arrow
+	phone numbers display poorly, add dashes when displaying
+
+---Fixed (yay)---
+	only admins get the big red x
+	matches link in profile
+	password controls
+
+---To be "switched on" at release---
+	apply for jobs mail command
+	report button admin mail command
+	mail list mail command (active now but it's annoying so I may turn it off)
+	captchas will have to be registered for target site
+
+
+
