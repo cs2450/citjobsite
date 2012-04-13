@@ -453,4 +453,16 @@ function gen_random_string($length) {
 	return $rstr;
 }
 
+// This fancy function will return the static url to the site root
+// Used in emails and the like
+// Takes the string of the calling location:
+// e.g. calling from within siteroot/php/apply_script.php would require
+// the string '/php/apply_script.php' to be passed in. 
+function static_url($calling_loc) {
+	$url = "http://".$_SERVER['HTTP_HOST'].$_SERVER['SCRIPT_NAME'];
+	$url = str_replace("$calling_loc","",$url);
+	return $url;
+}
+
+
 ?>

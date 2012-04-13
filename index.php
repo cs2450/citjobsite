@@ -29,9 +29,20 @@ if($_SESSION['user_type'] == 'admin' && isset($_GET['delete_job']))
 if(isset($_GET['report_job']))
 {
 	if(isset($_SESSION['email'])) {
-		$job_id = $_GET['report_job'];
+		$report_id = $_GET['report_job'];
 
-		// Do something here. Email?
+		// Send an email to ALL the admins
+		// This way, if a 'mystery' admin appears, it will show up in the 'to' field
+		// (to be honest, I wanted to secretly add my own admin account =P )
+		$sql="SELECT email FROM employers WHERE access=5";
+		$result = mysql_query($sql) or die(mysql_error());
+		$to = '';
+		while($row = mysql_fetch_assoc($result)) {
+			$to .= $row['email'].",";
+		}
+		$message = "The user ".$_SESSION['email']." has reported this job: ".static_url('/index.php')."/job_detail?job=$report_id";
+		$subject = "CIT Job Board user job report";
+		mail($to,$subject,$message);
 
 		echo '<script type="text/javascript">
 			$(document).ready(function () {
