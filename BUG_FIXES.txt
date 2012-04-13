@@ -56,15 +56,8 @@ Check for active icon across all pages
 	about time we got rid of the giant arrow
 	phone numbers display poorly, add dashes when displaying
 
----Fixed (yay)---
-	only admins get the big red x
-	matches link in profile
-	password controls
-
 ---To be "switched on" at release---
-	apply for jobs mail command
-	report button admin mail command
-	mail list mail command (active now but it's annoying so I may turn it off)
+	(DONE)apply for jobs mail command
 	captchas will have to be registered for target site
 
 

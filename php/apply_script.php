@@ -81,7 +81,7 @@ $page = str_replace("width: 69%", "width: 100%", $page);
 $boundary = uniqid('np');
 
 $headers = "MIME-Version: 1.0\r\n";
-$headers .= "From: Taeler <twatkin2@dmail.dixie.edu>\r\n";
+$headers .= "From: jobs@cs.dixie.edu\r\n";
 $headers .= "Subject: CIT Job test mail\r\n";
 $headers .= "Content-Type: multipart/alternative;boundary=" . $boundary . "\r\n";
 
@@ -102,11 +102,10 @@ $message .= "\r\n\r\n--" . $boundary . "--";
 
 // Set up the email
 $to = &$_POST['email'];
-//$to = "twatkin2@dmail.dixie.edu";
-//$to = '"Mark Whittaker" <mwhitta2@dmail.dixie.edu>, "Kasey Cowley" <kchunterdeluxe@gmail.com>, "Nick Cox" <nickcox1008@gmail.com>, "Steve Keeler" <stevekeeler057@gmail.com>, "Taeler Watkins" <twatkin2@dmail.dixie.edu>';
 $title = &$_POST['title'];
 $subject = "$title job applicant";
 
-echo $message;
-//mail($to, $subject, $message, $headers);
+mail($to, $subject, $message, $headers);
+header("Location:../index.php?apply=success");
+exit();
 ?>

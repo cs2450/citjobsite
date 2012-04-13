@@ -103,7 +103,7 @@
 	<!-- Skills stuff -->
 	<div class="jobSkills">
 		<label for="skills_matching"><h4>Skills Matching (optional)</h4></label>
-		<a href="">How does it work?</a>
+		<a href="faq.php">How does it work?</a>
 		<table id="skills_table" class="text">
 <!--		<tr>
 				<td colspan="2">

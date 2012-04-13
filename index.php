@@ -24,14 +24,36 @@ if($_SESSION['user_type'] == 'admin' && isset($_GET['delete_job']))
 	</script>';	
 }
 
+// Alert box for successful application submission
+if(isset($_GET['apply']) && $_GET['apply'] == 'success')
+{
+	echo '<script type="text/javascript">
+		$(document).ready(function () {
+			alert("Application successfully delivered");
+		});
+	</script>';	
+}
+
 // If an someone reports a job posting, handle it here.
 
 if(isset($_GET['report_job']))
 {
 	if(isset($_SESSION['email'])) {
-		$job_id = $_GET['report_job'];
+		$report_id = $_GET['report_job'];
 
-		// Do something here. Email?
+		// Send an email to ALL the admins
+		// This way, if a 'mystery' admin appears, it will show up in the 'to' field
+		// (to be honest, I wanted to secretly add my own admin account =P )
+		$sql="SELECT email FROM employers WHERE access=5";
+		$result = mysql_query($sql) or die(mysql_error());
+		$to = '';
+		while($row = mysql_fetch_assoc($result)) {
+			$to .= $row['email'].",";
+		}
+		$message = "The user ".$_SESSION['email']." has reported this job: ".static_url('/index.php')."/job_detail?job=$report_id";
+		$subject = "CIT Job Board user job report";
+		$headers = "From: jobs@cs.dixie.edu\r\n";
+		mail($to,$subject,$message,$headers);
 
 		echo '<script type="text/javascript">
 			$(document).ready(function () {
@@ -98,12 +120,12 @@ if ($currentPage < $maxPages) {
 
 echo $prev.' - '.$currentPage.'/'.$maxPages.' - '.$next;
 
-$expired = date('Y-m-d', strtotime('-120 month'));
+$tomorrow = date('Y-m-d', strtotime('+1 day'));
 
 echo "<div>";
 
 while($row=mysql_fetch_array($result)) {
-	if($row['date']  < $expired ){
+	if($row['expire_date']  < $tomorrow ){
 		mysql_query("UPDATE jobs SET status='expired' where id='$row[id]'");
 		mysql_query("UPDATE job_skills SET active=0 where job_id='$row[id]'");
 	}

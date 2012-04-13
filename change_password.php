@@ -19,13 +19,13 @@ else
 	<form name="change_pass" method="post" action="php/change_pass_script.php">
 		<label for="old_password">Old Password: </label>
 		<input type="password" name="old_password" />
-		<br/>
+		<br/><br/>
 		<label for="password">New Password: </label>
 		<input type="password" name="password" />
-		<br/>
+		<br/><br/>
 		<label for="confirm_password">Confirm Password: </label>
 		<input type="password" name="confirm_password" />
-		<br/><br/>
+		<br/><br/><br/>
 		<button class="button" type="submit">Submit</button>
 	</form>
 </div>

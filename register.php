@@ -28,6 +28,9 @@ $email = isset($_GET['email']) ? $_GET['email'] : NULL;
 			<tr><td class="labels"><label for="type">Employer?</label></td>
 				<td class="inputs"><input type="radio" name="register_type" id="employer_radio" value="employer" /></td></tr>
 		</table>
+		<br/>
+		<?php require_once("inc/recaptcha_client.php"); ?>
+		<br/>
 		<button class="button" id="register_button">Register</button>
 	</form>
 </div>

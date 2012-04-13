@@ -73,7 +73,7 @@ if ($action == 'create') {
 }
 // Updating
 else if ($action == 'edit') {
-	$sql= "UPDATE jobs SET title='$title', wage='$wage', hours='$hours', job_description='$desc', expire_date='$expires' WHERE id='$job_id' AND contact_email='$email'";
+	$sql= "UPDATE jobs SET date='$date', title='$title', wage='$wage', hours='$hours', job_description='$desc', expire_date='$expires' WHERE id='$job_id' AND contact_email='$email'";
 	mysql_query($sql) or die(mysql_error());
 }
 

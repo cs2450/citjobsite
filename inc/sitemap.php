@@ -7,6 +7,7 @@ if(isset($_SESSION['email'])) {
 }
 ?>
 	<div><a href="directory.php">Employer Directory</a></div>
+	<div><a href="mailing_list.php">Mailing List</a></div>
 	<div><a href="privacy.php">Privacy Policy</a></div>
 	<div><a href="faq.php">FAQ</a></div>
 </div>
