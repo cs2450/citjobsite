@@ -10,18 +10,21 @@
 	// If we are an employer and own this job then we get some controls
 	// These statements will also tell anyone viewing a filled/delete/expired job
 	// the respective status at the top.
-	if(isset($_GET['unfill']))
+	
+	if(isset($_GET['unfill']) && $_GET['unfill'] == true)
 	{
-		echo "+++++++++++++++++###############3===================";
+		echo "+++++++++++++++++###############===================";
 		// We must either own this job, or be admin to do this
-		if($_SESSION['user_type']=='admin' || ($_SESSION['user_type']=='employer' && $row['contact_email']==$_SESSION['email']))
+		if(($_SESSION['user_type']=='admin' || ($_SESSION['user_type']=='employer') && $row['contact_email']==$_SESSION['email']))
 		{
-			$sql = "UPDATE jobs SET status='active' WHERE id=".$_GET['unfill_id'];
+			$sql = "UPDATE jobs SET status='active' WHERE id=".$job_id;
 			mysql_query($sql) or die("Cannot query database: " . mysql_error());
 			// Also reactivate any skills associated
 			$sql = "UPDATE job_skills SET active=1 WHERE job_id='$job_id'";
 			mysql_query($sql) or die(mysql_error());
 		}
+		
+		exit();
 	}
 
 	if ($_SESSION['user_type'] == 'employer' && $row['contact_email'] == $_SESSION['email'] && $row['status'] != 'filled' && $row['status'] != 'deleted') {
@@ -74,7 +77,7 @@
 	}
 	if($_SESSION['user_type']=='admin' || ($_SESSION['user_type']=='employer' && $row['contact_email']==$_SESSION['email'])) {
 ?>
-<div class="jobControls"><?php echo $control_buttons; echo ($row['status']=='filled') ? ' <input type="hidden" name="unfill_id" value="'.$job_id.'" /><input type="button" name="unfill" value="Unfill?" />':''; ?></div>
+<div class="jobControls"><?php echo $control_buttons; echo ($row['status']=='filled') ? '<input type="button" name="unfill" value="Unfill?" />':''; ?></div>
 <?php 
 	} ?>
 <div class="jobDetail">

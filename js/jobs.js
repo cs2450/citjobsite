@@ -287,9 +287,11 @@ jQuery(document).ready(function($) {
 	//////////////////////////////////////////////////////////////////////////////////
 	$('input[name=unfill]').click(function () {
 		$.ajax({
+			type: 'GET',
 			url: 'job_detail.php',
 			data: {
-				unfill: $('input[name=unfill_id]').val()	
+				'job': $('input[name=job_id]').val(),
+				'unfill': true,
 			},
 			success: function (data) {
 				alert('Job is active again.');
