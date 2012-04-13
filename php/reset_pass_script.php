@@ -9,6 +9,7 @@ include_once("../inc/func.php");
 // Second, it will accept that link, generate a new password
 // and email it to the user. They can then login with it.
 
+$headers = "From: jobs@cs.dixie.edu\r\n";
 
 // Handle the POST request
 if(isset($_POST['email'])) {
@@ -49,7 +50,7 @@ if(isset($_POST['email'])) {
 	$message .="Click this link to recover your account: $url/php/reset_pass_script.php?key=$recovery_key\r\n";
 	$message .="If you feel you have recieved this message in error, you may disregard it and no changes will be made to your account.";
 
-	mail($email,$subject,$message);
+	mail($email,$subject,$message,$headers);
 	header("Location:../forgotten_password.php?check_email=true");
 	exit();
 }
@@ -87,7 +88,7 @@ elseif(isset($_GET['key']) && $_GET['key'] != NULL && $_GET['key'] != 'NULL' && 
 	$message .="Please remember to change your password once you have logged in.\r\n";
 	$message .="New password: $pass";
 
-	mail($email,$subject,$message);
+	mail($email,$subject,$message,$headers);
 
 	// Nullify the recovery key so it can't be used again
 	$sql = "UPDATE $table SET recovery_key=NULL WHERE email='$email'";

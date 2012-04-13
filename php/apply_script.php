@@ -81,7 +81,7 @@ $page = str_replace("width: 69%", "width: 100%", $page);
 $boundary = uniqid('np');
 
 $headers = "MIME-Version: 1.0\r\n";
-$headers .= "From: Taeler <twatkin2@dmail.dixie.edu>\r\n";
+$headers .= "From: jobs@cs.dixie.edu\r\n";
 $headers .= "Subject: CIT Job test mail\r\n";
 $headers .= "Content-Type: multipart/alternative;boundary=" . $boundary . "\r\n";
 

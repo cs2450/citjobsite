@@ -52,7 +52,8 @@ if(isset($_GET['report_job']))
 		}
 		$message = "The user ".$_SESSION['email']." has reported this job: ".static_url('/index.php')."/job_detail?job=$report_id";
 		$subject = "CIT Job Board user job report";
-		mail($to,$subject,$message);
+		$headers = "From: jobs@cs.dixie.edu\r\n";
+		mail($to,$subject,$message,$headers);
 
 		echo '<script type="text/javascript">
 			$(document).ready(function () {
