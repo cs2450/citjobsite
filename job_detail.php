@@ -45,7 +45,7 @@
 	if($_SESSION['user_type'] == 'student'){
 		$apply_button = "<input type='hidden' name='title' value='".$row['title']."' />\n";
 		$apply_button .= "<input type='hidden' name='email' value='".$row['contact_email']."' />\n";
-		$apply_button .= "<button class='button' id='apply_button'>Apply for this job</button>";
+		$apply_button .= "<button class='button' id='apply_button' onclick='return confirm(\"Are you sure?\");'>Apply for this job</button>";
 	}
 
 	// Get skill data from skills table
