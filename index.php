@@ -24,6 +24,16 @@ if($_SESSION['user_type'] == 'admin' && isset($_GET['delete_job']))
 	</script>';	
 }
 
+// Alert box for successful application submission
+if(isset($_GET['apply']) && $_GET['apply'] == 'success')
+{
+	echo '<script type="text/javascript">
+		$(document).ready(function () {
+			alert("Application successfully delivered");
+		});
+	</script>';	
+}
+
 // If an someone reports a job posting, handle it here.
 
 if(isset($_GET['report_job']))
@@ -109,12 +119,12 @@ if ($currentPage < $maxPages) {
 
 echo $prev.' - '.$currentPage.'/'.$maxPages.' - '.$next;
 
-$expired = date('Y-m-d', strtotime('-120 month'));
+$tomorrow = date('Y-m-d', strtotime('+1 day'));
 
 echo "<div>";
 
 while($row=mysql_fetch_array($result)) {
-	if($row['date']  < $expired ){
+	if($row['expire_date']  < $tomorrow ){
 		mysql_query("UPDATE jobs SET status='expired' where id='$row[id]'");
 		mysql_query("UPDATE job_skills SET active=0 where job_id='$row[id]'");
 	}

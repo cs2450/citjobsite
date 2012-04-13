@@ -102,11 +102,10 @@ $message .= "\r\n\r\n--" . $boundary . "--";
 
 // Set up the email
 $to = &$_POST['email'];
-//$to = "twatkin2@dmail.dixie.edu";
-//$to = '"Mark Whittaker" <mwhitta2@dmail.dixie.edu>, "Kasey Cowley" <kchunterdeluxe@gmail.com>, "Nick Cox" <nickcox1008@gmail.com>, "Steve Keeler" <stevekeeler057@gmail.com>, "Taeler Watkins" <twatkin2@dmail.dixie.edu>';
 $title = &$_POST['title'];
 $subject = "$title job applicant";
 
-echo $message;
-//mail($to, $subject, $message, $headers);
+mail($to, $subject, $message, $headers);
+header("Location:../index.php?apply=success");
+exit();
 ?>

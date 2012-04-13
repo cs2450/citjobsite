@@ -80,16 +80,16 @@ jQuery(document).ready(function($) {
 			}
 			
 			else if(!$('#student_radio').is(":checked") && !$('#employer_radio').is(":checked")) {
-				$('form[name=register]').before('<span class="error">Please select your registration type.</span>');
+				$('#form_container').before('<span class="error">Please select your registration type.</span>');
 				hasError = true;
 			}
 			
 			else if($('input[name=company]').val() == '') {
-				$('form[name=register]').before('<span class="error">Please enter your company name.</span>');
+				$('#form_container').before('<span class="error">Please enter your company name.</span>');
 				hasError = true;
 			}
 			else if($('textarea[name=description]').val() == '') {
-				$('form[name=register]').before('<span class="error">Please tell us about your company.</span>');
+				$('#form_container').before('<span class="error">Please tell us about your company.</span>');
 				hasError = true;
 			}
 	
