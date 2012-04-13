@@ -1,6 +1,6 @@
 <?php
 include_once("inc/header.php");
-
+// specifications 3.2, 3.2.1, 3.2.2, 3.2.5, 3.2.6, 3.3
 // If the session isn't set by logging in or registering, re-route to login.php
 
 if(!isset($_SESSION['email'])) {

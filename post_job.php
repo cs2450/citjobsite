@@ -1,4 +1,5 @@
 <?php
+// specifications 4.2, 4.2.1, 4.2.1.1, 4.2.2, 4.2.3, 4.2.4
 	session_start();
 	if (isset($_SESSION['email']) && $_SESSION['user_type'] != 'employer') {
 		header("Location:index.php");

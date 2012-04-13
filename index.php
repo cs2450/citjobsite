@@ -1,4 +1,5 @@
 <?php
+// satisfies all of 8.0 specifications
 // Default the page to home
 if(!isset($_GET['page']))
 	$_GET['page'] = 'home';

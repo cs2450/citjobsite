@@ -1,6 +1,5 @@
 <?php
-	// A little sad that the only thing this does is allow changes to 
-	// the employer company description. There was nowhere else to put it.
+	// specifications 4.1.2, 4.1.3
 	include_once("inc/connect.php");
 	include_once("inc/header.php");
 	

@@ -1,4 +1,5 @@
 <?php
+// specifications 4.3, 4.4, all of 9.0
 	include_once("inc/header.php");
 	$job_id = mysql_real_escape_string($_GET['job']);
 	$sql="select * from jobs where id='$job_id';";
@@ -13,7 +14,6 @@
 	
 	if(isset($_GET['unfill']) && $_GET['unfill'] == true)
 	{
-		echo "+++++++++++++++++###############===================";
 		// We must either own this job, or be admin to do this
 		if(($_SESSION['user_type']=='admin' || ($_SESSION['user_type']=='employer') && $row['contact_email']==$_SESSION['email']))
 		{

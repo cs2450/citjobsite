@@ -33,6 +33,7 @@ function validate_data($name,$email,$con_email,$phone,$pass,$con_passwd){
 //
 // This function generates the skills checkboxes on skills.php. Whenever a new skill is added to the database, a new checkbox is created in skills.php.
 // Specification covered: 3.1.1 (Divide skills by CIT emphasis)
+// as well as specs 3.1.3, 4.2.2, 4.2.3
 
 // current_skills is an array filled by querying for selected skills
 // filled using looped: $current_skills[$row['skill_id']] = true;
@@ -145,6 +146,8 @@ function validate($user, $pass, $type, &$error=NULL){
 	
     return false;
 }
+
+// specifications All of 5.0
 
 // This function calls the match functions and returns the SQL statement
 // Also returns the total matches by reference in $total

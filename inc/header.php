@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <?php
+// Satisfies all of 9.0 login page specifications
 session_start();
 //require_once('../includes/config.php');
 //require_once('../includes/functions.php');

@@ -2,7 +2,7 @@ jQuery(document).ready(function($) {
 	/////////////////
 	//  FUNCTIONS  //
 	/////////////////
-
+	// satisfies specifications 1.1.2.1 and 2.1.2.1
 	function validateEmail($email) {
     	var emailReg = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/;
     	if( !emailReg.test( $email ) ) {
@@ -15,6 +15,7 @@ jQuery(document).ready(function($) {
 	//////////////////////////////////////////////////////////////////////
 	// 	LOGIN.PHP HANDLERS FOR SETTINGS WHEN LOGIN FORMS ARE SUBMITTED  //
 	//////////////////////////////////////////////////////////////////////
+	// statisfies specification 9.2.3
 	$('#loginButton').click(function () {
         $(".error").hide();
              var hasError = false;
@@ -37,7 +38,7 @@ jQuery(document).ready(function($) {
 	/////////////////////////////////////////////////
 	//	REGISTER.PHP HANDLERS FOR FORM VALIDATION  //
 	/////////////////////////////////////////////////
-	
+	// satisfies specification 1.2 1.2.1 2.2 2.2.1	
 	$('#register_button').click(function () {
 		$(".error").remove();
              var hasError = false;

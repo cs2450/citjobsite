@@ -1,8 +1,5 @@
 <?php
-/*
-if(!isset($_SESSION['email']))
-	header("Location:prompt_login.php");
-*/
+//Satsifies specs 3.1, 5.1
 include_once("inc/header.php");
 include_once("inc/func.php");
 
