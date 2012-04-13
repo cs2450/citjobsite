@@ -17,15 +17,23 @@ else
 ?>
 <div>
 	<form name="change_pass" method="post" action="php/change_pass_script.php">
-		<label for="old_password">Old Password: </label>
-		<input type="password" name="old_password" />
-		<br/><br/>
-		<label for="password">New Password: </label>
-		<input type="password" name="password" />
-		<br/><br/>
-		<label for="confirm_password">Confirm Password: </label>
-		<input type="password" name="confirm_password" />
-		<br/><br/><br/>
+		<table align=center>
+			<tr><td colspan=2><br /></td></tr>
+			<tr>
+				<td style="text-align:right;"><label for="old_password">Old Password: </label></td>
+				<td><input type="password" name="old_password" /></td>
+			</tr>
+			<tr><td colspan=2><br /></td></tr>
+			<tr>
+				<td style="text-align:right;"><label for="password">New Password: </label></td>
+				<td><input type="password" name="password" /></td>
+			</tr>
+			<tr>
+				<td style="text-align:right;"><label for="confirm_password">Confirm Password: </label></td>
+				<td><input type="password" name="confirm_password" /></td>
+			</tr>
+			<tr><td colspan=2><br /></td></tr>
+		</table>
 		<button class="button" type="submit">Submit</button>
 	</form>
 </div>
